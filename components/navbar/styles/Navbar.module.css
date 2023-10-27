@@ -114,7 +114,10 @@
   }
 
   .mobileNavItems {
-    display: block;
+    display: flex;
+    flex-direction: row;
+    gap: 1.2rem;
+    /* border: solid peru; */
   }
 }
 
@@ -125,12 +128,14 @@
   }
 
   .mobileNavItems {
-    display: block;
+    display: none;
   }
 
   .tabletNavItems {
-  display: none;
-}
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+  }
 }
 
 /* .navbar div {

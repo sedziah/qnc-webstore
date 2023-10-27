@@ -4,13 +4,18 @@ import cart from "../assets/icons/cart.svg";
 import styles from "../styles/Navbar.module.css";
 import hamburger from "../assets/icons/hamburger.png";
 import Link from "next/link";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import MenuIcon from "@mui/icons-material/Menu";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 
 function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.nav_items}>
         <div>
-          <Image src={logo} alt="QnC Logo" width={121} height={51.5} />
+          <Link href="/">
+            <Image src={logo} alt="QnC Logo" width={121} height={51.5} />
+          </Link>
         </div>
 
         {/* Desktop Navigation Menu */}
@@ -45,12 +50,28 @@ function Navbar() {
 
         {/* Tablet and Smaller Desktop Navigation Menu */}
         <div className={styles.tabletNavItems}>
-          <Image src={hamburger} alt="QnC Logo" width={25} />
+          <Link href="#" className={styles.links}>
+            <PermIdentityIcon />
+          </Link>
+          <Link href="#" className={styles.links}>
+            <AddShoppingCartIcon />
+          </Link>
+          <Link href="#" className={styles.links}>
+            <MenuIcon />
+          </Link>
         </div>
 
         {/* Mobile Navigation Menu */}
         <div className={styles.mobileNavItems}>
-          <Image src={hamburger} alt="QnC Logo" width={25} />
+          <Link href="#" className={styles.links}>
+            <PermIdentityIcon />
+          </Link>
+          <Link href="#" className={styles.links}>
+            <AddShoppingCartIcon />
+          </Link>
+          <Link href="#" className={styles.links}>
+            <MenuIcon />
+          </Link>
         </div>
       </div>
     </nav>
