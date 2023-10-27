@@ -1,0 +1,27 @@
+/* styles.css */
+@import url("base.css");
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center vertically within the navbar */
+    border: solid red;
+    max-width: 100vw;
+    margin: 0;
+    padding: 0;
+}
+
+/* .navbar > div {
+    display: flex; Allow the logo and image to be side by side 
+    align-items: center; Center vertically within the logo container 
+} */
+
+/* .navbar ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.navbar li {
+    margin: 0 10px;
+} */

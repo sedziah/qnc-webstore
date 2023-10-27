@@ -1,4 +1,61 @@
+@import "reset-css/reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@700&display=swap");
+
+
 :root {
+  /* fonts */
+  --poppins: Poppins;
+  --montserrat: Montserrat;
+  --hanken-grotesk: "Hanken Grotesk";
+
+  /* Colors */
+  --secondary: #f4f4f4;
+  --text-color: #808080;
+  --qnc-heading-black: #191919;
+  --color-gray-100: #161616;
+  --primary: #111;
+  --p-text: #0f1111;
+  --qnc-orange: #f89132;
+  --color-darkorange-100: rgba(248, 145, 50, 0.4);
+  --white: #fff;
+  --qnc-blue: #085eb5;
+  --neutral: #ffffff;
+  --neutral-dark-gray: #505050;
+
+  /* Border radiuses */
+  --br-5xs-3: 7.3px;
+  --br-8xs: 5px;
+  --br-9xs-9: 3.9px;
+}
+
+
+
+
+/* Desktop styles
+@media (min-width: 768px) {
+  .desktop-component {
+    display: block;
+  }
+  .mobile-component {
+    display: none;
+  }
+}
+
+/* Mobile and Tablet styles */
+/* @media (max-width: 1024px) {
+  .desktop-component {
+    display: none;
+  }
+  .mobile-component {
+    display: block;
+  }
+} */
+
+
+
+/* :root {
   --max-width: 1100px;
   --border-radius: 12px;
   --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
@@ -104,4 +161,4 @@ a {
   html {
     color-scheme: dark;
   }
-}
+} */
