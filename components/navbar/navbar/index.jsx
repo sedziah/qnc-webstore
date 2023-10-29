@@ -7,6 +7,7 @@ import Link from "next/link";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import MenuIcon from "@mui/icons-material/Menu";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import SwipeableTemporaryDrawer from "../../drawer/Drawer";
 
 function Navbar() {
   return (
