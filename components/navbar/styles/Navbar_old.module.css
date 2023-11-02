@@ -67,7 +67,7 @@
   display: none;
 }
 
-.signup_button {
+.signup_button .signin_button {
   background-color: blue;
   color: var(--Secondary, #f4f4f4);
   border-radius: 50px;

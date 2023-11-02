@@ -1,41 +1,27 @@
-/* Navbar.module.css */
-
 .container {
   display: flex;
+  height: 12vh;
+  box-shadow: 0 4px 4px 0 rgba(248, 145, 50, 0.25);
+  border: solid 1px rgba(248, 145, 50, 0.4);
+}
+
+.navbar {
+  display: inherit;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  background-color: #3498db;
-  color: #ffffff;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.mobileNav,
-.tabletNav {
-  font-size: 1.5rem;
-  cursor: pointer;
-  /* Remove "display: none;" to make them visible by default */
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Remove "display: none;" to make it visible by default */
+  margin-left: 10%;
+  margin-right: 10%;
+  border: solid green;
+  width: 100vw;
 }
 
 .navLinks {
   list-style: none;
   display: flex;
+  align-items: center;
   gap: 1rem;
   padding: 0;
+  border: solid peru;
 }
 
 .navLinks li {
@@ -44,13 +30,57 @@
 
 .navLinks a {
   text-decoration: none;
-  color: #ffffff;
+  font-family: var(--montserrat), san sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--primary);
+}
+
+.signup_button,
+.signin_button {
+  border-radius: 50px;
+  height: 42px;
+  width: 93px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.signup_button {
+  background-color: blue;
+  color: var(--Secondary, #f4f4f4);
+}
+
+.signin_button {
+  border: solid;
+}
+
+.mobileNav,
+.tabletNav {
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
 }
 
 /* Mobile View */
 @media (max-width: 767px) {
   .mobileNav {
     display: block; /* Show mobile menu */
+  }
+
+  .navLinks {
+    display: none;
+  }
+
+  .navbar {
+    margin-left: 2%;
+    margin-right: 2%;
   }
 }
 
@@ -60,19 +90,3 @@
     display: block; /* Show tablet menu */
   }
 }
-
-.closeButton {
-  position: absolute;
-  top: 10px; /* Adjust this value to control the vertical position */
-  right: 10px; /* Adjust this value to control the horizontal position */
-  font-size: 1.5rem;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #fff;
-}
-
-
-
-
-
