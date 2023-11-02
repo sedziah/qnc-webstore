@@ -1,56 +1,43 @@
-import Image from "next/image";
-import logo from "../assets/images/logo.png";
-import cart from "../assets/icons/cart.svg";
-import styles from "../styles/Navbar.module.css";
-import hamburger from "../assets/icons/hamburger.png";
+"use client";
+import { useState } from "react";
 import Link from "next/link";
+import styles from "../styles/Navbar.module.css";
+import logo from "../assets/images/logo.png";
+import Image from "next/image";
 
 function Navbar() {
   return (
-    <nav className={styles.navbar}>
-      <div className={styles.nav_items}>
-        <div>
-          <Image src={logo} alt="QnC Logo" width={121} height={51.5} />
-        </div>
-
-        {/* Desktop Navigation Menu */}
-        <div className={styles.desktopNavItems}>
-          <ul>
-            <div className={styles.nav_links}>
-              <Link href="#" className={styles.links}>
+    <nav>
+      <div className={styles.container}>
+        <div className={styles.navbar}>
+          <div className={styles.logo}>
+            <Link href="/">
+              <Image src={logo} alt="QnC Logo" width={121} height={51.5} />
+            </Link>
+          </div>
+          <div>
+            <ul className={styles.navLinks}>
+              <Link href="#">
                 <li>featured</li>
               </Link>
-              <Link href="#" className={styles.links}>
+              <Link href="#">
                 <li>deals</li>
               </Link>
-              <Link href="#" className={styles.links}>
+              <Link href="#">
                 <li>categories</li>
               </Link>
-              <Link href="#" className={styles.links}>
-                <li>
-                  <Image src={cart} alt="QnC Logo" width={25} />
-                </li>
-              </Link>
-            </div>
-            <div className={styles.nav_buttons}>
               <Link href="#" className={styles.links}>
                 <li className={styles.signin_button}>Sign in</li>
               </Link>
               <Link href="#" className={styles.links}>
                 <li className={styles.signup_button}>Sign up</li>
               </Link>
-            </div>
-          </ul>
-        </div>
+            </ul>
+          </div>
 
-        {/* Tablet and Smaller Desktop Navigation Menu */}
-        <div className={styles.tabletNavItems}>
-          <Image src={hamburger} alt="QnC Logo" width={25} />
-        </div>
-
-        {/* Mobile Navigation Menu */}
-        <div className={styles.mobileNavItems}>
-          <Image src={hamburger} alt="QnC Logo" width={25} />
+          {/* Mobile Navigation Menu (Hamburger Menu) */
+          /* Hidden on desktop views */}
+          <div className={styles.mobileNav}>☰</div>
         </div>
       </div>
     </nav>
