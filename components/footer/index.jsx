@@ -18,7 +18,7 @@ function Footer() {
                 />
               </Link>
             </div>
-            <br></br>
+            <br/>
             <span>
               At QnC, Affordability Meets Excellence. Discover the Best Deals
               Today!
@@ -30,8 +30,7 @@ function Footer() {
           </div>
           <div className={styles.footerColumn}>
             <h1>Quick Links</h1>
-            <br></br>
-            <br></br>
+            <br />
             <Link href="#">About Us</Link>
             <br></br>
             <Link href="#">Terms and Conditions</Link>
@@ -41,7 +40,6 @@ function Footer() {
           </div>
           <div className={styles.footerColumn}>
             <h1>Receive daily deals</h1>
-            <br></br>
             <br></br>
             <span>
               Be the first to unlock incredible savings every day! Subscribe to
