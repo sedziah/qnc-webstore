@@ -2,7 +2,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import styles from "../styles/Navbar.module.css";
-import logo from "../assets/images/logo.png";
 import Image from "next/image";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -31,7 +30,12 @@ function Navbar() {
         <div className={styles.navbar}>
           <div className={styles.logo}>
             <Link href="/">
-              <Image src={logo} alt="QnC Logo" width={121} height={51.5} />
+              <Image
+                src="/images/logo.png"
+                alt="QnC Logo"
+                width={121}
+                height={51.5}
+              />
             </Link>
           </div>
           <div>
@@ -44,6 +48,16 @@ function Navbar() {
               </Link>
               <Link href="#">
                 <li>categories</li>
+              </Link>
+              <Link href="#">
+                <li>
+                  <Image
+                    src="/icons/cart.svg"
+                    alt="cart"
+                    width={25}
+                    height={51.5}
+                  />
+                </li>
               </Link>
               <Link href="#" className={styles.links}>
                 <li className={styles.signin_button}>Sign in</li>
@@ -99,16 +113,14 @@ function Navbar() {
           </div>
           <ul className={styles.mobileLinks}>
             <li>
-              <Link href="/">Home</Link>
+              <Link href="#">featured</Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
+              <Link href="#">deals</Link>
             </li>
+
             <li>
-              <Link href="/services">Services</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact</Link>
+              <Link href="#">categories</Link>
             </li>
           </ul>
         </div>
