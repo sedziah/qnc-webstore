@@ -7,6 +7,7 @@ import Image from "next/image";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
+import cart from "../assets/icons/cart.svg";
 
 function Navbar() {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
@@ -44,6 +45,11 @@ function Navbar() {
               </Link>
               <Link href="#">
                 <li>categories</li>
+              </Link>
+              <Link href="#">
+                <li>
+                  <Image src={cart} alt="cart" width={25} />
+                </li>
               </Link>
               <Link href="#" className={styles.links}>
                 <li className={styles.signin_button}>Sign in</li>
