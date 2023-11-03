@@ -11,7 +11,6 @@
   align-items: center;
   margin-left: 10%;
   margin-right: 10%;
-  border: solid green;
   width: 100vw;
 }
 
@@ -21,7 +20,6 @@
   align-items: center;
   gap: 1rem;
   padding: 0;
-  border: solid peru;
 }
 
 .navLinks li {
@@ -98,7 +96,7 @@
   }
 
   .overlay ul {
-    padding-top: 10vh;
+    padding-top: 8vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -147,6 +145,25 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+  }
+
+  .overlay ul {
+    padding-top: 6vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .overlay a {
+    text-decoration: none;
+  }
+
+  .overlay ul li {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5vh;
+    align-items: center;
+    font-family: var(--montserrat), san sans-serif;
   }
 
   .navLinks {

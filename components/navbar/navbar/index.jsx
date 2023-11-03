@@ -99,16 +99,14 @@ function Navbar() {
           </div>
           <ul className={styles.mobileLinks}>
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/">featured</Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
+              <Link href="/about">deals</Link>
             </li>
+
             <li>
-              <Link href="/services">Services</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact</Link>
+              <Link href="/contact">categories</Link>
             </li>
           </ul>
         </div>
