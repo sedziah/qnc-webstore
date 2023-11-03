@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+}
+
+.subFooter {
+  border: solid 2px green;
+  display: inherit;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 100vw;
+}
+
+.icons {
+    justify-items: center;
+    align-items: center;
+    border: solid blue;
+    gap: 1.5rem;
+    display: inherit;
+    flex-direction: row;
+}

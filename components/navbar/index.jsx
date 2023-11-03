@@ -118,7 +118,6 @@ function Navbar() {
             <li>
               <Link href="#">deals</Link>
             </li>
-
             <li>
               <Link href="#">categories</Link>
             </li>
