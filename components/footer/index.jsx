@@ -30,7 +30,6 @@ function Footer() {
           </div>
           <div className={styles.footerColumn}>
             <h1>Quick Links</h1>
-            <br />
             <Link href="#">About Us</Link>
             <br></br>
             <Link href="#">Terms and Conditions</Link>
@@ -40,12 +39,10 @@ function Footer() {
           </div>
           <div className={styles.footerColumn}>
             <h1>Receive daily deals</h1>
-            <br></br>
             <span>
               Be the first to unlock incredible savings every day! Subscribe to
               start saving now
             </span>
-            <br></br>
             <div>
               <input type="text" placeholder="  Type Email here" required />
               <button>Submit</button>
