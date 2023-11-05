@@ -1,6 +1,7 @@
 .container {
   display: flex;
   background: var(--Primary, #111);
+  padding-bottom: 1%;
   /* height: 300px; */
 }
 
