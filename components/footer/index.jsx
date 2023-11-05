@@ -1,6 +1,7 @@
 import styles from "./Footer.module.css";
 import Image from "next/image";
 import Link from "next/link";
+import Stack from "@mui/material/Stack";
 
 function Footer() {
   return (
@@ -18,38 +19,38 @@ function Footer() {
                 />
               </Link>
             </div>
-            <br/>
-            <span>
-              At QnC, Affordability Meets Excellence. Discover the Best Deals
-              Today!
-            </span>
-            <br></br>
-            <span>+230 54 324 771</span>
-            <br></br>
-            <span>Banana Street, East Legon</span>
+
+            <Stack className={styles.footerContact}>
+              <span>
+                At QnC, we believe affordability and excellence can go hand in
+                hand. Explore our curated selection of quality products and
+                services that won't break the bank. Discover the best deals
+                today and enjoy the perfect balance of savings and satisfaction!
+              </span>
+              <span>+233 (0) 207-597-903</span>
+              <span>Banana Street, East Legon</span>
+            </Stack>
           </div>
           <div className={styles.footerColumn}>
-            <h1>Quick Links</h1>
-            <br />
-            <Link href="#">About Us</Link>
-            <br></br>
-            <Link href="#">Terms and Conditions</Link>
-            <br></br>
-            <Link href="#">Our Team</Link>
-            <br></br>
+            <Stack className={styles.footerQuickLinks}>
+              <h1>Quick Links</h1>
+              <Link href="#">About Us</Link>
+              <Link href="#">Terms and Conditions</Link>
+              <Link href="#">Our Team</Link>
+            </Stack>
           </div>
           <div className={styles.footerColumn}>
-            <h1>Receive daily deals</h1>
-            <br></br>
-            <span>
-              Be the first to unlock incredible savings every day! Subscribe to
-              start saving now
-            </span>
-            <br></br>
-            <div>
-              <input type="text" placeholder="  Type Email here" required />
-              <button>Submit</button>
-            </div>
+            <Stack className={styles.footerDeals}>
+              <h1>Receive daily deals</h1>
+              <span>
+                Be the first to unlock incredible savings every day. Subscribe
+                to start saving now!
+              </span>
+              <div>
+                <input type="text" placeholder="  Type Email here" required />
+                <button>Submit</button>
+              </div>
+            </Stack>
           </div>
         </div>
       </div>
