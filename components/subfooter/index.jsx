@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import styles from "./SubFooter.module.css";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -20,4 +20,4 @@ function SubFooter() {
   );
 }
 
-export default SubFooter
+export default SubFooter;

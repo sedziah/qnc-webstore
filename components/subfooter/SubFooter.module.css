@@ -1,9 +1,9 @@
 .container {
   display: flex;
+  padding-top: 0.5em;
 }
 
 .subFooter {
-  border: solid 2px green;
   display: inherit;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -16,7 +16,6 @@
 .icons {
     justify-items: center;
     align-items: center;
-    border: solid blue;
     gap: 1.5rem;
     display: inherit;
     flex-direction: row;
