@@ -164,6 +164,7 @@
     font-style: bold !important;
     line-height: 140% !important;
     text-align: justify;
+    text-decoration: none;
   }
 
   .footerContact span:first-child {
