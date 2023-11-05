@@ -32,7 +32,6 @@
   .mobileSubFooter {
     display: flex;
     justify-content: space-between;
-    border: solid red;
     margin-left: 5%;
     margin-right: 5%;
     width: 100vw;
@@ -57,7 +56,6 @@
   .tabletSubFooter {
     display: flex;
     justify-content: space-between;
-    border: solid red;
     width: 100vw;
     margin-left: 10%;
     margin-right: 10%;
