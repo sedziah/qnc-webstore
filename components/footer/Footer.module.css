@@ -29,9 +29,6 @@
   padding-bottom: 5%;
 }
 
-.footerContact {
-}
-
 .footerContact span {
   font-size: 12px !important;
   font-family: var(--poppins) !important;
@@ -63,9 +60,6 @@
   line-height: 140% !important;
   text-align: justify;
   padding-bottom: 0.3rem;
-}
-
-.footerDeals {
 }
 
 .footerDeals span {
@@ -193,9 +187,6 @@
     /* padding-bottom: 0.1rem; */
   }
 
-  .footerDeals {
-
-  }
 
   .footerDeals span {
     text-decoration: none;
