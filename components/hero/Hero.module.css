@@ -18,6 +18,14 @@
   .mobileHero {
     display: flex;
     border: solid yellow;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 100vw;
+    justify-content: center;
+  }
+
+  .heroImage {
+    
   }
 
   .desktopHero,
