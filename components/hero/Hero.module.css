@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.desktopHero {
+  border: solid red;
+}
+
+/* Mobile and Tablet Styles */
+.mobileHero,
+.tabletHero {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .mobileHero {
+    display: flex;
+    border: solid yellow;
+  }
+
+  .desktopHero,
+  .tabletHero {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tabletHero {
+    display: flex;
+    border: solid green;
+  }
+
+  .mobileHero,
+  .desktopHero {
+    display: none;
+  }
+}
+
+

@@ -5,6 +5,7 @@ import Navbar from "../components/navbar/index";
 import Footer from "../components/footer/index";
 import SubFooter from "../components/subfooter/index";
 import SearchBar from "../components/searchbar/index"
+import Hero from "../components/hero/index";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,6 +25,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         <SearchBar />
+        <Hero />
         {children}
         <Footer />
         <SubFooter />
