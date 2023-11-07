@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./Hero.module.css";
 import Image from "next/image";
 
@@ -11,36 +12,44 @@ function Hero() {
   return (
     <div className={styles.heroSection}>
       <div className={styles.imageContainer}>
-        <Image
-          src="/images/hero/hero_mobile_phone.png"
-          alt="Mobile Phones"
-          layout="fill"
-          objectFit="cover"
-        />
+        <Link href="#">
+          <Image
+            src="/images/hero/hero_mobile_phone.png"
+            alt="Mobile Phones"
+            layout="fill"
+            objectFit="cover"
+          />
+        </Link>
       </div>
       <div className={styles.imageContainer}>
-        <Image
-          src="/images/hero/hero_computers.png"
-          alt="Computers"
-          layout="fill"
-          objectFit="cover"
-        />
+        <Link href="#">
+          <Image
+            src="/images/hero/hero_computers.png"
+            alt="Computers"
+            layout="fill"
+            objectFit="cover"
+          />
+        </Link>
       </div>
       <div className={styles.imageContainer}>
-        <Image
-          src="/images/hero/hero_accessories.png"
-          alt="Accessories"
-          layout="fill"
-          objectFit="cover"
-        />
+        <Link href="#">
+          <Image
+            src="/images/hero/hero_accessories.png"
+            alt="Accessories"
+            layout="fill"
+            objectFit="cover"
+          />
+        </Link>
       </div>
       <div className={styles.imageContainerFullWidth}>
-        <Image
-          src="/images/hero/hero_appliances.png"
-          alt="Appliances"
-          layout="fill"
-          objectFit="cover"
-        />
+        <Link href="#">
+          <Image
+            src="/images/hero/hero_appliances.png"
+            alt="Appliances"
+            layout="fill"
+            objectFit="cover"
+          />
+        </Link>
       </div>
     </div>
   );
