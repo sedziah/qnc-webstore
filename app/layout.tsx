@@ -23,12 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <head></head>
       <body>
-        <Navbar />
-        <SearchBar />
+        {/* <Navbar />
+        <SearchBar /> */}
         <Hero />
         {children}
-        <Footer />
-        <SubFooter />
+        {/* <Footer />
+        <SubFooter /> */}
       </body>
     </html>
   );
