@@ -1,49 +1,24 @@
-.container {
+.heroSection {
   display: flex;
-  width: 100%;
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  padding: 1% 10% 0 10%;
+  gap: 10px; /* You can adjust the gap between images */
 }
 
-.desktopHero {
-  border: solid red;
+.imageContainer, .imageContainerFullWidth {
+  position: relative; /* This is required for next/image to work with layout="fill" */
+  flex-basis: calc(33.333% - 10px); /* Adjust for 3 images per row with gap, except for full width */
+  height: 200px; /* Define your preferred height for all image containers */
+  /* background-color: #f3f3f3; Placeholder color, can be removed if images load properly */
 }
 
-/* Mobile and Tablet Styles */
-.mobileHero,
-.tabletHero {
-  display: none;
+.imageContainerFullWidth {
+  flex-basis: 100%; /* Full width for the last image */
 }
 
-@media (max-width: 767px) {
-  .mobileHero {
-    display: flex;
-    border: solid yellow;
-    margin-left: 2%;
-    margin-right: 2%;
-    width: 100vw;
-    justify-content: center;
-  }
-
-  .heroImage {
-    
-  }
-
-  .desktopHero,
-  .tabletHero {
-    display: none;
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .imageContainer, .imageContainerFullWidth {
+    flex-basis: 100%; /* Full width on smaller screens */
   }
 }
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .tabletHero {
-    display: flex;
-    border: solid green;
-  }
-
-  .mobileHero,
-  .desktopHero {
-    display: none;
-  }
-}
-
-
