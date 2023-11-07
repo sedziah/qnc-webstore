@@ -1,6 +1,6 @@
 // Banner.js or Banner.tsx if you're using TypeScript
 import Image from "next/image";
-import styles from "./Banner.module.css";
+
 
 const Banner = ({ src, alt }) => {
   return (
