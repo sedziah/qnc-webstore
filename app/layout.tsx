@@ -32,15 +32,14 @@ export default function RootLayout({
       <head></head>
       <body>
         <Navbar />
-        <SearchBar />
-        <Hero />
+        
         {/* <ImagesSlider images={imagesData} /> */}
-        <div style={{ padding: "40px" }}>
+        {/* <div style={{ padding: "40px" }}>
           <Banner
             src="/images/banner/qnc_banner_1.png"
             alt="Banner Description"
           />
-        </div>
+        </div> */}
         {children}
         {/* <div style={{ padding: "20px" }}>
           <Banner
