@@ -1,4 +1,3 @@
-/* Banner.module.css */
 .bannerContainer {
   position: relative; /* Required for Next.js Image component with layout="fill" */
   width: calc(100% - 20%); /* Subtracting padding from the full width */
@@ -15,7 +14,9 @@
 /* Responsive adjustments for tablets and mobiles */
 @media (max-width: 768px) {
   .bannerContainer {
-    width: calc(100% - 10%); /* Subtracting padding from the full width for smaller screens */
+    width: calc(
+      100% - 10%
+    ); /* Subtracting padding from the full width for smaller screens */
     margin-left: 5%; /* Left padding for small screens */
     margin-right: 5%; /* Right padding for small screens */
     height: 200px; /* Optional: Adjust height for smaller screens if necessary */
