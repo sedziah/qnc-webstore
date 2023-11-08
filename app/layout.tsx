@@ -7,7 +7,6 @@ import SubFooter from "../components/subfooter/index";
 import SearchBar from "../components/searchbar/index";
 import Hero from "../components/hero/index";
 import Banner from "../components/banner/index";
-import ImagesSlider from "../components/imageSlider/index";
 
 const imagesData = [
   { id: 1, src: "/images/banner/qnc_banner_2.png", alt: "Image description 1" },
