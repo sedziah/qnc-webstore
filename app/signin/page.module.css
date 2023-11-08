@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.formContainer {
+  max-width: 400px;
+}
+
+.inputField, .submitButton, .socialButton {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submitButton {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+.socialButton {
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+.separator {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.separatorLine {
+  display: inline-block;
+  width: 30%;
+}
+
+.rememberMe {
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    display: none;
+  }
+}

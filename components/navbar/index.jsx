@@ -49,7 +49,7 @@ function Navbar() {
               <Link href="#">
                 <li>categories</li>
               </Link>
-              <Link href="#">
+              <Link href="/cart">
                 <li>
                   <Image
                     src="/icons/cart.svg"
@@ -59,10 +59,10 @@ function Navbar() {
                   />
                 </li>
               </Link>
-              <Link href="#" className={styles.links}>
+              <Link href="/signin" className={styles.links}>
                 <li className={styles.signin_button}>Sign in</li>
               </Link>
-              <Link href="#" className={styles.links}>
+              <Link href="/signup" className={styles.links}>
                 <li className={styles.signup_button}>Sign up</li>
               </Link>
             </ul>
