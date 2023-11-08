@@ -1,7 +1,12 @@
+import Hero from '@/components/hero';
+import SearchBar from '@/components/searchbar';
 import React from 'react'
 
 export default function Home() {
   return (
-    <div>Home</div>
-  )
+    <div>
+      <SearchBar />
+      <Hero />
+    </div>
+  );
 }
