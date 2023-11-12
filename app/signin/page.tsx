@@ -4,48 +4,47 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import styles from "./page.module.css";
 import { useRouter } from "next/navigation";
+import { useAuth } from "../auth/contexts/AuthContext";
 
 const Page = () => {
   const router = useRouter();
-
+  const { isAuthenticated, login } = useAuth(); // Destructure isAuthenticated
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevent the default form submit action
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/dashboard"); // Use replace to prevent going back to the sign-in page
+    }
+  }, [isAuthenticated, router]); // Depend on isAuthenticated and router
 
-    // Prepare data to be sent to your Django backend
-    const credentials = {
-      email: emailOrUsername,
-      password: password,
-    };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setError(""); // Clear any existing errors
 
-    console.log("Form Submitted", { credentials });
+    // if (!emailOrUsername || !password) {
+    //   setError("Please enter both email and password");
+    //   return; // Exit early if fields are empty
+    // }
 
     try {
-      // Make an API call to your Django backend
-      const response = await fetch("http://127.0.0.1:8000/accounts/login/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(credentials),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      // Handle response data, store auth tokens, etc.
-
-      // Redirect to another page upon successful sign-in
-      router.push("/");
+      console.log("Attempting login...");
+      await login(emailOrUsername, password);
+      console.log("Login successful, redirecting...");
+      router.push("/"); // Redirect only if login is successful
     } catch (error) {
-      // Handle errors (e.g., display an error message)
-      console.error("Sign-in failed:", error);
+      console.error("Login failed:", error);
+      setError(error.message || "An error occurred during login.");
     }
   };
+
+  if (isAuthenticated) {
+    // If user is authenticated, do not render the sign-in form.
+    // Optionally, render null or a loading spinner instead.
+    return null;
+  }
+
 
   return (
     <div className={styles.container}>

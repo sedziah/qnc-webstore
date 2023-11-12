@@ -22,7 +22,7 @@ const Page = () => {
         <input
           type="text"
           className={styles.inputField}
-          placeholder="Email or username"
+          placeholder="Email"
         />
         <input
           type="text"
