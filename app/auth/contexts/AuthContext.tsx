@@ -1,6 +1,6 @@
 // contexts/AuthContext.tsx
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 import { apiService } from "../../../services/apiService";
 
 interface AuthContextType {
@@ -11,20 +11,25 @@ interface AuthContextType {
 }
 
 // Set initial isAuthenticated state based on the presence of a token in local storage
-const initialIsAuthenticated = !!localStorage.getItem("token");
+// const initialIsAuthenticated = !!localStorage.getItem("token");
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
-  isAuthenticated: initialIsAuthenticated, // Provide an initial value
+  isAuthenticated: false, // Provide an initial value
   login: async () => {},
   logoutUser: () => {}, // Stub for logoutUser
 });
 
 export const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    initialIsAuthenticated
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // Since localStorage is not available on the server, we perform this check on the client side
+    const token =
+      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+    setIsAuthenticated(!!token);
+  }, []);
 
   const login = async (email: string, password: string) => {
     try {

@@ -52,12 +52,13 @@ const Page = () => {
 
       <div className={styles.formContainer}>
         <form className={styles.formContainer} onSubmit={handleSubmit}>
-          <h1>Sign in to QnC or create an account</h1>
+          <h1>Sign In</h1>
+          <br></br>
 
           <input
             type="text"
             className={styles.inputField}
-            placeholder="Email or username"
+            placeholder="Email"
             value={emailOrUsername}
             onChange={(e) => setEmailOrUsername(e.target.value)}
           />
@@ -83,14 +84,6 @@ const Page = () => {
           <button className={`${styles.submitButton} ${styles.socialButton}`}>
             Continue with Apple
           </button>
-
-          <label className={styles.rememberMe}>
-            <input type="checkbox" /> Stay signed in
-          </label>
-          <p>
-            Using a public or shared device? Uncheck to protect your account.
-            <a href="#">Learn more</a>
-          </p>
         </form>
       </div>
     </div>
