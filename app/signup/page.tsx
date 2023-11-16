@@ -4,11 +4,12 @@ import styles from "./page.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../auth/contexts/AuthContext"; // Adjust path as needed
-import {apiService} from "../../services/apiService"
+import { apiService } from "../../services/apiService";
 
 const Page = () => {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
+  const [signedUp, setSignedUp] = useState(false);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -48,7 +49,9 @@ const Page = () => {
 
       // Handle response, store token, etc.
 
-      router.push("/"); // Redirect to home after sign up
+      router.push("/signin"); // Redirect to signin after sign up completion
+      setSignedUp(true); // Set signedUp to true after successful registration
+      setError(""); // Clear any previous errors
     } catch (err) {
       // Handle errors, display message to user
       setError(err.message);
@@ -59,11 +62,17 @@ const Page = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleResendVerification = async () => {
+    try {
+      await apiService.resendVerificationEmail(formData.email);
+      alert("Verification email resent! Please check your inbox.");
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   return (
     <div className={styles.container}>
-      {/* Optionally include your image container here */}
-
       <div className={styles.formContainer}>
         <form onSubmit={handleSubmit}>
           <h1>Sign Up </h1>
@@ -117,7 +126,7 @@ const Page = () => {
           {error && <p className={styles.error}>{error}</p>}
         </form>
 
-        <div className={styles.separator}>
+        {/* <div className={styles.separator}>
           <span className={styles.separatorLine}>or</span>
         </div>
 
@@ -129,7 +138,7 @@ const Page = () => {
         </button>
         <button className={`${styles.submitButton} ${styles.socialButton}`}>
           Continue with Apple
-        </button>
+        </button> */}
       </div>
     </div>
   );

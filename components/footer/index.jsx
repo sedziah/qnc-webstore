@@ -41,7 +41,7 @@ function Footer() {
           <div className={styles.footerColumn}>
             <Stack className={styles.footerQuickLinks}>
               <h1>Quick Links</h1>
-              <Link href="#">{quickLink1}</Link>
+              <Link href="/about">{quickLink1}</Link>
               <Link href="#">{quickLink2}</Link>
               <Link href="#">{quickLink3}</Link>
             </Stack>

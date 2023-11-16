@@ -83,7 +83,7 @@ function Navbar() {
               </Link>
               {isAuthenticated ? (
                 <>
-                  <Link href="/my-account">
+                  <Link href="/dashboard">
                     <li className={styles.myAccount}>My Account</li>
                   </Link>
                   <li onClick={handleSignOut} className={styles.signoutButton}>

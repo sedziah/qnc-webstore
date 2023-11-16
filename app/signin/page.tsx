@@ -23,11 +23,6 @@ const Page = () => {
     event.preventDefault();
     setError(""); // Clear any existing errors
 
-    // if (!emailOrUsername || !password) {
-    //   setError("Please enter both email and password");
-    //   return; // Exit early if fields are empty
-    // }
-
     try {
       console.log("Attempting login...");
       await login(emailOrUsername, password);
@@ -35,7 +30,7 @@ const Page = () => {
       router.push("/"); // Redirect only if login is successful
     } catch (error) {
       console.error("Login failed:", error);
-      setError(error.message || "An error occurred during login.");
+      setError(error.message);
     }
   };
 
@@ -45,7 +40,6 @@ const Page = () => {
     return null;
   }
 
-
   return (
     <div className={styles.container}>
       {/* Optionally include your image container here */}
@@ -54,7 +48,6 @@ const Page = () => {
         <form className={styles.formContainer} onSubmit={handleSubmit}>
           <h1>Sign In</h1>
           <br></br>
-
           <input
             type="text"
             className={styles.inputField}
@@ -70,11 +63,11 @@ const Page = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button className={styles.submitButton}>Continue</button>
-
-          <div className={styles.separator}>
+          {error && <div className={styles.error}>{error}</div>}{" "}
+          {/* Display error message here */}
+          {/* <div className={styles.separator}>
             <span className={styles.separatorLine}>or</span>
           </div>
-
           <button className={`${styles.submitButton} ${styles.socialButton}`}>
             Continue with Facebook
           </button>
@@ -83,7 +76,7 @@ const Page = () => {
           </button>
           <button className={`${styles.submitButton} ${styles.socialButton}`}>
             Continue with Apple
-          </button>
+          </button> */}
         </form>
       </div>
     </div>
