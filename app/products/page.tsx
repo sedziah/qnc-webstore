@@ -1,4 +1,5 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import ProductCard from "@/components/productCard/ProductCard";
 import styles from "./page.module.css";
 import { apiService } from "@/services/apiService";
@@ -52,11 +53,22 @@ const products: Product[] = [
 ];
 
 const Page = () => {
+  const [cartCount, setCartCount] = useState(0);
+
+  // Effect to update the cart count on initial load
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    updateCartCount(cart);
+  }, []);
+
+  // Function to update the cart count
+  const updateCartCount = (cart: any[]) => {
+    const totalCount = cart.reduce((count, item) => count + item.quantity, 0);
+    setCartCount(totalCount);
+  };
+
   const handleAddToCart = async (productId: string) => {
     console.log("Add to cart:", productId);
-    // Add to cart logic here
-    // Here you'll need to check if the user is logged in
-    // This is just a placeholder, replace with your actual logic
     const isLoggedIn = false; // Replace with actual login check
 
     if (isLoggedIn) {
@@ -80,23 +92,26 @@ const Page = () => {
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
-      // Optionally trigger any state updates to reflect the cart update
       console.log("Item added to local storage cart");
+      updateCartCount(cart);
     }
   };
 
   return (
-    <div className={styles.productsContainer}>
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          id={product.id}
-          title={product.title}
-          image={product.image}
-          price={product.price}
-          onAddToCart={handleAddToCart}
-        />
-      ))}
+    <div>
+      <div className={styles.cartCount}>Cart Items: {cartCount}</div>
+      <div className={styles.productsContainer}>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            title={product.title}
+            image={product.image}
+            price={product.price}
+            onAddToCart={handleAddToCart}
+          />
+        ))}
+      </div>
     </div>
   );
 };

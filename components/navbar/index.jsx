@@ -11,25 +11,24 @@ import { useAuth } from "../../app/auth/contexts/AuthContext";
 function Navbar() {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const [isTabletNavOpen, setTabletNavOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const { isAuthenticated, logoutUser } = useAuth();
 
+  useEffect(() => {
+    // Function to update the cart count
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const totalCount = cart.reduce((count, item) => count + item.quantity, 0);
+      setCartCount(totalCount);
+    };
+
+    // Call updateCartCount on component mount and whenever the cart updates
+    updateCartCount();
+  }, []);
+
   const handleSignOut = () => {
-    logoutUser(); // Make sure this updates the `isAuthenticated` state to false
-    // Optionally, add a router push here if you want to redirect after logout
+    logoutUser();
   };
-
-  // const isAuthenticated =
-  //   typeof window !== "undefined" && !!localStorage.getItem("userToken");
-
-  // const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // useEffect(() => {
-  //   // Check for token in local storage
-  //   const token = localStorage.getItem("yourTokenKey");
-  //   if (token) {
-  //     setIsAuthenticated(true);
-  //   }
-  // }, []);
 
   console.log("Is Authenticated:", isAuthenticated);
 
@@ -73,12 +72,10 @@ function Navbar() {
               </Link>
               <Link href="/cart">
                 <li>
-                  <Image
-                    src="/icons/cart.svg"
-                    alt="cart"
-                    width={25}
-                    height={51.5}
-                  />
+                  <AddShoppingCartIcon />
+                  {cartCount > 0 && (
+                    <span className={styles.cartCount}>{cartCount}</span>
+                  )}
                 </li>
               </Link>
               {isAuthenticated ? (
