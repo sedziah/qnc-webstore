@@ -26,12 +26,12 @@ const AuthContext = createContext<AuthContextType>({
   logoutUser: () => {}, // Stub for logoutUser
 });
 
-// Define the type for the props of AuthProvider
-interface AuthProviderProps {
-  children: ReactNode;
+interface Props {
+  children?: ReactNode;
+  // any props that come into the component
 }
 
-export const AuthProvider = ({ children }) => {
+export const AuthProvider: React.FC = ({ children, ...props }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
