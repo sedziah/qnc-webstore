@@ -1,6 +1,12 @@
 // contexts/AuthContext.tsx
 "use client";
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 import { apiService } from "../../../services/apiService";
 
 interface AuthContextType {
@@ -19,6 +25,11 @@ const AuthContext = createContext<AuthContextType>({
   login: async () => {},
   logoutUser: () => {}, // Stub for logoutUser
 });
+
+// Define the type for the props of AuthProvider
+interface AuthProviderProps {
+  children: ReactNode;
+}
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
