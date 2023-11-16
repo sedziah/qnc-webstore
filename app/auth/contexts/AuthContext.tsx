@@ -50,7 +50,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       localStorage.setItem("token", data.token); // Store the token
     } catch (error) {
       console.error(error);
-      throw error; // Re-throw the error to be caught by the caller
+      // throw error; Re-throw the error to be caught by the caller
+      
     }
   };
 

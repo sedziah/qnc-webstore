@@ -29,8 +29,15 @@ const Page = () => {
       console.log("Login successful, redirecting...");
       router.push("/"); // Redirect only if login is successful
     } catch (error) {
-      console.error("Login failed:", error);
-      setError(error.message);
+      // console.error("Login failed:", error);
+      // setError(error.message);
+      if (error instanceof Error) {
+        console.error("Login failed:", error);
+        setError(error.message); // Now TypeScript knows error is an Error object
+      } else {
+        console.error("Login failed with unknown error");
+        setError("An unexpected error occurred"); // Generic error message
+      }
     }
   };
 
