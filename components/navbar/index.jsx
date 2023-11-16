@@ -7,24 +7,25 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useAuth } from "../../app/auth/contexts/AuthContext";
+import { useCart } from "../../app/cart/CartContext";
 
 function Navbar() {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const [isTabletNavOpen, setTabletNavOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
   const { isAuthenticated, logoutUser } = useAuth();
+  const { cartCount } = useCart();
 
-  useEffect(() => {
-    // Function to update the cart count
-    const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const totalCount = cart.reduce((count, item) => count + item.quantity, 0);
-      setCartCount(totalCount);
-    };
+  // useEffect(() => {
+  //   // Function to update the cart count
+  //   const updateCartCount = () => {
+  //     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  //     const totalCount = cart.reduce((count, item) => count + item.quantity, 0);
+  //     setCartCount(totalCount);
+  //   };
 
-    // Call updateCartCount on component mount and whenever the cart updates
-    updateCartCount();
-  }, []);
+  //   // Call updateCartCount on component mount and whenever the cart updates
+  //   updateCartCount();
+  // }, []);
 
   const handleSignOut = () => {
     logoutUser();

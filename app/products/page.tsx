@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ProductCard from "@/components/productCard/ProductCard";
 import styles from "./page.module.css";
 import { apiService } from "@/services/apiService";
+import { useCart } from "@/app/cart/CartContext";
 
 type Product = {
   id: string;
@@ -53,49 +54,50 @@ const products: Product[] = [
 ];
 
 const Page = () => {
-  const [cartCount, setCartCount] = useState(0);
+  // const [cartCount, setCartCount] = useState(0);
+  const { handleAddToCart, cartCount } = useCart();
 
   // Effect to update the cart count on initial load
-  useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    updateCartCount(cart);
-  }, []);
+  // useEffect(() => {
+  //   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  //   updateCartCount(cart);
+  // }, []);
 
   // Function to update the cart count
-  const updateCartCount = (cart: any[]) => {
-    const totalCount = cart.reduce((count, item) => count + item.quantity, 0);
-    setCartCount(totalCount);
-  };
+  // const updateCartCount = (cart: any[]) => {
+  //   const totalCount = cart.reduce((count, item) => count + item.quantity, 0);
+  //   setCartCount(totalCount);
+  // };
 
-  const handleAddToCart = async (productId: string) => {
-    console.log("Add to cart:", productId);
-    const isLoggedIn = false; // Replace with actual login check
+  // const handleAddToCart = async (productId: string) => {
+  //   console.log("Add to cart:", productId);
+  //   const isLoggedIn = false; // Replace with actual login check
 
-    if (isLoggedIn) {
-      // User is logged in, call the API to add the item to the cart
-      try {
-        const updatedCart = await apiService.addToCart(productId, 1); // Replace with actual API call
-        console.log("Item added to cart:", updatedCart);
-        // Here you would update your state/context with the updated cart
-      } catch (error) {
-        console.error("Error adding item to cart:", error);
-      }
-    } else {
-      // User is not logged in, store the cart in local storage
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const existingItem = cart.find((item: any) => item.id === productId);
+  //   if (isLoggedIn) {
+  //     // User is logged in, call the API to add the item to the cart
+  //     try {
+  //       const updatedCart = await apiService.addToCart(productId, 1); // Replace with actual API call
+  //       console.log("Item added to cart:", updatedCart);
+  //       // Here you would update your state/context with the updated cart
+  //     } catch (error) {
+  //       console.error("Error adding item to cart:", error);
+  //     }
+  //   } else {
+  //     // User is not logged in, store the cart in local storage
+  //     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  //     const existingItem = cart.find((item: any) => item.id === productId);
 
-      if (existingItem) {
-        existingItem.quantity += 1; // Increment quantity
-      } else {
-        cart.push({ id: productId, quantity: 1 }); // Add new item
-      }
+  //     if (existingItem) {
+  //       existingItem.quantity += 1; // Increment quantity
+  //     } else {
+  //       cart.push({ id: productId, quantity: 1 }); // Add new item
+  //     }
 
-      localStorage.setItem("cart", JSON.stringify(cart));
-      console.log("Item added to local storage cart");
-      updateCartCount(cart);
-    }
-  };
+  //     localStorage.setItem("cart", JSON.stringify(cart));
+  //     console.log("Item added to local storage cart");
+  //     updateCartCount(cart);
+  //   }
+  // };
 
   return (
     <div>
