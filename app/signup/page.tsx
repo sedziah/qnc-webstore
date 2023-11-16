@@ -54,7 +54,12 @@ const Page = () => {
       setError(""); // Clear any previous errors
     } catch (err) {
       // Handle errors, display message to user
-      setError(err.message);
+      // setError(err.message);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An unexpected error occurred"); // Generic error message
+      }
     }
   };
 
