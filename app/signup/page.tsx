@@ -76,7 +76,12 @@ const Page = () => {
       await apiService.resendVerificationEmail(formData.email);
       alert("Verification email resent! Please check your inbox.");
     } catch (err) {
-      setError(err.message);
+      // setError(err.message);
+       if (err instanceof Error) {
+         setError(err.message); // Now TypeScript knows err is an Error object
+       } else {
+         setError("An unexpected error occurred"); // Generic error message for unknown types
+       }
     }
   };
 
