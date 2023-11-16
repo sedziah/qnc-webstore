@@ -27,7 +27,7 @@ const Page = () => {
     }
   }, [isAuthenticated, router]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
