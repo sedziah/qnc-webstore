@@ -31,7 +31,7 @@ interface Props {
   // any props that come into the component
 }
 
-export const AuthProvider: React.FC = ({ children, ...props }) => {
+export const AuthProvider: React.FC = ({ children, ...props }: any) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
