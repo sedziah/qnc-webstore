@@ -34,9 +34,13 @@ interface CartProviderProps {
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
+  // Function to save cart to local storage
+  const saveCartToLocalStorage = (updatedCart: CartItem[]) => {
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  // Initialize cart from local storage
   useEffect(() => {
-    // const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    // setCart(storedCart);
     let storedCart;
     try {
       storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -44,6 +48,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       console.error("Error parsing cart from local storage:", error);
       storedCart = [];
     }
+    setCart(storedCart); // Set the cart state with the stored cart
   }, []);
 
   const updateCartCount = () => {
@@ -74,7 +79,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         newCart = [...cart, { id: productId, quantity: 1 }];
       }
       setCart(newCart);
-      localStorage.setItem("cart", JSON.stringify(newCart));
+      // localStorage.setItem("cart", JSON.stringify(newCart));
+      saveCartToLocalStorage(newCart); // Save updated cart to local storage
     }
   };
 
