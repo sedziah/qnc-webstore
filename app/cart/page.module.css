@@ -5,52 +5,91 @@
   align-items: center;
 }
 
-.cartText {
-  color: var(--Secondary, #f4f4f4);
-  font-feature-settings: "clig" off, "liga" off;
-  margin-left: 10%;
-  margin-right: 10%;
+.cartPage {
+  padding: 1em;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-  /* H3 */
-  font-family: var(--montserrat);
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 120%; /* 48px */
+.cartContents {
+  display: block;
+  overflow-x: auto;
+}
+
+.cartTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2em;
+}
+
+.cartTable th,
+.cartTable td {
+  text-align: left;
+  padding: 0.5em;
+  border-bottom: 1px solid #ccc;
+}
+
+.productInfo {
+  display: flex;
+  align-items: center;
+}
+
+.productImage {
+  width: 50px; /* Adjust as needed */
+  height: auto;
+  margin-right: 1em;
+}
+
+.cartTable button {
+  margin: 0 0.5em;
+  padding: 0.25em 0.5em;
+}
+
+.cartTotals {
+  text-align: right;
+}
+
+.subtotal,
+.total {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 0;
+}
+
+.checkoutButton {
+  background-color: #000;
+  color: #fff;
+  padding: 1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  margin-top: 1em;
 }
 
 .emptyCart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40vh;
+  text-align: center;
+  padding: 2em 0;
 }
 
-.emptyCart :first-child {
-  color: var(--QnC-Heading-Black, #191919);
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Poppins;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 130%; /* 36.4px */
-  padding-right: 10px;
+.emptyCart a {
+  color: #0056b3;
+  text-decoration: none;
 }
 
-.emptyCart :nth-child(2) {
-  color: var(--qnc-orange, #f89132);
-  font-feature-settings: "clig" off, "liga" off;
 
-  /* H5 */
-  font-family: Montserrat;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%; /* 33.6px */
-}
-
+/* Mobile responsiveness */
 @media (max-width: 768px) {
-  .cartText {
-    font-size: 25px;
+  .productImage {
+    width: 40px; /* Smaller image on mobile */
+  }
+
+  .cartTotals,
+  .subtotal,
+  .total {
+    text-align: left;
+  }
+
+  .checkoutButton {
+    width: 100%; /* Full-width button on mobile */
   }
 }
