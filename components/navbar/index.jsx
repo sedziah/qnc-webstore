@@ -15,18 +15,6 @@ function Navbar() {
   const { isAuthenticated, logoutUser } = useAuth();
   const { cartCount } = useCart();
 
-  // useEffect(() => {
-  //   // Function to update the cart count
-  //   const updateCartCount = () => {
-  //     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  //     const totalCount = cart.reduce((count, item) => count + item.quantity, 0);
-  //     setCartCount(totalCount);
-  //   };
-
-  //   // Call updateCartCount on component mount and whenever the cart updates
-  //   updateCartCount();
-  // }, []);
-
   const handleSignOut = () => {
     logoutUser();
   };
@@ -62,13 +50,13 @@ function Navbar() {
           </div>
           <div>
             <ul className={styles.navLinks}>
-              <Link href="#">
+              <Link href="/products">
                 <li>featured</li>
               </Link>
-              <Link href="#">
+              <Link href="/products">
                 <li>deals</li>
               </Link>
-              <Link href="#">
+              <Link href="/products">
                 <li>categories</li>
               </Link>
               <Link href="/cart">
@@ -146,13 +134,13 @@ function Navbar() {
           </div>
           <ul className={styles.mobileLinks}>
             <li>
-              <Link href="#">featured</Link>
+              <Link href="/products">featured</Link>
             </li>
             <li>
-              <Link href="#">deals</Link>
+              <Link href="/products">deals</Link>
             </li>
             <li>
-              <Link href="#">categories</Link>
+              <Link href="/products">categories</Link>
             </li>
           </ul>
         </div>

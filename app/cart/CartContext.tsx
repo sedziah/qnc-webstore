@@ -1,4 +1,4 @@
-//app/cart/CartContext.js
+// src/cart/CartContext.js
 "use client";
 import React, {
   createContext,
@@ -12,9 +12,6 @@ import { apiService } from "../../services/apiService"; // Adjust the import pat
 interface CartItem {
   id: string;
   quantity: number;
-  title: string;
-  price: number;
-  image: string;
   // Include other properties as needed
 }
 
@@ -22,11 +19,13 @@ interface CartContextType {
   cart: CartItem[];
   cartCount: number;
   handleAddToCart: (productId: string) => Promise<void>;
-  updateCartItemQuantity: (productId: string, quantity: number) => void;
-  removeCartItem: (productId: string) => void;
 }
 
-const CartContext = createContext<CartContextType>(null!);
+const CartContext = createContext<CartContextType>({
+  cart: [],
+  cartCount: 0,
+  handleAddToCart: async () => {}, // Provide a default no-op function
+});
 
 interface CartProviderProps {
   children: ReactNode; // Defining the type for children
@@ -36,53 +35,21 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCart(storedCart);
+    // const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    // setCart(storedCart);
+    let storedCart;
+    try {
+      storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    } catch (error) {
+      console.error("Error parsing cart from local storage:", error);
+      storedCart = [];
+    }
   }, []);
-
-  // Helper function to persist the cart state to local storage
-  const saveCartToLocalStorage = (updatedCart: CartItem[]) => {
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
 
   const updateCartCount = () => {
     const totalCount = cart.reduce((count, item) => count + item.quantity, 0);
     return totalCount;
   };
-
-  const updateCartItemQuantity = (productId: string, quantity: number) => {
-    const updatedCart = cart.map((item) =>
-      item.id === productId
-        ? { ...item, quantity: Math.max(0, quantity) }
-        : item
-    );
-    setCart(updatedCart);
-    saveCartToLocalStorage(updatedCart);
-  };
-
-  // Function to remove a cart item
-  const removeCartItem = (productId: string) => {
-    const updatedCart = cart.filter((item) => item.id !== productId);
-    setCart(updatedCart);
-    saveCartToLocalStorage(updatedCart);
-  };
-
-  // This function simulates fetching product details from local storage.
-  function getProductDetails(productId: string) {
-    // Retrieve the product list from local storage
-    const products = JSON.parse(localStorage.getItem("products") || "[]");
-
-    // Find the product with the matching productId
-    const product = products.find(
-      (productId: string) => product.id === productId
-    );
-
-    if (!product) {
-      throw new Error("Product not found");
-    }
-
-    return product;
-  }
 
   const handleAddToCart = async (productId: string) => {
     const isLoggedIn = false; // Replace with actual login check
@@ -104,19 +71,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
             : item
         );
       } else {
-        const productDetails = getProductDetails(productId);
-        newCart = [
-          ...cart,
-          {
-            id: productId,
-            quantity: 1,
-            title: productDetails.title, // Replace with actual title
-            price: productDetails.price, // Replace with actual price
-            image: productDetails.image, // Replace with actual image URL
-          },
-        ];
+        newCart = [...cart, { id: productId, quantity: 1 }];
       }
-
       setCart(newCart);
       localStorage.setItem("cart", JSON.stringify(newCart));
     }
@@ -124,13 +80,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{
-        cart,
-        cartCount: updateCartCount(),
-        handleAddToCart,
-        updateCartItemQuantity,
-        removeCartItem,
-      }}
+      value={{ cart, cartCount: updateCartCount(), handleAddToCart }}
     >
       {children}
     </CartContext.Provider>
