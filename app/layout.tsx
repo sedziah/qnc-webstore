@@ -7,6 +7,8 @@ import SubFooter from "../components/subfooter/index";
 import SearchBar from "../components/searchbar/index";
 import Hero from "../components/hero/index";
 import Banner from "../components/banner/index";
+import { AuthProvider } from "./auth/contexts/AuthContext";
+import { CartProvider } from "./cart/CartContext";
 
 const imagesData = [
   { id: 1, src: "/images/banner/qnc_banner_2.png", alt: "Image description 1" },
@@ -29,26 +31,30 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head></head>
-      <body>
-        <Navbar />
-        
-        {/* <ImagesSlider images={imagesData} /> */}
-        {/* <div style={{ padding: "40px" }}>
+      <CartProvider>
+        <AuthProvider>
+          <body>
+            <Navbar />
+
+            {/* <ImagesSlider images={imagesData} /> */}
+            {/* <div style={{ padding: "40px" }}>
           <Banner
             src="/images/banner/qnc_banner_1.png"
             alt="Banner Description"
           />
         </div> */}
-        {children}
-        {/* <div style={{ padding: "20px" }}>
+            {children}
+            {/* <div style={{ padding: "20px" }}>
           <Banner
             src="/images/banner/qnc_banner_2.png"
             alt="Banner Description"
           />
         </div> */}
-        <Footer />
-        <SubFooter />
-      </body>
+            <Footer />
+            <SubFooter />
+          </body>
+        </AuthProvider>
+      </CartProvider>
     </html>
   );
 }

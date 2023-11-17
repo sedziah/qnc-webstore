@@ -14,12 +14,28 @@
   width: 100vw;
 }
 
+.cartCount {
+  background-color: orange;
+  color: black;
+  border-radius: 50%;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  position: absolute;
+  top: -5px; /* Adjust these values as needed */
+  right: -10px; /* Adjust these values as needed */
+}
+
 .navLinks {
   list-style: none;
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 0;
+}
+
+.navLinks li {
+  position: relative; /* This is important for positioning the cart count */
+  /* ... other styles ... */
 }
 
 .navLinks li:hover {

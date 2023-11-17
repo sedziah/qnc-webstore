@@ -1,15 +1,25 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import styles from "./Navbar.module.css";
 import Image from "next/image";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useAuth } from "../../app/auth/contexts/AuthContext";
+import { useCart } from "../../app/cart/CartContext";
 
 function Navbar() {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const [isTabletNavOpen, setTabletNavOpen] = useState(false);
+  const { isAuthenticated, logoutUser } = useAuth();
+  const { cartCount } = useCart();
+
+  const handleSignOut = () => {
+    logoutUser();
+  };
+
+  console.log("Is Authenticated:", isAuthenticated);
 
   const toggleMobileNav = () => {
     setMobileNavOpen(!isMobileNavOpen);
@@ -40,31 +50,42 @@ function Navbar() {
           </div>
           <div>
             <ul className={styles.navLinks}>
-              <Link href="#">
+              <Link href="/products">
                 <li>featured</li>
               </Link>
-              <Link href="#">
+              <Link href="/products">
                 <li>deals</li>
               </Link>
-              <Link href="#">
+              <Link href="/products">
                 <li>categories</li>
               </Link>
-              <Link href="#">
+              <Link href="/cart">
                 <li>
-                  <Image
-                    src="/icons/cart.svg"
-                    alt="cart"
-                    width={25}
-                    height={51.5}
-                  />
+                  <AddShoppingCartIcon />
+                  {cartCount > 0 && (
+                    <span className={styles.cartCount}>{cartCount}</span>
+                  )}
                 </li>
               </Link>
-              <Link href="#" className={styles.links}>
-                <li className={styles.signin_button}>Sign in</li>
-              </Link>
-              <Link href="#" className={styles.links}>
-                <li className={styles.signup_button}>Sign up</li>
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  <Link href="/dashboard">
+                    <li className={styles.myAccount}>My Account</li>
+                  </Link>
+                  <li onClick={handleSignOut} className={styles.signoutButton}>
+                    Sign Out
+                  </li>
+                </>
+              ) : (
+                <>
+                  <Link href="/signin" className={styles.links}>
+                    <li className={styles.signin_button}>Sign in</li>
+                  </Link>
+                  <Link href="/signup" className={styles.links}>
+                    <li className={styles.signup_button}>Sign up</li>
+                  </Link>
+                </>
+              )}
             </ul>
           </div>
 
@@ -113,13 +134,13 @@ function Navbar() {
           </div>
           <ul className={styles.mobileLinks}>
             <li>
-              <Link href="#">featured</Link>
+              <Link href="/products">featured</Link>
             </li>
             <li>
-              <Link href="#">deals</Link>
+              <Link href="/products">deals</Link>
             </li>
             <li>
-              <Link href="#">categories</Link>
+              <Link href="/products">categories</Link>
             </li>
           </ul>
         </div>
