@@ -17,6 +17,7 @@ const ProductCard: React.FC<ProductProps> = ({
   price,
   onAddToCart,
 }) => {
+  console.log('Product Data:', { id, title, image, price });
   return (
     <div className={styles.card}>
       <div className={styles.image}>
