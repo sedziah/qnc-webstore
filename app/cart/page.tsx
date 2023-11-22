@@ -1,8 +1,6 @@
-//app/cart/page.tsx
 "use client";
 import styles from "./page.module.css";
 import { useCart } from "@/app/cart/CartContext";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { TransformedProduct, apiService } from "../../services/apiService";
 
@@ -24,20 +22,22 @@ export default function Page() {
     loadProducts();
   }, []);
 
-  // Calculate the total cost of items in the cart
-  const total = cart.reduce((sum, item) => {
-    return sum + item.price * item.quantity;
-  }, 0);
-
   if (cart.length === 0) {
     return (
       <div className={styles.emptyCart}>
         <span>Your cart is currently empty.</span>
-        {/* Link to the shop page */}
         <a href="/shop">Click here to shop</a>
       </div>
     );
   }
+
+  // Calculate the total cost of items in the cart
+  const total = cart.reduce((sum, cartItem) => {
+    const product = products.find((p) => p.id === cartItem.id);
+    // Check if product is found and price is a number
+    const price = product && !isNaN(product.price) ? product.price : 0;
+    return sum + price * cartItem.quantity;
+  }, 0);
 
   return (
     <div className={styles.cartPage}>
@@ -64,7 +64,7 @@ export default function Page() {
                     {/* Product Information */}
                     <span>{product.name}</span>
                   </td>
-                  <td>{product.price}</td>
+                  <td>GHS {product.price}</td>
                   <td>
                     <button
                       onClick={() =>
@@ -88,7 +88,7 @@ export default function Page() {
                       +
                     </button>
                   </td>
-                  <td>{(product.price * cartItem.quantity).toFixed(2)}</td>
+                  <td>GHS {(product.price * cartItem.quantity).toFixed(2)}</td>
                   <td>
                     <button onClick={() => removeCartItem(cartItem.id)}>
                       Remove
@@ -100,14 +100,11 @@ export default function Page() {
           </tbody>
         </table>
         <div className={styles.cartTotals}>
-          <div className={styles.subtotal}>
-            <span>Subtotal</span>
-            <span>{total.toFixed(2)}</span>
-          </div>
           <div className={styles.total}>
             <span>Total</span>
-            <span>{total.toFixed(2)}</span>
+            <span>GHS {isNaN(total) ? "0.00" : total.toFixed(2)}</span>
           </div>
+
           <button className={styles.checkoutButton}>Proceed to Checkout</button>
         </div>
       </div>
