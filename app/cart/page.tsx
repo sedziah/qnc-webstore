@@ -1,11 +1,12 @@
 //app/cart/page.tsx
 "use client"
 import styles from "./page.module.css";
-import { useCart } from "@/app/cart/CartContext";
+import { useCart} from "@/app/cart/CartContext";
 import Image from "next/image";
 
 export default function Page() {
   const { cart } = useCart();
+  const { updateCartItemQuantity } = useCart();
 
   // Calculate the total cost of items in the cart
   const total = cart.reduce((sum, item) => {
@@ -57,17 +58,17 @@ export default function Page() {
                 <td>{item.price}</td>
                 <td>
                   <button
-                  // onClick={() =>
-                  //   updateCartItemQuantity(item.id, item.quantity - 1)
-                  // }
+                  onClick={() =>
+                    updateCartItemQuantity(item.id, item.quantity - 1)
+                  }
                   >
                     -
                   </button>
                   <span>{item.quantity}</span>
                   <button
-                  // onClick={() =>
-                  //   updateCartItemQuantity(item.id, item.quantity + 1)
-                  // }
+                  onClick={() =>
+                    updateCartItemQuantity(item.id, item.quantity + 1)
+                  }
                   >
                     +
                   </button>

@@ -1,4 +1,4 @@
-// src/cart/CartContext.js
+//app/cart/CartContext.js
 "use client";
 import React, {
   createContext,
@@ -19,13 +19,17 @@ interface CartContextType {
   cart: CartItem[];
   cartCount: number;
   handleAddToCart: (productId: string) => Promise<void>;
+  updateCartItemQuantity: (productId: string, newQuantity: number) => void;
 }
 
 const CartContext = createContext<CartContextType>({
   cart: [],
   cartCount: 0,
   handleAddToCart: async () => {}, // Provide a default no-op function
+  updateCartItemQuantity: (productId: string, newQuantity: number) => {},
 });
+
+
 
 interface CartProviderProps {
   children: ReactNode; // Defining the type for children
@@ -56,6 +60,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     return totalCount;
   };
 
+  
+
   const handleAddToCart = async (productId: string) => {
     const isLoggedIn = false; // Replace with actual login check
 
@@ -84,9 +90,30 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   };
 
+  const updateCartItemQuantity = (
+    productId: string,
+    newQuantity: number
+  ) => {
+    // Find the cart item by productId
+    const updatedCart = cart.map((item) =>
+      item.id === productId ? { ...item, quantity: newQuantity } : item
+    );
+
+    // Update the cart state with the new cart
+    setCart(updatedCart);
+
+    // Save the updated cart to local storage
+    saveCartToLocalStorage(updatedCart);
+  };
+
   return (
     <CartContext.Provider
-      value={{ cart, cartCount: updateCartCount(), handleAddToCart }}
+      value={{
+        cart,
+        cartCount: updateCartCount(),
+        handleAddToCart,
+        updateCartItemQuantity,
+      }} 
     >
       {children}
     </CartContext.Provider>
