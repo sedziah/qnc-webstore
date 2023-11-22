@@ -1,12 +1,28 @@
 //app/cart/page.tsx
-"use client"
+"use client";
 import styles from "./page.module.css";
-import { useCart} from "@/app/cart/CartContext";
+import { useCart } from "@/app/cart/CartContext";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { TransformedProduct, apiService } from "../../services/apiService";
 
 export default function Page() {
   const { cart, updateCartItemQuantity, removeCartItem } = useCart();
+  const [products, setProducts] = useState<TransformedProduct[]>([]);
 
+  useEffect(() => {
+    // Fetch products data when the component mounts
+    const loadProducts = async () => {
+      try {
+        const allProducts = await apiService.getProducts();
+        setProducts(allProducts);
+      } catch (error) {
+        console.error("Error loading products:", error);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   // Calculate the total cost of items in the cart
   const total = cart.reduce((sum, item) => {
@@ -38,49 +54,49 @@ export default function Page() {
             </tr>
           </thead>
           <tbody>
-            {cart.map((item) => (
-              <tr key={item.id}>
-                <td>
-                  <div className={styles.productInfo}>
-                    {/* <Image
-                      src={item.image}
-                      alt={item.title}
-                      className={styles.productImage}
-                    /> */}
-                    {/* <img
-                      src={item.image}
-                      alt={item.title}
-                      className={styles.productImage}
-                    /> */}
-                    <span>{item.title}</span>
-                  </div>
-                </td>
-                <td>{item.price}</td>
-                <td>
-                  <button
-                    onClick={() =>
-                      updateCartItemQuantity(item.id, item.quantity - 1)
-                    }
-                  >
-                    -
-                  </button>
-                  <span>{item.quantity}</span>
-                  <button
-                    onClick={() =>
-                      updateCartItemQuantity(item.id, item.quantity + 1)
-                    }
-                  >
-                    +
-                  </button>
-                </td>
-                <td>{(item.price * item.quantity).toFixed(2)}</td>
-                <td>
-                  <button onClick={() => removeCartItem(item.id)}>
-                    Remove
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {cart.map((cartItem) => {
+              const product = products.find((p) => p.id === cartItem.id);
+              if (!product) return null; // Handle this case appropriately
+
+              return (
+                <tr key={cartItem.id}>
+                  <td>
+                    {/* Product Information */}
+                    <span>{product.name}</span>
+                  </td>
+                  <td>{product.price}</td>
+                  <td>
+                    <button
+                      onClick={() =>
+                        updateCartItemQuantity(
+                          cartItem.id,
+                          cartItem.quantity - 1
+                        )
+                      }
+                    >
+                      -
+                    </button>
+                    <span>{cartItem.quantity}</span>
+                    <button
+                      onClick={() =>
+                        updateCartItemQuantity(
+                          cartItem.id,
+                          cartItem.quantity + 1
+                        )
+                      }
+                    >
+                      +
+                    </button>
+                  </td>
+                  <td>{(product.price * cartItem.quantity).toFixed(2)}</td>
+                  <td>
+                    <button onClick={() => removeCartItem(cartItem.id)}>
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <div className={styles.cartTotals}>

@@ -20,7 +20,7 @@ interface Price {
   amount: string;
 }
 
-interface TransformedProduct {
+export interface TransformedProduct {
   id: string;
   name: string;
   brand: string;
