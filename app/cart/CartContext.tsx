@@ -90,11 +90,21 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
   };
 
-  const updateCartItemQuantity = (
-    productId: string,
-    newQuantity: number
-  ) => {
-    // Find the cart item by productId
+  const updateCartItemQuantity = (productId: string, newQuantity: number) => {
+    // Ensure the new quantity is not less than 1
+    if (newQuantity < 1) {
+      console.warn("Quantity cannot be less than 1");
+      return; // Exit the function if the new quantity is invalid
+    }
+
+    // Optionally, you can also add a maximum limit check
+    // const MAX_QUANTITY = 10; // Example maximum limit
+    // if (newQuantity > MAX_QUANTITY) {
+    //   console.warn(`Quantity cannot exceed ${MAX_QUANTITY}`);
+    //   return; // Exit the function if the new quantity exceeds the limit
+    // }
+
+    // Find the cart item by productId and update its quantity
     const updatedCart = cart.map((item) =>
       item.id === productId ? { ...item, quantity: newQuantity } : item
     );
