@@ -20,6 +20,7 @@ interface CartContextType {
   cartCount: number;
   handleAddToCart: (productId: string) => Promise<void>;
   updateCartItemQuantity: (productId: string, newQuantity: number) => void;
+  removeCartItem: (productId: string) => void;
 }
 
 const CartContext = createContext<CartContextType>({
@@ -27,6 +28,7 @@ const CartContext = createContext<CartContextType>({
   cartCount: 0,
   handleAddToCart: async () => {}, // Provide a default no-op function
   updateCartItemQuantity: (productId: string, newQuantity: number) => {},
+  removeCartItem: (productId: string) => {},
 });
 
 
@@ -116,6 +118,18 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     saveCartToLocalStorage(updatedCart);
   };
 
+  const removeCartItem = (productId: string) => {
+    // Filter out the item with the given productId
+    const updatedCart = cart.filter((item) => item.id !== productId);
+
+    // Update the cart state with the new cart
+    setCart(updatedCart);
+
+    // Save the updated cart to local storage
+    saveCartToLocalStorage(updatedCart);
+  };
+
+
   return (
     <CartContext.Provider
       value={{
@@ -123,7 +137,8 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
         cartCount: updateCartCount(),
         handleAddToCart,
         updateCartItemQuantity,
-      }} 
+        removeCartItem,
+      }}
     >
       {children}
     </CartContext.Provider>

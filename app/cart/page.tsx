@@ -5,8 +5,8 @@ import { useCart} from "@/app/cart/CartContext";
 import Image from "next/image";
 
 export default function Page() {
-  const { cart } = useCart();
-  const { updateCartItemQuantity } = useCart();
+  const { cart, updateCartItemQuantity, removeCartItem } = useCart();
+
 
   // Calculate the total cost of items in the cart
   const total = cart.reduce((sum, item) => {
@@ -58,25 +58,26 @@ export default function Page() {
                 <td>{item.price}</td>
                 <td>
                   <button
-                  onClick={() =>
-                    updateCartItemQuantity(item.id, item.quantity - 1)
-                  }
+                    onClick={() =>
+                      updateCartItemQuantity(item.id, item.quantity - 1)
+                    }
                   >
                     -
                   </button>
                   <span>{item.quantity}</span>
                   <button
-                  onClick={() =>
-                    updateCartItemQuantity(item.id, item.quantity + 1)
-                  }
+                    onClick={() =>
+                      updateCartItemQuantity(item.id, item.quantity + 1)
+                    }
                   >
                     +
                   </button>
                 </td>
                 <td>{(item.price * item.quantity).toFixed(2)}</td>
                 <td>
-                  {/* onClick={() => removeCartItem(item.id)} */}
-                  <button>Remove</button>
+                  <button onClick={() => removeCartItem(item.id)}>
+                    Remove
+                  </button>
                 </td>
               </tr>
             ))}
