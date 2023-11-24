@@ -13,6 +13,9 @@ const SearchBar = () => {
         <div className={styles.categorySelectContainer}>
           <select className={styles.categorySelect}>
             <option>All Categories</option>
+            <option>Electronics</option>
+            <option>Appliances</option>
+            <option>Accessories</option>
             {/* You can map over your categories here */}
           </select>
         </div>
