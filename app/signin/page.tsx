@@ -8,10 +8,10 @@ import { useAuth } from "../auth/contexts/AuthContext";
 
 const Page = () => {
   const router = useRouter();
-  const { isAuthenticated, login } = useAuth(); // Destructure isAuthenticated
+  const { isAuthenticated, error, login } = useAuth(); // Destructure isAuthenticated
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+   const [loginError, setLoginError] = useState("");
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -21,23 +21,24 @@ const Page = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setError(""); // Clear any existing errors
+    setLoginError(""); // Clear previous errors before trying to log in
 
     try {
-      console.log("Attempting login...");
       await login(emailOrUsername, password);
-      console.log("Login successful, redirecting...");
-      router.push("/"); // Redirect only if login is successful
-    } catch (error) {
-      // console.error("Login failed:", error);
-      // setError(error.message);
-      if (error instanceof Error) {
-        console.error("Login failed:", error);
-        setError(error.message); // Now TypeScript knows error is an Error object
-      } else {
-        console.error("Login failed with unknown error");
-        setError("An unexpected error occurred"); // Generic error message
+      // Check if isAuthenticated is updated before redirecting
+      if (isAuthenticated) {
+        console.log("Login successful, redirecting...");
+        router.push("/dashboard"); // Redirect to dashboard instead of home
       }
+    } catch (error) {
+      if (error instanceof Error) {
+        // If the error is an instance of Error, we can safely assume it has a message property
+        setLoginError(error.message);
+      } else {
+        // If it's not an Error, we handle it as an unknown error
+        setLoginError("An unknown error occurred.");
+      }
+      console.log(`This is a test: ${error}`);
     }
   };
 
@@ -47,6 +48,7 @@ const Page = () => {
     return null;
   }
 
+  
   return (
     <div className={styles.container}>
       {/* Optionally include your image container here */}
@@ -70,20 +72,18 @@ const Page = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button className={styles.submitButton}>Continue</button>
-          {error && <div className={styles.error}>{error}</div>}{" "}
           {/* Display error message here */}
-          {/* <div className={styles.separator}>
-            <span className={styles.separatorLine}>or</span>
-          </div>
-          <button className={`${styles.submitButton} ${styles.socialButton}`}>
-            Continue with Facebook
-          </button>
-          <button className={`${styles.submitButton} ${styles.socialButton}`}>
-            Continue with Google
-          </button>
-          <button className={`${styles.submitButton} ${styles.socialButton}`}>
-            Continue with Apple
-          </button> */}
+          {/* Always display this div to check if it's rendered */}
+          {loginError && (
+            <div
+              style={{
+                color: "red",
+                marginTop: "10px",
+              }}
+            >
+              {loginError}
+            </div>
+          )}
         </form>
       </div>
     </div>

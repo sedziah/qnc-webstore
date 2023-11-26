@@ -12,6 +12,7 @@ import { apiService } from "../../../services/apiService";
 interface AuthContextType {
   user: any; // Replace 'any' with the type of your user object
   isAuthenticated: boolean; // Add this line to your context type
+  error: string; // Add an error state
   login: (email: string, password: string) => Promise<void>;
   logoutUser: () => void; // You should have a logout function as well
 }
@@ -22,6 +23,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isAuthenticated: false, // Provide an initial value
+  error: "", // Add an error state
   login: async () => {},
   logoutUser: () => {}, // Stub for logoutUser
 });
@@ -34,6 +36,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [error, setError] = useState(""); // Add an error state
 
   useEffect(() => {
     // Since localStorage is not available on the server, we perform this check on the client side
@@ -43,15 +46,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const login = async (email: string, password: string) => {
+    setError(""); // Clear previous errors
     try {
       const data = await apiService.login(email, password);
       setUser(data.user);
       setIsAuthenticated(true); // Update the isAuthenticated state
       localStorage.setItem("token", data.token); // Store the token
     } catch (error) {
+      setError("An error occurred during login."); // Set a generic error message
       console.error(error);
-      // throw error; Re-throw the error to be caught by the caller
-      
+      throw error; // You can still throw the error if you want to handle it elsewhere
     }
   };
 
@@ -62,7 +66,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, login, logoutUser }}>
+    <AuthContext.Provider value={{ user, error, isAuthenticated, login, logoutUser }}>
       {children}
     </AuthContext.Provider>
   );
