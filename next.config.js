@@ -1,3 +1,6 @@
+
+//next.config.js
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -5,5 +8,23 @@ const nextConfig = {
   },
   // ... other Next.js configurations ...
 };
+
+const path = require("path");
+
+module.exports = {
+  webpack: (config) => {
+    config.resolve.alias["@"] = path.resolve(__dirname);
+    config.resolve.alias["@/components"] = path.resolve(
+      __dirname,
+      "components"
+    );
+    config.resolve.alias["@/services"] = path.resolve(__dirname, "services");
+    config.resolve.alias["@/store"] = path.resolve(__dirname, "store");
+    config.resolve.alias["@/app"] = path.resolve(__dirname, "app");
+    // Add other aliases if necessary
+    return config;
+  },
+};
+
 
 module.exports = nextConfig;
