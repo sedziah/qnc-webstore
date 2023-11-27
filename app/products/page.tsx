@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import ProductCard from "@/components/productCard/ProductCard";
+import ProductCard from "../../components/productCard/ProductCard";
 import styles from "./page.module.css";
-import { apiService } from "@/services/apiService";
-import { useCart } from "@/app/cart/CartContext";
+import { apiService } from "../../services/apiService";
+import { useCart } from "../cart/CartContext";
 
 // type Product = {
 //   id: string;
