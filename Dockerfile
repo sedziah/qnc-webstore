@@ -1,35 +1,23 @@
-# Use a smaller base image, node:alpine, which is much smaller in size
-FROM node:alpine as builder
+# Use the official lightweight Node.js image.
+FROM node:16-alpine
 
-# Set the working directory in the container
+# Set the working directory to the root of your project
 WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json (if available)
+COPY package*.json ./
 
 # Install dependencies
-# Copying package.json and package-lock.json separately to leverage Docker cache
-COPY package.json package-lock.json ./
+RUN npm install --production
 
-# Install only production dependencies
-# If you need development dependencies for building, omit `--production`
-RUN npm ci --only=production
-
-# Bundle app source
+# Copy the rest of the project
 COPY . .
 
-# Build the Next.js app
+# Build the application
 RUN npm run build
 
-# Production stage: Use a clean, new stage to minimize the final image size
-FROM node:alpine
-WORKDIR /usr/src/app
-
-# Copy only necessary files from the builder stage
-COPY --from=builder /usr/src/app/next.config.js ./next.config.js
-COPY --from=builder /usr/src/app/.next ./.next
-COPY --from=builder /usr/src/app/node_modules ./node_modules
-COPY --from=builder /usr/src/app/public ./public
-
-# Your app binds to port 3000 so you'll use the EXPOSE instruction to have it mapped by the docker daemon
+# Expose the port the app runs on
 EXPOSE 3000
 
-# Define the command to run your app using CMD which defines your runtime
-CMD [ "npm", "start" ]
+# Set the command to start the node server
+CMD ["npm", "start"]
