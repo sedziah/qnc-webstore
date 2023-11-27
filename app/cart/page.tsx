@@ -1,6 +1,6 @@
 "use client";
 import styles from "./page.module.css";
-import { useCart } from "@/app/cart/CartContext";
+import { useCart } from "./CartContext";
 import { useEffect, useState } from "react";
 import { TransformedProduct, apiService } from "../../services/apiService";
 
