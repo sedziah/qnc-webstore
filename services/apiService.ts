@@ -1,7 +1,7 @@
 // services/apiService.ts
 
-const API_BASE_URL = "http://127.0.0.1:8000"; // Adjust this as needed
-// const API_BASE_URL = "http://167.172.52.195:8000"; // Adjust this as needed
+// const API_BASE_URL = "http://127.0.0.1:8000"; // Adjust this as needed
+const API_BASE_URL = "http://167.172.52.195:8000"; // Adjust this as needed
 
 interface Variant {
   id: string;
