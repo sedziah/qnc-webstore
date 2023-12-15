@@ -21,7 +21,7 @@ jobs:
         key: ${{ secrets.SERVER_SSH_KEY }}
         port: ${{ secrets.SERVER_PORT }}
         source: "."
-        target: /var/www/qnc/qnc_webstore
+        target: /var/www/qnc/qnc-webstore
 
     - name: Restart web service
       uses: appleboy/ssh-action@master
@@ -31,6 +31,6 @@ jobs:
         key: ${{ secrets.SERVER_SSH_KEY }}
         port: ${{ secrets.SERVER_PORT }}
         script: |
-          cd /var/www/qnc/qnc_webstore
+          cd /var/www/qnc/qnc-webstore
           docker-compose down
           docker-compose up --build -d
