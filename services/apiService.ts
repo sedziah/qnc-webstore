@@ -1,7 +1,7 @@
 // services/apiService.ts
 
 // const API_BASE_URL = "http://127.0.0.1:8000"; // Adjust this as needed
-const API_BASE_URL = "http://167.172.52.195:8000"; // Adjust this as needed
+const API_BASE_URL = "http://167.172.52.195"; // Adjust this as needed
 
 interface Variant {
   id: string;
@@ -236,6 +236,23 @@ export const apiService = {
     );
 
     return transformedProducts;
+  },
+
+  getCategories: async () => {
+    const response = await fetch(`${API_BASE_URL}/products/categories`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization': `Token ${userToken}`, // Add this if your endpoint requires authentication
+      },
+    });
+
+    if (!response.ok) {
+      // Handle error response
+      throw new Error("Failed to fetch categories.");
+    }
+
+    return response.json();
   },
 
   // Add other endpoints as needed

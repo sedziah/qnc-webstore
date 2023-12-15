@@ -1,0 +1,70 @@
+/* page.module.css */
+
+.categoriesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Allow grid items to fill available space and wrap */
+  gap: 1rem; /* Space between cards */
+  padding: 1rem;
+  justify-items: center; /* Center cards in the grid cells */
+  border: solid red;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Card width - can set to a fixed width if necessary */
+  background: #fff; /* Card background color */
+  border-radius: 10px; /* Rounded corners for the card */
+  overflow: hidden; /* Ensures contents stay within the card shape */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow around the card */
+  transition: transform 0.2s; /* Smooth transition for hover effect */
+}
+
+.category:hover {
+  transform: translateY(-5px); /* Slight raise effect on hover */
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%; /* Image takes full width of the card */
+  padding-top: 100%; /* Aspect ratio 1:1 */
+}
+
+.category p {
+  margin: 0;
+  padding: 0.5rem; /* Padding inside the card */
+  text-align: center; /* Center text */
+  background: #f9f9f9; /* Background color for the text area */
+  border-top: 1px solid #eaeaea; /* Border at the top of the text area */
+  font-size: 0.9rem; /* Adjust font size as needed */
+}
+
+/* Responsive design for smaller devices */
+@media (max-width: 768px) {
+  .categoriesContainer {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* More columns on smaller screens */
+  }
+
+  .imageContainer {
+    padding-top: 75%; /* Adjust the aspect ratio for smaller screens if needed */
+  }
+}
+
+/* Additional media query for very small devices */
+@media (max-width: 480px) {
+  .categoriesContainer {
+    grid-template-columns: repeat(2, 1fr); /* Fewer columns for very small screens */
+    gap: 0.5rem; /* Smaller gap for very small screens */
+  }
+
+  .imageContainer {
+    padding-top: 75%; /* Adjust the aspect ratio as needed for very small screens */
+  }
+
+  .category p {
+    padding: 0.25rem; /* Smaller padding for the text */
+    font-size: 0.8rem; /* Smaller font size for the text */
+  }
+}

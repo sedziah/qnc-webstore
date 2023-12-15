@@ -7,7 +7,7 @@ import styles from "./page.module.css"
 export default function Home() {
   return (
     <div>
-      <SearchBar />
+      {/* <SearchBar /> */}
       <Hero />
       {/* <div className={styles.dailyDeals}>
         <h2>
