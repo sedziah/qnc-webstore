@@ -45,6 +45,8 @@
 @media (max-width: 768px) {
   .categoriesContainer {
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* More columns on smaller screens */
+    margin-left: 5%;
+    margin-right: 5%;
   }
 
   .imageContainer {
