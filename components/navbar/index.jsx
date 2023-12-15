@@ -56,7 +56,7 @@ function Navbar() {
               <Link href="/products">
                 <li>deals</li>
               </Link>
-              <Link href="/products">
+              <Link href="/categories">
                 <li>categories</li>
               </Link>
               <Link href="/cart">
