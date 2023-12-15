@@ -45,36 +45,35 @@ type CategoryItemProps = {
 
 const defaultImageUrl = "/images/default-image.png"; // Default image path
 
-// export const CategoryItem: React.FC<CategoryItemProps> = ({
-//   name,
-//   imageUrl,
-// }) => {
-//   return (
-//     <div className={styles.category}>
-//       <div className={styles.imageContainer}>
-//         <Image
-//           src={imageUrl || defaultImageUrl}
-//           alt={name}
-//           layout="fill"
-//           objectFit="cover" // Cover ensures the image fills the area
-//         />
-//       </div>
-//       <p>{name}</p>
-//     </div>
-//   );
-// };
+export const CategoryItem: React.FC<CategoryItemProps> = ({
+  name,
+  imageUrl,
+}) => {
+  return (
+    <div className={styles.category}>
+      <div className={styles.imageContainer}>
+        <Image
+          src={imageUrl || defaultImageUrl}
+          alt={name}
+          layout="fill"
+          objectFit="cover" // Cover ensures the image fills the area
+        />
+      </div>
+      <p>{name}</p>
+    </div>
+  );
+};
 
 const Page: React.FC = () => {
   return (
     <div className={styles.categoriesContainer}>
-      {/* {sampleCategories.map((category) => (
+      {sampleCategories.map((category) => (
         <CategoryItem
           key={category.id}
           name={category.name}
           imageUrl={category.icon}
         />
-      ))} */}
-      Categories
+      ))}
     </div>
   );
 };
