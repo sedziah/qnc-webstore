@@ -45,7 +45,7 @@ type CategoryItemProps = {
 
 const defaultImageUrl = "/images/default-image.png"; // Default image path
 
-export const CategoryItem: React.FC<CategoryItemProps> = ({
+const CategoryItem: React.FC<CategoryItemProps> = ({
   name,
   imageUrl,
 }) => {
