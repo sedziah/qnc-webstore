@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../auth/contexts/AuthContext"; // Adjust path as needed
 import { apiService } from "../../services/apiService";
+import Link from "next/link";
 
 const Page = () => {
   const router = useRouter();
@@ -139,6 +140,7 @@ const Page = () => {
           <button className={styles.submitButton}>Continue</button>
           {error && <p className={styles.error}>{error}</p>}
         </form>
+        <Link href="/signin">Sign In</Link>
 
         {/* <div className={styles.separator}>
           <span className={styles.separatorLine}>or</span>

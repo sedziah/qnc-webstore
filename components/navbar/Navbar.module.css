@@ -116,6 +116,11 @@
     display: block; /* Show mobile menu */
   }
 
+  .link {
+    text-decoration: none;
+    color: inherit;
+  }
+
   .mobileNav ul {
     display: flex;
     flex-direction: row;
