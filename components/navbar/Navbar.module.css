@@ -111,7 +111,7 @@
 }
 
 /* Mobile View */
-@media (max-width: 767px) {
+@media (max-width: 1024px) {
   .mobileNav {
     display: block; /* Show mobile menu */
   }
