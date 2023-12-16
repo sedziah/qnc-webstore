@@ -93,10 +93,12 @@ function Navbar() {
           /* Hidden on desktop views */}
           <div className={styles.mobileNav}>
             <ul>
-              <li>
-                <PermIdentityIcon />
-              </li>
-              <Link href="/cart">
+              <Link className={styles.link} href="/signin">
+                <li className={styles.link}>
+                  <PermIdentityIcon />
+                </li>
+              </Link>
+              <Link className={styles.link} href="/cart">
                 <li>
                   <AddShoppingCartIcon />
                 </li>
@@ -114,7 +116,7 @@ function Navbar() {
 
           {/* Tablet Navigation Menu (Hamburger Menu) */
           /* Hidden on desktop views */}
-          <div className={styles.tabletNav}>
+          {/* <div className={styles.tabletNav}>
             <ul>
               <li>
                 <PermIdentityIcon />
@@ -131,7 +133,7 @@ function Navbar() {
                 <MenuIcon />
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -146,16 +148,16 @@ function Navbar() {
           </div>
           <ul className={styles.mobileLinks}>
             <li>
-              <Link href="/products">Home</Link>
+              <Link href="/">Home</Link>
             </li>
             <li>
               <Link href="/categories">categories</Link>
             </li>
             <li>
-              <Link href="/products">Account</Link>
+              <Link href="/signin">Account</Link>
             </li>
             <li>
-              <Link href="/products">About</Link>
+              <Link href="/about">About</Link>
             </li>
           </ul>
         </div>

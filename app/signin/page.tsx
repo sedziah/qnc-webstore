@@ -72,6 +72,7 @@ const Page = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <button className={styles.submitButton}>Continue</button>
+
           {/* Display error message here */}
           {/* Always display this div to check if it's rendered */}
           {loginError && (
@@ -85,6 +86,7 @@ const Page = () => {
             </div>
           )}
         </form>
+        <Link href="/signup">Create an Account</Link>
       </div>
     </div>
   );
