@@ -9,11 +9,6 @@ export default function Home() {
     <div>
       {/* <SearchBar /> */}
       <Hero />
-      {/* <div className={styles.dailyDeals}>
-        <h2>
-          Daily Deals | See All <ArrowForwardIcon />
-        </h2>
-      </div> */}
     </div>
   );
 }
