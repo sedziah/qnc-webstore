@@ -91,13 +91,23 @@ function Navbar() {
 
           {/* Mobile Navigation Menu (Hamburger Menu) */
           /* Hidden on desktop views */}
-          <div
-            className={`${styles.mobileNav} ${
-              isMobileNavOpen ? styles.active : ""
-            }`}
-            onClick={toggleMobileNav}
-          >
-            <MenuIcon />
+          <div className={styles.mobileNav}>
+            <ul>
+              <li>
+                <PermIdentityIcon />
+              </li>
+              <li>
+                <AddShoppingCartIcon />
+              </li>
+              <li
+                className={`${styles.mobileNav} ${
+                  isMobileNavOpen ? styles.active : ""
+                }`}
+                onClick={toggleMobileNav}
+              >
+                <MenuIcon />
+              </li>
+            </ul>
           </div>
 
           {/* Tablet Navigation Menu (Hamburger Menu) */
