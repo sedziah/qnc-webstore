@@ -96,9 +96,11 @@ function Navbar() {
               <li>
                 <PermIdentityIcon />
               </li>
-              <li>
-                <AddShoppingCartIcon />
-              </li>
+              <Link href="/cart">
+                <li>
+                  <AddShoppingCartIcon />
+                </li>
+              </Link>
               <li
                 className={`${styles.mobileNav} ${
                   isMobileNavOpen ? styles.active : ""
@@ -144,13 +146,16 @@ function Navbar() {
           </div>
           <ul className={styles.mobileLinks}>
             <li>
-              <Link href="/products">featured</Link>
+              <Link href="/products">Home</Link>
             </li>
             <li>
-              <Link href="/products">deals</Link>
+              <Link href="/categories">categories</Link>
             </li>
             <li>
-              <Link href="/products">categories</Link>
+              <Link href="/products">Account</Link>
+            </li>
+            <li>
+              <Link href="/products">About</Link>
             </li>
           </ul>
         </div>
