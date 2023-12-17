@@ -1,5 +1,8 @@
+// components/searchbar/index.js
+
 import React from "react";
 import styles from "./SearchBar.module.css"; // Assuming a CSS module
+import { apiService } from "../../services/apiService";
 
 const SearchBar = () => {
   return (
