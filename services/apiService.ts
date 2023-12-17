@@ -32,7 +32,6 @@ export interface TransformedProduct {
   // Add other fields as needed
 }
 
-
 export const apiService = {
   login: async (email: string, password: string) => {
     const response = await fetch(`${API_BASE_URL}/accounts/login/`, {
@@ -250,6 +249,23 @@ export const apiService = {
     if (!response.ok) {
       // Handle error response
       throw new Error("Failed to fetch categories.");
+    }
+
+    return response.json();
+  },
+
+  searchProducts: async (query: string): Promise<any[]> => {
+    const response = await fetch(`${API_BASE_URL}/search/?q=${query}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization': `Token ${userToken}`, // Add this if your endpoint requires authentication
+      },
+    });
+
+    if (!response.ok) {
+      // Handle error response
+      throw new Error("Failed to fetch search results.");
     }
 
     return response.json();

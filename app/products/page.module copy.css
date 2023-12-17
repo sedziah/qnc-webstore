@@ -1,0 +1,15 @@
+/* page.module.css */
+
+.productsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Or 'flex-start' for left alignment */
+  gap: 10px; /* Adjust the gap as needed */
+  padding: 10px; /* Container padding */
+}
+
+@media screen and (max-width: 600px) {
+  .productsContainer {
+    justify-content: center; /* Center the items on smaller screens */
+  }
+}
