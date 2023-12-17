@@ -1,7 +1,7 @@
 // components/ProductList.js
 
 import React from "react";
-import styles from "./page.module.css"; // Make sure to create this CSS module
+import styles from "./ProductList.module.css"; // Make sure to create this CSS module
 
 const staticProducts = [
   {
@@ -35,14 +35,15 @@ const staticProducts = [
   // ... add more products as needed
 ];
 
-const Page = () => {
+
+const ProductList = () => {
   return (
     <div className={styles.productListContainer}>
       {staticProducts.map((product) => (
         <div key={product.id} className={styles.productItem}>
           <div className={styles.productImage}>
             <img
-              src={product.imageUrl || "images/default-image.png"}
+              src={product.imageUrl || "/default-product.jpg"}
               alt={product.name}
             />
           </div>
@@ -59,4 +60,4 @@ const Page = () => {
   );
 };
 
-export default Page;
+export default ProductList;

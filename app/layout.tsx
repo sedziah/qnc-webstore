@@ -35,6 +35,7 @@ export default function RootLayout({
         <AuthProvider>
           <body>
             <Navbar />
+            <SearchBar />
 
             {/* <ImagesSlider images={imagesData} /> */}
             {/* <div style={{ padding: "40px" }}>
