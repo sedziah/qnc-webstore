@@ -59,15 +59,15 @@ function Navbar() {
               <Link href="/categories">
                 <li>categories</li>
               </Link>
-              <Link href="/cart">
+              {/* <Link href="/cart">
                 <li>
                   <AddShoppingCartIcon />
                   {cartCount > 0 && (
                     <span className={styles.cartCount}>{cartCount}</span>
                   )}
                 </li>
-              </Link>
-              {isAuthenticated ? (
+              </Link> */}
+              {/* {isAuthenticated ? (
                 <>
                   <Link href="/dashboard">
                     <li className={styles.myAccount}>My Account</li>
@@ -85,7 +85,7 @@ function Navbar() {
                     <li className={styles.signup_button}>Sign up</li>
                   </Link>
                 </>
-              )}
+              )} */}
             </ul>
           </div>
 
@@ -93,7 +93,7 @@ function Navbar() {
           /* Hidden on desktop views */}
           <div className={styles.mobileNav}>
             <ul>
-              <Link className={styles.link} href="/signin">
+              {/* <Link className={styles.link} href="/signin">
                 <li className={styles.link}>
                   <PermIdentityIcon />
                 </li>
@@ -102,7 +102,7 @@ function Navbar() {
                 <li>
                   <AddShoppingCartIcon />
                 </li>
-              </Link>
+              </Link> */}
               <li
                 className={`${styles.mobileNav} ${
                   isMobileNavOpen ? styles.active : ""
@@ -153,9 +153,9 @@ function Navbar() {
             <li>
               <Link href="/categories">categories</Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/signin">Account</Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/about">About</Link>
             </li>
