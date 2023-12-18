@@ -11,6 +11,7 @@ const SearchBar = () => {
 
   const handleSearch = () => {
     if (searchQuery) {
+      console.log("Search Query:", searchQuery);
       // Navigate to the search results page with the query
       router.push(`/products/${encodeURIComponent(searchQuery)}`);
     }
