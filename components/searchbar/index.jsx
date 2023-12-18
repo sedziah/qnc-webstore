@@ -1,10 +1,27 @@
-// components/searchbar/index.js
+// components/searchbar/index.jsx
 
-import React from "react";
-import styles from "./SearchBar.module.css"; // Assuming a CSS module
-import { apiService } from "../../services/apiService";
+"use client";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import styles from "./SearchBar.module.css";
 
 const SearchBar = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter(); // Call useRouter at the top level
+
+  const handleSearch = () => {
+    if (searchQuery) {
+      // Navigate to the search results page with the query
+      router.push(`/products/${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
+  };
+
   return (
     <div className={styles.searchBarWrapper}>
       <div className={styles.searchContainer}>
@@ -12,18 +29,15 @@ const SearchBar = () => {
           type="text"
           className={styles.searchInput}
           placeholder="Search for anything"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyPress={handleKeyPress}
         />
-        <div className={styles.categorySelectContainer}>
-          <select className={styles.categorySelect}>
-            <option>All Categories</option>
-            <option>Electronics</option>
-            <option>Appliances</option>
-            <option>Accessories</option>
-            {/* You can map over your categories here */}
-          </select>
-        </div>
+        {/* Additional elements (like category select) can be added here */}
       </div>
-      <button className={styles.searchButton}>Go</button>
+      <button className={styles.searchButton} onClick={handleSearch}>
+        Go
+      </button>
     </div>
   );
 };
