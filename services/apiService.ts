@@ -32,6 +32,7 @@ export interface TransformedProduct {
   // Add other fields as needed
 }
 
+
 export const apiService = {
   login: async (email: string, password: string) => {
     const response = await fetch(`${API_BASE_URL}/accounts/login/`, {
@@ -254,8 +255,8 @@ export const apiService = {
     return response.json();
   },
 
-  searchProducts: async (query: string): Promise<any[]> => {
-    const response = await fetch(`${API_BASE_URL}/search/?q=${query}`, {
+  searchProducts: async (query) => {
+    const response = await fetch(`${API_BASE_URL}/products/search/?q=${query}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
