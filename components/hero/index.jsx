@@ -19,6 +19,7 @@ function Hero() {
             layout="fill"
             objectFit="cover"
           />
+          <h1>Mobile Phones</h1>
         </Link>
       </div>
       <div className={styles.imageContainer}>
@@ -29,6 +30,7 @@ function Hero() {
             layout="fill"
             objectFit="cover"
           />
+          <h1>Computers</h1>
         </Link>
       </div>
       <div className={styles.imageContainer}>
@@ -39,6 +41,7 @@ function Hero() {
             layout="fill"
             objectFit="cover"
           />
+          <h1>Accessories</h1>
         </Link>
       </div>
       <div className={styles.imageContainerFullWidth}>
@@ -49,6 +52,7 @@ function Hero() {
             layout="fill"
             objectFit="cover"
           />
+          <h1>Appliances</h1>
         </Link>
       </div>
     </div>
