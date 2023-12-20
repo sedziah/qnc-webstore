@@ -7,6 +7,16 @@ import { apiService } from "../../../services/apiService"; // Ensure the correct
 import styles from "./page.module.css";
 
 
+interface Product {
+  id: string;
+  product_name: string;
+  category_name: string;
+  brand_name: string;
+  actual_price: string;
+  // Add any other relevant fields for the products
+}
+
+
 function Page() {
 
   const [products, setProducts] = useState([]);
