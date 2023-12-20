@@ -40,12 +40,19 @@ function Navbar() {
         <div className={styles.navbar}>
           <div className={styles.logo}>
             <Link href="/">
-              <Image
+              {/* <Image
                 src="/images/logo.png"
                 alt="QnC Logo"
                 width={121}
                 height={51.5}
-              />
+              /> */}
+              <div
+                style={{ fontSize: "24px", fontFamily: "Arial, sans-serif" }}
+              >
+                <span style={{ color: "#86B817" }}>Q</span>
+                <span style={{ color: "#F5AF02" }}>n</span>
+                <span style={{ color: "#0654BA" }}>C</span>
+              </div>
             </Link>
           </div>
           <div>
