@@ -19,7 +19,7 @@ interface Product {
 
 function Page() {
 
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true); // Set to true initially
   const [error, setError] = useState("");
   const params = useParams();
