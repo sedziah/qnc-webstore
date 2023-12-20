@@ -255,14 +255,17 @@ export const apiService = {
     return response.json();
   },
 
-  searchProducts: async (query) => {
-    const response = await fetch(`${API_BASE_URL}/products/search/?q=${query}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Authorization': `Token ${userToken}`, // Add this if your endpoint requires authentication
-      },
-    });
+  searchProducts: async (query: string) => {
+    const response = await fetch(
+      `${API_BASE_URL}/products/search/?q=${query}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Authorization': `Token ${userToken}`, // Add this if your endpoint requires authentication
+        },
+      }
+    );
 
     if (!response.ok) {
       // Handle error response

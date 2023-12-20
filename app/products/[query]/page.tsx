@@ -25,9 +25,15 @@ function Page() {
   const params = useParams();
 
   useEffect(() => {
-    if (params.query) {
+    // Ensure that query is a string
+    const queryParam = Array.isArray(params.query)
+      ? params.query[0]
+      : params.query;
+
+    if (queryParam) {
+      setLoading(true);
       apiService
-        .searchProducts(params.query)
+        .searchProducts(queryParam)
         .then((data) => {
           setProducts(data);
           setLoading(false);
