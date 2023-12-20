@@ -2,9 +2,9 @@
 
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter from Next.js
 import styles from "./SearchBar.module.css";
-import { apiService } from "../../services/apiService";
-import ProductList from "components/productList/index"; // Import the ProductList component
+import { apiService } from "../../services/apiService"; // Ensure the correct path
 
 interface SearchResult {
   id: string;
@@ -17,24 +17,20 @@ interface SearchResult {
 
 const SearchBar: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const router = useRouter(); // Initialize useRouter hook
 
   const handleSearch = async () => {
     if (searchQuery) {
       setIsLoading(true);
       setError("");
       try {
-        const results = await apiService.searchProducts(searchQuery);
-        setSearchResults(results.map(result => ({
-          ...result,
-          name: result.product_name,
-          brand: result.brand_name,
-          category: result.category_name,
-          price: result.actual_price,
-          imageUrl: result.imageUrl // Assuming imageUrl is part of the results
-        })));
+        // Perform the search and log the results
+        // const results = await apiService.searchProducts(searchQuery);
+        // console.log(results); // Log the results to the console
+        // Instead of setting search results in the state, navigate to the dynamic route
+        await router.push(`/products/${encodeURIComponent(searchQuery)}`);
       } catch (err) {
         setError("Failed to fetch search results.");
         console.error(err);
@@ -73,10 +69,8 @@ const SearchBar: React.FC = () => {
       </div>
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      <ProductList products={searchResults} /> {/* Display search results using ProductList */}
     </div>
   );
 };
 
 export default SearchBar;
-

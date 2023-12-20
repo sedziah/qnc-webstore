@@ -1,0 +1,25 @@
+/* page.module.css */
+
+.product_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.product_card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+@media (max-width: 600px) {
+  .product_list {
+    grid-template-columns: 1fr; /* Stack the cards on smaller screens */
+  }
+  
+  .product_card {
+    padding: 0.5rem;
+  }
+  
+}

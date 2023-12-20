@@ -1,38 +1,67 @@
-// app/pages/products/[query].jsx
+//app/products/[query]
 
 "use client";
-import React from "react";
-import { useRouter } from "next/navigation";
-import ProductList from "../../../components/productList/index"; // Ensure correct import path
+import React, { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
+import { apiService } from "../../../services/apiService"; // Ensure the correct path
+import styles from "./page.module.css";
 
-// Static data for demonstration purposes
-const staticProducts = [
-  {
-    id: "1",
-    name: "Wireless Headphones",
-    brand: "AudioTech",
-    category: "Electronics",
-    price: "99.99",
-    imageUrl: "/images/iphone_14.png", // Example image path
-  },
-  {
-    id: "2",
-    name: "Smartphone 12X",
-    brand: "PhoneCo",
-    category: "Electronics",
-    price: "799.00",
-    imageUrl: "/images/iphone.png",
-  },
-  // ... more products
-];
 
-const SearchResultsPage = () => {
+function Page() {
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // Set to true initially
+  const [error, setError] = useState("");
+  const params = useParams();
+
+  useEffect(() => {
+    if (params.query) {
+      apiService
+        .searchProducts(params.query)
+        .then((data) => {
+          setProducts(data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          setError(err.message);
+          setLoading(false);
+        });
+    } else {
+      setLoading(false); // Ensure to stop loading if no query is provided
+    }
+  }, [params.query]);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (error) {
+    return <h1>Error: {error}</h1>;
+  }
 
   return (
     <div>
-      <ProductList products={staticProducts} />
+      {params.query ? (
+        <>
+          <h1>Results for {params.query}</h1>
+
+          <div className={styles.product_list}>
+            {products.map((product) => (
+              <div className={styles.product_card} key={product.id}>
+                <h2>{product.product_name}</h2>
+                <p>{product.brand_name}</p>
+                <p>{product.category_name}</p>
+                <p>${product.actual_price}</p>
+              </div>
+            ))}
+          </div>
+
+        </>
+      ) : (
+        <h1>No search query provided.</h1>
+      )}
     </div>
   );
-};
+}
 
-export default SearchResultsPage;
+export default Page;
