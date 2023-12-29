@@ -40,19 +40,12 @@ function Navbar() {
         <div className={styles.navbar}>
           <div className={styles.logo}>
             <Link href="/">
-              {/* <Image
+              <Image
                 src="/images/logo.png"
                 alt="QnC Logo"
                 width={121}
                 height={51.5}
-              /> */}
-              <div
-                style={{ fontSize: "24px", fontFamily: "Arial, sans-serif" }}
-              >
-                <span style={{ color: "#86B817" }}>Q</span>
-                <span style={{ color: "#F5AF02" }}>n</span>
-                <span style={{ color: "#0654BA" }}>C</span>
-              </div>
+              />
             </Link>
           </div>
           <div>
@@ -66,15 +59,15 @@ function Navbar() {
               <Link href="/categories">
                 <li>categories</li>
               </Link>
-              {/* <Link href="/cart">
+              <Link href="/cart">
                 <li>
                   <AddShoppingCartIcon />
                   {cartCount > 0 && (
                     <span className={styles.cartCount}>{cartCount}</span>
                   )}
                 </li>
-              </Link> */}
-              {/* {isAuthenticated ? (
+              </Link>
+              {isAuthenticated ? (
                 <>
                   <Link href="/dashboard">
                     <li className={styles.myAccount}>My Account</li>
@@ -92,7 +85,7 @@ function Navbar() {
                     <li className={styles.signup_button}>Sign up</li>
                   </Link>
                 </>
-              )} */}
+              )}
             </ul>
           </div>
 
@@ -100,7 +93,7 @@ function Navbar() {
           /* Hidden on desktop views */}
           <div className={styles.mobileNav}>
             <ul>
-              {/* <Link className={styles.link} href="/signin">
+              <Link className={styles.link} href="/signin">
                 <li className={styles.link}>
                   <PermIdentityIcon />
                 </li>
@@ -109,7 +102,7 @@ function Navbar() {
                 <li>
                   <AddShoppingCartIcon />
                 </li>
-              </Link> */}
+              </Link>
               <li
                 className={`${styles.mobileNav} ${
                   isMobileNavOpen ? styles.active : ""

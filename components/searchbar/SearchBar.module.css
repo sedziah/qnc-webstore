@@ -1,71 +1,31 @@
 /* SearchBar.module.css */
+
 .searchBarWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 5px;
-  margin-top: 2vh;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin: 3vh 35vh 0 35vh;
 }
 
 .searchContainer {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 25px;
-  /* margin-right: 20%; 20% margin to the right for desktop */
-  /* border: solid green; */
-  width: 100%;
-}
-
-.searchInput {
-  border: none;
-  outline: none;
-  padding: 10px;
-  flex-grow: 1;
-  border-radius: 25px 0 0 25px;
-  width: 60%;
-}
-
-.categorySelectContainer {
-  border-left: 1px solid #ccc;
-}
-
-.categorySelect {
   display: inherit;
-  border: none;
-  outline: none;
-  padding: 10px;
-  background: white;
-  border-radius: 0 25px 25px 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  align-items: center;
+  border: 1px solid var(--text-color);
+  border-radius: 25px;
+  width: 100%;
+  padding-left: 2%;
 }
 
 .searchButton {
-  padding: 10px 20px;
-  border: none;
-  outline: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 15px;
-  cursor: pointer;
-  margin-left: 1%;
-}
-
-/* Media query for mobile */
-@media (max-width: 600px) {
-  .searchBarWrapper {
-    margin-top: 2vh;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 2vh;
-  }
-
-  .categorySelect {
-    display: none;
+    background-color: var(--qnc-blue);
+    border-radius: 20px;
+    border: none;
+    width: 10%;
+    margin-left: 2%;
+    color: var(--neutral);
+    font-family: var(--montserrat);
+    font-size: 14px;
+    height: 40px;
   }
 
   .searchInput {
@@ -73,6 +33,57 @@
     outline: none;
     padding: 10px;
     flex-grow: 1;
-    border-radius: 25px;
+    width: 100%;
+    background-color: transparent;
+    font-family: var(--poppins);
+    font-size: 14px;
+  }
+
+
+
+
+/* Media query for mobile and Tablets */
+@media (max-width: 1024px) {
+  .searchBarWrapper {
+    display: flex;
+    margin: 5%;
+  }
+
+  .searchContainer {
+    display: inherit;
+    align-items: center;
+    border: 1px solid var(--text-color);
+    border-radius: 20px;
+    background-color: var(--white);
+    width: 80%;
+    padding-left: 2%;
+    
+    }
+
+  .searchInput {
+    border: none;
+    outline: none;
+    padding: 10px;
+    flex-grow: 1;
+    width: 100%;
+    background-color: transparent;
+    font-family: var(--poppins);
+    font-size: 10px;
+  }
+
+  /* .searchIcon {
+    color: #333;
+    border: solid green;
+  } */
+
+  .searchButton {
+    background-color: var(--qnc-blue);
+    border-radius: 20px;
+    border: none;
+    width: 20%;
+    margin-left: 2%;
+    color: var(--neutral);
+    font-family: var(--montserrat);
+    font-size: 14px;
   }
 }

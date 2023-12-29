@@ -4,7 +4,10 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter from Next.js
 import styles from "./SearchBar.module.css";
-import { apiService } from "../../services/apiService"; // Ensure the correct path
+import SearchIcon from '@mui/icons-material/Search';
+import Stack from "@mui/material/Stack";
+import "../../app/globals.css"
+
 
 interface SearchResult {
   id: string;
@@ -47,26 +50,25 @@ const SearchBar: React.FC = () => {
   };
 
   return (
-    <div>
-      <div className={styles.searchBarWrapper}>
-        <div className={styles.searchContainer}>
-          <input
-            type="text"
-            className={styles.searchInput}
-            placeholder="Search for anything"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={handleKeyPress}
-          />
-          <button
-            className={styles.searchButton}
-            onClick={handleSearch}
-            disabled={isLoading}
-          >
-            Go
-          </button>
-        </div>
+    <div className={styles.searchBarWrapper}>
+      <div className={styles.searchContainer}>
+        <SearchIcon className={styles.SearchIcon} />
+        <input
+          type="text"
+          className={styles.searchInput}
+          placeholder="Search for anything"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
       </div>
+      <button
+        className={styles.searchButton}
+        onClick={handleSearch}
+        disabled={isLoading}
+      >
+        Go
+      </button>
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
     </div>

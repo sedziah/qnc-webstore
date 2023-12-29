@@ -4,9 +4,6 @@ import "./globals.css";
 import Navbar from "../components/navbar/index";
 import Footer from "../components/footer/index";
 import SubFooter from "../components/subfooter/index";
-import SearchBar from "../components/searchbar/index";
-import Hero from "../components/hero/index";
-import Banner from "../components/banner/index";
 import { AuthProvider } from "./auth/contexts/AuthContext";
 import { CartProvider } from "./cart/CartContext";
 
@@ -35,24 +32,9 @@ export default function RootLayout({
         <AuthProvider>
           <body>
             <Navbar />
-            <SearchBar />
-
-            {/* <ImagesSlider images={imagesData} /> */}
-            {/* <div style={{ padding: "40px" }}>
-          <Banner
-            src="/images/banner/qnc_banner_1.png"
-            alt="Banner Description"
-          />
-        </div> */}
             {children}
-            {/* <div style={{ padding: "20px" }}>
-          <Banner
-            src="/images/banner/qnc_banner_2.png"
-            alt="Banner Description"
-          />
-        </div> */}
-            <Footer />
-            <SubFooter />
+            {/* <Footer />
+            <SubFooter /> */}
           </body>
         </AuthProvider>
       </CartProvider>
