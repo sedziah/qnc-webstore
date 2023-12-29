@@ -1,4 +1,5 @@
 /* SearchBar.module.css */
+
 .searchBarWrapper {
   display: flex;
   align-items: center;
@@ -7,6 +8,7 @@
   margin-top: 2vh;
   margin-left: 20%;
   margin-right: 20%;
+  position: relative;
 }
 
 .searchContainer {
@@ -14,9 +16,19 @@
   align-items: center;
   border: 1px solid #ccc;
   border-radius: 25px;
-  /* margin-right: 20%; 20% margin to the right for desktop */
-  /* border: solid green; */
   width: 100%;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.searchIconContainer {
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  color: #333;
 }
 
 .searchInput {
@@ -25,23 +37,8 @@
   padding: 10px;
   flex-grow: 1;
   border-radius: 25px 0 0 25px;
-  width: 60%;
-}
-
-.categorySelectContainer {
-  border-left: 1px solid #ccc;
-}
-
-.categorySelect {
-  display: inherit;
-  border: none;
-  outline: none;
-  padding: 10px;
-  background: white;
-  border-radius: 0 25px 25px 0;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  width: 100%;
+  background-color: transparent;
 }
 
 .searchButton {
@@ -50,12 +47,16 @@
   outline: none;
   background-color: #007bff;
   color: white;
-  border-radius: 15px;
+  border-radius: 50%;
   cursor: pointer;
-  margin-left: 1%;
+  position: absolute;
+  right: 20%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-/* Media query for mobile */
+/* Media query for mobile and Tablets */
 @media (max-width: 600px) {
   .searchBarWrapper {
     margin-top: 2vh;
@@ -64,15 +65,27 @@
     margin-bottom: 2vh;
   }
 
-  .categorySelect {
+  /* .categorySelect {
     display: none;
+  } */
+
+  .searchContainer,
+  .searchInput {
+    width: calc(100% - 60px);
   }
 
-  .searchInput {
+  .searchInput,
+  .searchButton {
     border: none;
     outline: none;
     padding: 10px;
     flex-grow: 1;
+    margin-left: 0;
     border-radius: 25px;
+  }
+
+  .searchButton {
+    right: 5%; /* Adjust the position of the button on mobile */
+    padding: 10px 15px;
   }
 }

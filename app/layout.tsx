@@ -33,8 +33,8 @@ export default function RootLayout({
           <body>
             <Navbar />
             {children}
-            <Footer />
-            <SubFooter />
+            {/* <Footer />
+            <SubFooter /> */}
           </body>
         </AuthProvider>
       </CartProvider>

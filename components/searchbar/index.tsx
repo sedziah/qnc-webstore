@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation"; // Import useRouter from Next.js
 import styles from "./SearchBar.module.css";
-import { apiService } from "../../services/apiService"; // Ensure the correct path
+import SearchIcon from '@mui/icons-material/Search';
 
 interface SearchResult {
   id: string;
@@ -50,6 +50,9 @@ const SearchBar: React.FC = () => {
     <div>
       <div className={styles.searchBarWrapper}>
         <div className={styles.searchContainer}>
+          <div className={styles.searchIconContainer}>
+            <SearchIcon className={styles.searchIcon} />
+          </div>
           <input
             type="text"
             className={styles.searchInput}
