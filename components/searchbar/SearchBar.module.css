@@ -1,67 +1,52 @@
 /* SearchBar.module.css */
 
-/* .searchBarWrapper {
+.searchBarWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 5px;
-  margin-top: 2vh;
-  margin-left: 20%;
-  margin-right: 20%;
-  position: relative;
-  border: solid orange;
-} */
+  margin: 3vh 35vh 0 35vh;
+}
 
-/* .searchContainer {
-  display: flex;
+.searchContainer {
+  display: inherit;
   align-items: center;
-  border: 1px solid #ccc;
+  border: 1px solid var(--text-color);
   border-radius: 25px;
   width: 100%;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: solid orange;
-}
-
-.searchIconContainer {
-  padding-left: 10px;
-  display: flex;
-  align-items: center;
-  border: solid red;
-}
-
-.searchInput {
-  border: none;
-  outline: none;
-  padding: 10px;
-  flex-grow: 1;
-  border-radius: 25px 0 0 25px;
-  width: 100%;
-  background-color: transparent;
-  border: solid teal;
+  padding-left: 2%;
 }
 
 .searchButton {
-  padding: 10px 20px;
-  border: none;
-  outline: none;
-  background-color: #007bff;
-  color: white;
-  border-radius: 50%;
-  cursor: pointer;
-  position: absolute;
-  right: 20%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  top: 50%;
-  transform: translateY(-50%);
-} */
+    background-color: var(--qnc-blue);
+    border-radius: 20px;
+    border: none;
+    width: 10%;
+    margin-left: 2%;
+    color: var(--neutral);
+    font-family: var(--montserrat);
+    font-size: 14px;
+    height: 40px;
+  }
+
+  .searchInput {
+    border: none;
+    outline: none;
+    padding: 10px;
+    flex-grow: 1;
+    width: 100%;
+    background-color: transparent;
+    font-family: var(--poppins);
+    font-size: 14px;
+  }
+
+
+
 
 /* Media query for mobile and Tablets */
-@media (max-width: 600px) {
+@media (max-width: 1024px) {
   .searchBarWrapper {
     display: flex;
     margin: 5%;
-    /* border: solid purple; */
   }
 
   .searchContainer {
@@ -86,10 +71,10 @@
     font-size: 10px;
   }
 
-  .searchIcon {
+  /* .searchIcon {
     color: #333;
     border: solid green;
-  }
+  } */
 
   .searchButton {
     background-color: var(--qnc-blue);
@@ -97,7 +82,7 @@
     border: none;
     width: 20%;
     margin-left: 2%;
-    color: #fff;
+    color: var(--neutral);
     font-family: var(--montserrat);
     font-size: 14px;
   }
