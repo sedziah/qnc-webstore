@@ -1,0 +1,64 @@
+.dealsHeaderContainer {
+  background-color: #fff;
+  margin: 3% 10% 2% 11%;
+}
+
+.dealsTitleSection {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  margin-bottom: 5px; /* Reduced space between title and subtitle */
+}
+
+.dealsTitle {
+  font-size: 1.5em; /* Adjust size as needed */
+  margin-right: 10px; /* Ensure there's space if "See all" wraps to the next line */
+}
+
+.dealsSubTitle {
+  font-size: 0.75em; /* Adjust size as needed */
+  color: #888; /* Adjust color as needed */
+  margin-bottom: 10px; /* Space above the countdown timer */
+}
+
+.timerContainer {
+  display: flex;
+  align-items: center;
+}
+
+.timeBox {
+  background-color: #ff9900; /* Adjust background color as needed */
+  color: #fff; /* Adjust text color as needed */
+  padding: 5px 10px;
+  margin: 0 5px;
+  border-radius: 4px; /* Rounded corners */
+  font-weight: bold;
+  display: flex; /* To align the number and label horizontally */
+  align-items: baseline; /* Aligns the text baseline */
+}
+
+.timeLabel {
+  margin-left: 4px; /* Spacing between number and label */
+  font-size: 0.75em; /* Smaller font size for the label */
+}
+
+.seeAllLink {
+  cursor: pointer;
+  color: #0066c0; /* Adjust link color as needed */
+  text-decoration: underline;
+  white-space: nowrap; /* Prevent "See all" from wrapping */
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
+  .dealsHeaderContainer {
+    margin: 1% 5% 2% 5%;
+  }
+}
+
+/* Media query for tablets */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .dealsHeaderContainer {
+    margin: 1% 5% 2% 5%;
+  }
+}
