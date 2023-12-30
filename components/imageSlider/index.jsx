@@ -25,24 +25,44 @@ function Carousel() {
   }, []);
 
   return (
-    <div className={styles.imageSliderContainer}>
-      <Swiper slidesPerView={4} navigation pagination={{ clickable: true }}>
-        <SwiperSlide>
+    <div className={styles.carouselContainer}>
+      <Swiper
+        slidesPerView={3} // Adjust the number of slides per view according to your design
+        spaceBetween={30} // Adjust the space between slides
+        navigation
+        pagination={{ clickable: true }}
+        className={styles.mySwiper} // Use a custom class for additional styling
+      >
+        {/* Generate SwiperSlides based on your data */}
+        {/* Replace with your actual data and image paths */}
+        <SwiperSlide className={styles.slide}>
           <img src="/images/deals/deal_6.jpg" alt="Item 1" />
-          <div>Title</div>
-          <div>Description</div>
-          {/* Add other content for slide 1 */}
+          <div className={styles.slideContent}>
+            <div className={styles.slideTitle}>SONY WH-1000XM4</div>
+            <div className={styles.slideDescription}>
+              Wireless Industry Leading Noise Cancelling Overhead Headphones
+              with Mic
+            </div>
+            <div className={styles.slidePrice}>Ghs 1,279</div>
+            <div className={styles.originalPrice}>Ghs 1,999</div>
+          </div>
         </SwiperSlide>
-        <SwiperSlide>
-          <img src="/images/deals/deals_1.png" alt="Item 2" />
-          {/* Add other content for slide 2 */}
+        {/* Repeat for other slides */}
+        <SwiperSlide className={styles.slide}>
+          <img src="/images/deals/deal_6.jpg" alt="Item 1" />
+          <div className={styles.slideContent}>
+            <div className={styles.slideTitle}>SONY WH-1000XM4</div>
+            <div className={styles.slideDescription}>
+              Wireless Industry Leading Noise Cancelling Overhead Headphones
+              with Mic
+            </div>
+            <div className={styles.slidePrice}>Ghs 1,279</div>
+            <div className={styles.originalPrice}>Ghs 1,999</div>
+          </div>
         </SwiperSlide>
-        {/* ... additional slides */}
       </Swiper>
     </div>
   );
 }
 
 export default Carousel;
-
-

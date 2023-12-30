@@ -1,7 +1,46 @@
 /* components/imageSlider/imageSlider.module.css */
 
-.imageSliderContainer {
-    border: solid red;
-    margin: 0 10% 3% 10%;
+.carouselContainer {
+  /* Ensures that the Swiper container does not exceed the width of its parent */
+  width: 100%;
+  max-width: 1200px; /* Adjust max-width as needed */
+  margin: auto; /* Centers the carousel */
+}
 
+.mySwiper {
+  /* Specific styles for the Swiper instance */
+}
+
+.slide {
+  /* Styles for each slide */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items horizontally */
+}
+
+.slideContent {
+  /* Styles for the content inside each slide */
+  padding: 10px;
+  text-align: center; /* Center text */
+}
+
+.slideTitle {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.slideDescription {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.slidePrice {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #E44D26; /* Example color for the price */
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  color: #777;
 }
