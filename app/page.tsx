@@ -2,7 +2,7 @@
 
 import Hero from '../components/hero';
 import SearchBar from '../components/searchbar';
-import DealsHeader from 'components/deals/index';
+import DealsHeader from '../components/deals/index';
 import React from 'react'
 
 export default function Home() {
