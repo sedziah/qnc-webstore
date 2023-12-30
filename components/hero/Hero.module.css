@@ -1,24 +1,98 @@
+/* components/hero/Hero.moduled.css */
+
 .heroSection {
   display: flex;
-  flex-wrap: wrap;
-  padding: 1% 10% 0 10%;
-  gap: 10px; /* You can adjust the gap between images */
+  justify-content: space-between;
+  height: 30vh;
+  border: solid mediumorchid;
+  margin: 3% 10% 0 10%;
 }
 
-.imageContainer, .imageContainerFullWidth {
-  position: relative; /* This is required for next/image to work with layout="fill" */
-  flex-basis: calc(33.333% - 10px); /* Adjust for 3 images per row with gap, except for full width */
-  height: 200px; /* Define your preferred height for all image containers */
-  /* background-color: #f3f3f3; Placeholder color, can be removed if images load properly */
+.imageContainer {
+  width: 33%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: solid purple;
 }
 
+.mobilePhones {
+background-image: url('/images/hero/hero_mobile_phone.png');
+}
+
+.computers {
+  background-image: url('/images/hero/hero_computers.png');
+}
+
+.accessories {
+  background-image: url('/images/hero/hero_accessories.png');
+}
+
+.appliances {
+  background-image: url('/images/hero/hero_appliances.png');
+}
+
+.mobilePhones, .computers, .accessories, .appliances {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+
+/*
 .imageContainerFullWidth {
-  flex-basis: 100%; /* Full width for the last image */
-}
+  position: relative;
+  flex-basis: calc(33.333% - 1vh);
+  height: 200px;
+} */
+
+/* 
+.imageOverlay {
+  position: absolute;
+  bottom: 40px;
+  left: 30px;
+  color: var(--primary);
+  font-size: 20px;
+  /* font-weight: bold; */
+/* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+} */
+
+/* .imageContainerFullWidth {
+  flex-basis: 100%; /* Full width for the last image 
+} 
 
 /* Responsive behavior */
-@media (max-width: 768px) {
-  .imageContainer, .imageContainerFullWidth {
-    flex-basis: 100%; /* Full width on smaller screens */
+@media (max-width: 1024px) {
+  .heroSection {
+    border: solid green;
+  }
+
+  .stackContainer {
+    border: solid red;
+    width: 100%;
+    height: 30px;
+  }
+
+  .imageContainer {
+    border: solid purple;
+    width: 30%;
+  }
+
+
+  /* .imageContainerFullWidth {
+    flex-basis: 100%;
+    border: solid white;
+    position: relative;
+    flex-basis: calc(33.333% - 1vh);
+    height: 200px;
+  } */
+
+  .imageOverlay {
+    font-size: 16px;
+    bottom: 40px;
+    left: 20px;
   }
 }
