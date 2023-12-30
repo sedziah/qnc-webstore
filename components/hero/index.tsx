@@ -17,6 +17,9 @@ function Hero() {
         <div className={`${styles.imageContainer} ${styles.accessories}`}>
           Accessories
         </div>
+        <div className={`${styles.imageContainer} ${styles.mobile_appliances}`}>
+          Appliances
+        </div>
       </div>
 
       <div
