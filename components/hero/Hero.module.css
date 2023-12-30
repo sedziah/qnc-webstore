@@ -2,10 +2,18 @@
 
 .heroSection {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  height: 30vh;
-  border: solid mediumorchid;
+  height: 60vh;
   margin: 3% 10% 0 10%;
+}
+
+.flexContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  height: 30vh;
 }
 
 .imageContainer {
@@ -15,8 +23,13 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border: solid purple;
 }
+
+.fullWidth {
+  width: 100%;
+  height: 30vh;
+}
+
 
 .mobilePhones {
 background-image: url('/images/hero/hero_mobile_phone.png');

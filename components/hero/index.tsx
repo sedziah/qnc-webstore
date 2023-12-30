@@ -14,12 +14,23 @@ function Hero() {
 
   return (
     <div className={styles.heroSection}>
-      <div className={`${styles.imageContainer} ${styles.mobilePhones}`}>
-        Mobile Phones
+      <div className={styles.flexContainer}>
+        <div className={`${styles.imageContainer} ${styles.mobilePhones}`}>
+          Mobile Phones
+        </div>
+        <div className={`${styles.imageContainer} ${styles.computers}`}>
+          Computer
+        </div>
+        <div className={`${styles.imageContainer} ${styles.accessories}`}>
+          Accessories
+        </div>
       </div>
-      <div className={`${styles.imageContainer} ${styles.computers}`}>Computer</div>
-      <div className={`${styles.imageContainer} ${styles.accessories}`}>Accessories</div>
-      <div>D</div>
+
+      <div
+        className={`${styles.imageContainer} ${styles.fullWidth} ${styles.appliances}`}
+      >
+        Appliances
+      </div>
     </div>
   );
 }
