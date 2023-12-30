@@ -1,7 +1,6 @@
 .dealsHeaderContainer {
   background-color: #fff;
   margin: 3% 10% 2% 11%;
-  border: solid red;
 }
 
 .dealsTitleSection {
@@ -50,13 +49,16 @@
   white-space: nowrap; /* Prevent "See all" from wrapping */
 }
 
-
 /* Media query for mobile devices */
 @media only screen and (max-width: 600px) {
-
+  .dealsHeaderContainer {
+    margin: 1% 5% 2% 5%;
+  }
 }
 
 /* Media query for tablets */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
-
+  .dealsHeaderContainer {
+    margin: 1% 5% 2% 5%;
+  }
 }
