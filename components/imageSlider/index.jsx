@@ -19,9 +19,9 @@ export default function Carousel() {
   return (
     <>
       <Swiper
-        pagination={{
-          type: "fraction",
-        }}
+        // pagination={{
+        //   type: "fraction",
+        // }}
         navigation={true}
         modules={[Pagination, Navigation]}
         slidesPerView={3}
