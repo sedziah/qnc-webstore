@@ -1,24 +1,106 @@
+/* components/hero/Hero.moduled.css */
+
 .heroSection {
   display: flex;
-  flex-wrap: wrap;
-  padding: 1% 10% 0 10%;
-  gap: 10px; /* You can adjust the gap between images */
+  flex-direction: column;
+  justify-content: space-between;
+  height: 60vh;
+  margin: 3% 10% 0 10%;
 }
 
-.imageContainer, .imageContainerFullWidth {
-  position: relative; /* This is required for next/image to work with layout="fill" */
-  flex-basis: calc(33.333% - 10px); /* Adjust for 3 images per row with gap, except for full width */
-  height: 200px; /* Define your preferred height for all image containers */
-  /* background-color: #f3f3f3; Placeholder color, can be removed if images load properly */
+.flexContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+  height: 30vh;
 }
 
-.imageContainerFullWidth {
-  flex-basis: 100%; /* Full width for the last image */
+.imageContainer {
+  width: 33%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-/* Responsive behavior */
-@media (max-width: 768px) {
-  .imageContainer, .imageContainerFullWidth {
-    flex-basis: 100%; /* Full width on smaller screens */
+.fullWidth {
+  width: 100%;
+  height: 30vh;
+}
+
+.mobilePhones {
+  background-image: url("/images/hero/hero_mobile_phone.png");
+}
+
+.computers {
+  background-image: url("/images/hero/hero_computers.png");
+}
+
+.accessories {
+  background-image: url("/images/hero/hero_accessories.png");
+}
+
+.appliances {
+  background-image: url("/images/hero/hero_appliances.png");
+}
+
+.mobilePhones,
+.computers,
+.accessories,
+.appliances {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
+  .heroSection {
+    display: flex;
+    flex-direction: row;
+    margin: 5%;
+    height: auto;
   }
+
+  .flexContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60vh;
+  }
+
+  .imageContainer,
+  .fullWidth {
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height: 60vh;
+    margin-bottom: 3%;
+  }
+}
+
+/* Media query for tablets */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  .heroSection {
+    /* Styles specific to tablets */
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 3% 5%; /* Slightly reduced margins for larger devices */
+  }
+
+  .imageContainer {
+    /* Adjust width for tablets to show 2 or 3 items per row as per design */
+    width: calc(50% - 10px); /* Example for 2 items per row */
+    margin-bottom: 10px;
+  }
+
+  .fullWidth {
+    width: 100%; /* Full width for the bottom container */
+  }
+
+  /* Additional tablet-specific styles can go here */
 }
