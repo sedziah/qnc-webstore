@@ -1,24 +1,24 @@
+/* component/banner/Banner.Module.css */
+
 .bannerContainer {
-  position: relative; /* Required for Next.js Image component with layout="fill" */
-  width: calc(100% - 20%); /* Subtracting padding from the full width */
-  height: 400px; /* Adjust the height as needed */
-  margin-left: 10%; /* Left padding for desktop */
-  margin-right: 10%; /* Right padding for desktop */
+  position: relative;
+  width: calc(100% - 20%);
+  height: 400px;
+  margin: 3% 10% 3% 10%;
   /* Add more styles, such as border, shadow, etc., as needed */
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden; /* Ensures the image does not overflow the container */
+  overflow: hidden;
+  border: solid red;
 }
 
 /* Responsive adjustments for tablets and mobiles */
 @media (max-width: 768px) {
   .bannerContainer {
-    width: calc(
-      100% - 10%
-    ); /* Subtracting padding from the full width for smaller screens */
-    margin-left: 5%; /* Left padding for small screens */
-    margin-right: 5%; /* Right padding for small screens */
-    height: 200px; /* Optional: Adjust height for smaller screens if necessary */
+    width: calc(100% - 10%);
+    margin-left: 5%;
+    margin-right: 5%;
+    height: 200px;
   }
 }
