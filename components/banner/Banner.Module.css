@@ -4,7 +4,7 @@
   position: relative;
   width: calc(100% - 20%);
   height: 400px;
-  margin: 1% 10% 3% 10%;
+  margin: 3% 10% 3% 10%;
   /* Add more styles, such as border, shadow, etc., as needed */
   display: flex;
   justify-content: center;
