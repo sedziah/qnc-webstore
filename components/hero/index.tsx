@@ -8,24 +8,24 @@ function Hero() {
     <div className={styles.heroSection}>
       <div className={styles.flexContainer}>
         <div className={`${styles.imageContainer} ${styles.mobilePhones}`}>
-          <Link href="#">Mobile Phones</Link>
+          <Link href="/categories/mobile-phones">Mobile Phones</Link>
         </div>
 
         <div className={`${styles.imageContainer} ${styles.computers}`}>
-          <Link href="#">Computers</Link>
+          <Link href="/categories/computers">Computers</Link>
         </div>
         <div className={`${styles.imageContainer} ${styles.accessories}`}>
-          <Link href="#">Accessories</Link>
+          <Link href="/categories/accessories">Accessories</Link>
         </div>
         <div className={`${styles.imageContainer} ${styles.mobile_appliances}`}>
-          <Link href="#">Appliances</Link>
+          <Link href="/categories/appliances">Appliances</Link>
         </div>
       </div>
 
       <div
         className={`${styles.imageContainer} ${styles.fullWidth} ${styles.appliances}`}
       >
-        <Link href="#">Appliances</Link>
+        <Link href="/categories/appliances">Appliances</Link>
       </div>
     </div>
   );
