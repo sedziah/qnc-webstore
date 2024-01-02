@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Banner = ({ src, alt }) => {
   return (
-    <div className={styles.bannerContainer}>
+    <div >
       <Image
         src={src}
         alt={alt}
