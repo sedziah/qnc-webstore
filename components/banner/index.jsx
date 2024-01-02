@@ -1,6 +1,6 @@
 // components/banner/index.jsx
 import Image from "next/image";
-import styles from "./banner.module.css";
+// import styles from "./banner.module.css";
 
 
 const Banner = ({ src, alt }) => {
