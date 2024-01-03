@@ -6,6 +6,8 @@ import { useParams } from "next/navigation";
 import { apiService } from "../../../services/apiService"; // Ensure the correct path
 import styles from "./page.module.css";
 import Image from "next/image";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 interface ProductImage {
   id: string;
@@ -57,7 +59,18 @@ function Page() {
   }, [params.query]);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh", // This takes the full height of the viewport
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
   }
 
   if (error) {
