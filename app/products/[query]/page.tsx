@@ -5,14 +5,23 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { apiService } from "../../../services/apiService"; // Ensure the correct path
 import styles from "./page.module.css";
+import Image from "next/image";
+
+interface ProductImage {
+  id: string;
+  image: string;
+  alt_text: string;
+  is_main_image: boolean;
+}
 
 
 interface Product {
   id: string;
-  product_name: string;
+  product: string;
   category_name: string;
   brand_name: string;
   actual_price: string;
+  images: ProductImage[];
   // Add any other relevant fields for the products
 }
 
@@ -63,15 +72,34 @@ function Page() {
 
           <div className={styles.product_list}>
             {products.map((product) => (
-              <div className={styles.product_card} key={product.id}>
-                <h2>{product.product_name}</h2>
+              <div key={product.id} className={styles.product_card}>
+                <div className={styles.product_image}>
+                  {/* Check if the product has images and display the main image */}
+                  {product.images.length > 0 &&
+                    product.images.find((img) => img.is_main_image) && (
+                      <Image
+                        src={
+                          product.images.find((img) => img.is_main_image)
+                            ?.image || product.images[0].image // Fallback to the first image if no main image
+                        }
+                        alt={
+                          product.images.find((img) => img.is_main_image)
+                            ?.alt_text || product.images[0].alt_text // Fallback alt text
+                        }
+                        width={400} // Set the width as required
+                        height={400} // Set the height as required
+                        // layout="responsive" // This prop is used to maintain the aspect ratio of the image
+                        quality={100}
+                      />
+                    )}
+                </div>
+                <h2>{product.product}</h2>
                 <p>{product.brand_name}</p>
                 <p>{product.category_name}</p>
                 <p>${product.actual_price}</p>
               </div>
             ))}
           </div>
-
         </>
       ) : (
         <h1>No search query provided.</h1>
