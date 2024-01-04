@@ -8,6 +8,7 @@ import styles from "./page.module.css";
 import Image from "next/image";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Link from "next/link";
 
 interface ProductImage {
   id: string;
@@ -22,10 +23,47 @@ interface Product {
   product: string;
   category_name: string;
   brand_name: string;
+  condition: string;
   actual_price: string;
   images: ProductImage[];
   // Add any other relevant fields for the products
 }
+
+// New ProductCard component
+const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
+  <div className={styles.product_card}>
+    <div className={styles.product_image}>
+      {/* Display the main image or the first image as a fallback */}
+      <Image
+        src={
+          product.images.find((img: ProductImage) => img.is_main_image)
+            ?.image || product.images[0].image // Fallback to the first image if no main image
+        }
+        alt={
+          product.images.find((img: ProductImage) => img.is_main_image)
+            ?.alt_text || product.images[0].alt_text // Fallback alt text
+        }
+        width={150}
+        height={150}
+        objectFit="cover" // Adjust to cover the area without distorting the aspect ratio
+        quality={100}
+      />
+    </div>
+    <div className={styles.product_details}>
+      <h2 className={styles.product_title}>
+        {product.brand_name} {product.product}
+      </h2>
+      <p className={styles.product_price}>{product.condition}</p>
+      <p className={styles.product_price}>64GB</p>
+      <p className={styles.product_price}>Factory Unlocked</p>
+      <p className={styles.product_price}>All Colours</p>
+      <p className={styles.product_price}>GHS {product.actual_price}</p>
+      <Link href={`/product/${product.id}`} passHref>
+        <div className={styles.product_link}>View details</div>
+      </Link>
+    </div>
+  </div>
+);
 
 
 function Page() {
@@ -34,6 +72,8 @@ function Page() {
   const [loading, setLoading] = useState(true); // Set to true initially
   const [error, setError] = useState("");
   const params = useParams();
+
+
 
   useEffect(() => {
     // Ensure that query is a string
@@ -85,32 +125,7 @@ function Page() {
 
           <div className={styles.product_list}>
             {products.map((product) => (
-              <div key={product.id} className={styles.product_card}>
-                <div className={styles.product_image}>
-                  {/* Check if the product has images and display the main image */}
-                  {product.images.length > 0 &&
-                    product.images.find((img) => img.is_main_image) && (
-                      <Image
-                        src={
-                          product.images.find((img) => img.is_main_image)
-                            ?.image || product.images[0].image // Fallback to the first image if no main image
-                        }
-                        alt={
-                          product.images.find((img) => img.is_main_image)
-                            ?.alt_text || product.images[0].alt_text // Fallback alt text
-                        }
-                        width={400} // Set the width as required
-                        height={400} // Set the height as required
-                        // layout="responsive" // This prop is used to maintain the aspect ratio of the image
-                        quality={100}
-                      />
-                    )}
-                </div>
-                <h2>{product.product}</h2>
-                <p>{product.brand_name}</p>
-                <p>{product.category_name}</p>
-                <p>${product.actual_price}</p>
-              </div>
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         </>
