@@ -1,40 +1,61 @@
 /* product/[query]/page.module.css */
 
 .product_card {
-  display: flex;
-  flex-direction: row; /* Stack items vertically */
-  margin-bottom: 16px; /* Space between cards */
-  border: solid red;
-}
+    display: flex;
+    flex-direction: row; /* Stack items vertically */
+    margin-bottom: 16px; /* Space between cards */
+    border: solid yellowgreen;
+    margin: 0 10% 0 10%
+  }
 
-.product_image {
-  width: 50%; /* Full width of the card */
-  height: auto; /* Maintain aspect ratio */
-  border: solid green;
-}
+  .product_image {
+    width: 30%; /* Full width of the card */
+    height: auto; /* Maintain aspect ratio */
+  }
 
-.product_details {
-  width: 50%;
-  border: solid blue;
-}
 
-.product_title {
-  font-size: 1.2rem; /* Example title size */
-  border: solid purple;
-}
 
-.product_price {
-  color: #E44D26; /* Example price color */
-  font-weight: bold;
-}
 
-.product_seller, .product_sold {
-  font-size: 0.8rem; /* Smaller text for seller and sold count */
-}
 
-.product_link {
-  color: #0066cc;
-  text-decoration: none; /* No underline */
-  font-weight: bold;
-  margin-top: 8px; /* Space from the last element */
+
+@media only screen and (max-width: 600px) {
+  .product_card {
+    display: flex;
+    flex-direction: row; /* Stack items vertically */
+    margin-bottom: 16px; /* Space between cards */
+    border: solid red;
+  }
+
+  .product_image {
+    width: 50%; /* Full width of the card */
+    height: auto; /* Maintain aspect ratio */
+    border: solid green;
+  }
+
+  .product_details {
+    width: 50%;
+    border: solid blue;
+  }
+
+  .product_title {
+    font-size: 1.2rem; /* Example title size */
+    border: solid purple;
+  }
+
+  .product_price {
+    color: #e44d26; /* Example price color */
+    font-weight: bold;
+  }
+
+  .product_seller,
+  .product_sold {
+    font-size: 0.8rem; /* Smaller text for seller and sold count */
+  }
+
+  .product_link {
+    color: #0066cc;
+    text-decoration: none; /* No underline */
+    font-weight: bold;
+    margin-top: 8px; /* Space from the last element */
+  }
 }
