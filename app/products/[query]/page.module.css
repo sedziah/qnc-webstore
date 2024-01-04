@@ -23,23 +23,19 @@
     display: flex;
     flex-direction: row; /* Stack items vertically */
     margin-bottom: 16px; /* Space between cards */
-    border: solid red;
   }
 
   .product_image {
     width: 50%; /* Full width of the card */
     height: auto; /* Maintain aspect ratio */
-    border: solid green;
   }
 
   .product_details {
     width: 50%;
-    border: solid blue;
   }
 
   .product_title {
     font-size: 1.2rem; /* Example title size */
-    border: solid purple;
   }
 
   .product_price {
