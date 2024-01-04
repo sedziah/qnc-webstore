@@ -1,25 +1,40 @@
-/* page.module.css */
-
-.product_list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
-}
+/* product/[query]/page.module.css */
 
 .product_card {
-  border: 1px solid #ddd;
-  padding: 1rem;
-  border-radius: 8px;
+  display: flex;
+  flex-direction: row; /* Stack items vertically */
+  margin-bottom: 16px; /* Space between cards */
+  border: solid red;
 }
 
-@media (max-width: 600px) {
-  .product_list {
-    grid-template-columns: 1fr; /* Stack the cards on smaller screens */
-  }
-  
-  .product_card {
-    padding: 0.5rem;
-  }
-  
+.product_image {
+  width: 50%; /* Full width of the card */
+  height: auto; /* Maintain aspect ratio */
+  border: solid green;
+}
+
+.product_details {
+  width: 50%;
+  border: solid blue;
+}
+
+.product_title {
+  font-size: 1.2rem; /* Example title size */
+  border: solid purple;
+}
+
+.product_price {
+  color: #E44D26; /* Example price color */
+  font-weight: bold;
+}
+
+.product_seller, .product_sold {
+  font-size: 0.8rem; /* Smaller text for seller and sold count */
+}
+
+.product_link {
+  color: #0066cc;
+  text-decoration: none; /* No underline */
+  font-weight: bold;
+  margin-top: 8px; /* Space from the last element */
 }
