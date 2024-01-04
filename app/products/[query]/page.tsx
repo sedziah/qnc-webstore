@@ -23,6 +23,7 @@ interface Product {
   product: string;
   category_name: string;
   brand_name: string;
+  condition: string;
   actual_price: string;
   images: ProductImage[];
   // Add any other relevant fields for the products
@@ -49,8 +50,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
       />
     </div>
     <div className={styles.product_details}>
-      <h2 className={styles.product_title}>{product.brand_name} {product.product}</h2>
-      <p className={styles.product_price}>${product.actual_price}</p>
+      <h2 className={styles.product_title}>
+        {product.brand_name} {product.product}
+      </h2>
+      <p className={styles.product_price}>{product.condition}</p>
+      <p className={styles.product_price}>64GB</p>
+      <p className={styles.product_price}>Factory Unlocked</p>
+      <p className={styles.product_price}>All Colours</p>
+      <p className={styles.product_price}>GHS {product.actual_price}</p>
       <Link href={`/product/${product.id}`} passHref>
         <div className={styles.product_link}>View details</div>
       </Link>
