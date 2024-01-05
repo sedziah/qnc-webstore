@@ -17,7 +17,6 @@ interface ProductImage {
   is_main_image: boolean;
 }
 
-
 interface Product {
   id: string;
   product: string;
@@ -43,8 +42,9 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
           product.images.find((img: ProductImage) => img.is_main_image)
             ?.alt_text || product.images[0].alt_text // Fallback alt text
         }
-        width={150}
-        height={150}
+        layout="responsive"
+        width={1} // Width ratio part
+        height={1} // Height ratio part, 1:1 here for a square aspect ratio
         objectFit="cover" // Adjust to cover the area without distorting the aspect ratio
         quality={100}
       />
@@ -65,15 +65,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => (
   </div>
 );
 
-
 function Page() {
-
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true); // Set to true initially
   const [error, setError] = useState("");
   const params = useParams();
-
-
 
   useEffect(() => {
     // Ensure that query is a string
