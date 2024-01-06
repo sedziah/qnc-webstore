@@ -4,18 +4,25 @@
     display: flex;
     flex-direction: row; /* Stack items vertically */
     margin-bottom: 16px; /* Space between cards */
-    border: solid yellowgreen;
     margin: 0 10% 0 10%
   }
 
   .product_image {
     width: 30%; /* Full width of the card */
     height: auto; /* Maintain aspect ratio */
+    border: solid brown;
   }
 
+  .product_details {
+    border: solid green;
+    margin: 0 0 0 3% ;
+    font-family: var(--montserrat);
+  }
 
-
-
+  .product_title {
+    font-weight: bold;
+    border: solid paleturquoise;
+  }
 
 
 @media only screen and (max-width: 600px) {
@@ -23,15 +30,20 @@
     display: flex;
     flex-direction: row; /* Stack items vertically */
     margin-bottom: 16px; /* Space between cards */
+    border: solid teal;
+    margin: 0 0 0 0;
   }
 
   .product_image {
     width: 50%; /* Full width of the card */
     height: auto; /* Maintain aspect ratio */
+    border: solid yellow;
   }
 
   .product_details {
     width: 50%;
+    margin: 0 0 0 0%;
+    border: none;
   }
 
   .product_title {
