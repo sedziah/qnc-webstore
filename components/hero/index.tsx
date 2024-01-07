@@ -2,14 +2,46 @@
 
 import Link from "next/link";
 import styles from "./Hero.module.css";
+import Image from "next/image";
+
+// Hero Images
+import appliances from "../../public/images/hero/hero_accessories.png";
+
+// Define a type that covers static image imports
+type StaticRequire = ReturnType<typeof require>;
+
+type HeroImageProps = {
+  imageUrl: string | StaticRequire; // Renamed from Image to imageUrl
+};
+
+const HeroImage: React.FC<HeroImageProps> = ({ imageUrl }) => {
+  return (
+    <Image
+      src={imageUrl}
+      alt="hero_image"
+      layout="responsive"
+      width={1}
+      height={1}
+      objectFit="cover"
+      quality={100}
+    />
+  );
+};
+
 
 function Hero() {
   return (
     <div className={styles.heroSection}>
       <div className={styles.flexContainer}>
-        <div className={`${styles.imageContainer} ${styles.mobilePhones}`}>
-          <Link href="/categories/mobile-phones">Mobile Phones</Link>
-        </div>
+        <span style={{ border: "solid red" }}>
+          <div
+            style={{ border: "solid green" }}
+            className={`${styles.imageContainer} ${styles.mobilePhones}`}
+          >
+            {/* <HeroImage imageUrl={appliances} /> */}
+            <Link href="/categories/mobile-phones">Mobile Phones</Link>
+          </div>
+        </span>
 
         <div className={`${styles.imageContainer} ${styles.computers}`}>
           <Link href="/categories/computers">Computers</Link>
