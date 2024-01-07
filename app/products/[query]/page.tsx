@@ -113,11 +113,16 @@ function Page() {
     return <h1>Error: {error}</h1>;
   }
 
+  // Check if products are empty
+  if (!loading && products.length === 0) {
+    return <h1 className={styles.no_products}>No products found!</h1>;
+  }
+
   return (
     <div>
       {params.query ? (
         <>
-          <h1>Results for {params.query}</h1>
+          <h1 className={styles.results_title}>Results for {params.query}</h1>
 
           <div className={styles.product_list}>
             {products.map((product) => (
