@@ -20,6 +20,7 @@
 
   .product_title {
     font-weight: bold;
+    margin-bottom: 15%;
   }
 
 
@@ -45,6 +46,7 @@
 
   .product_title {
     font-size: 1.2rem; /* Example title size */
+    
   }
 
   .product_price {
