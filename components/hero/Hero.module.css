@@ -23,10 +23,10 @@
   border: solid purple;
 }
 
-.heroImage {
+/* .heroImage {
   /* The Image component has absolute positioning */
   /* z-index: -1; Ensure the image is behind the text */
-}
+} */
 
 .heroText {
   z-index: 2; /* Ensure the text is above the image */
