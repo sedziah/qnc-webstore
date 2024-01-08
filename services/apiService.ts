@@ -32,7 +32,6 @@ export interface TransformedProduct {
   // Add other fields as needed
 }
 
-
 export const apiService = {
   login: async (email: string, password: string) => {
     const response = await fetch(`${API_BASE_URL}/accounts/login/`, {

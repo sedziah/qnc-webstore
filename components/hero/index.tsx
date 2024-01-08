@@ -28,20 +28,16 @@ const HeroImage: React.FC<HeroImageProps> = ({ imageUrl }) => {
   );
 };
 
-
 function Hero() {
   return (
     <div className={styles.heroSection}>
       <div className={styles.flexContainer}>
-        <span style={{ border: "solid red" }}>
-          <div
-            style={{ border: "solid green" }}
-            className={`${styles.imageContainer} ${styles.mobilePhones}`}
-          >
+        <Link href="#">
+          <div className={`${styles.imageContainer} ${styles.mobilePhones}`}>
             {/* <HeroImage imageUrl={appliances} /> */}
             <Link href="/categories/mobile-phones">Mobile Phones</Link>
           </div>
-        </span>
+        </Link>
 
         <div className={`${styles.imageContainer} ${styles.computers}`}>
           <Link href="/categories/computers">Computers</Link>
