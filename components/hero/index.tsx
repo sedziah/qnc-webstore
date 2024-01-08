@@ -1,60 +1,64 @@
 // components/hero/index.tsx
 
-import Link from "next/link";
-import styles from "./Hero.module.css";
+import React from "react";
 import Image from "next/image";
+import styles from "./Hero.module.css"; // Import the CSS module
+import Link from "next/link";
+
 
 // Hero Images
-import appliances from "../../public/images/hero/hero_accessories.png";
-
-// Define a type that covers static image imports
-type StaticRequire = ReturnType<typeof require>;
-
-type HeroImageProps = {
-  imageUrl: string | StaticRequire; // Renamed from Image to imageUrl
-};
-
-const HeroImage: React.FC<HeroImageProps> = ({ imageUrl }) => {
-  return (
-    <Image
-      src={imageUrl}
-      alt="hero_image"
-      layout="responsive"
-      width={1}
-      height={1}
-      objectFit="cover"
-      quality={100}
-    />
-  );
-};
+import phones from "../../public/images/hero/hero_mobile_phone.png";
+import accessories from "../../public/images/hero/hero_accessories.png";
+import computers from "../../public/images/hero/hero_computers.png";
+import appliances from "../../public/images/hero/hero_appliances.png";
 
 function Hero() {
   return (
     <div className={styles.heroSection}>
-      <div className={styles.flexContainer}>
-        <Link href="#">
-          <div className={`${styles.imageContainer} ${styles.mobilePhones}`}>
-            {/* <HeroImage imageUrl={appliances} /> */}
-            <Link href="/categories/mobile-phones">Mobile Phones</Link>
-          </div>
-        </Link>
-
-        <div className={`${styles.imageContainer} ${styles.computers}`}>
-          <Link href="/categories/computers">Computers</Link>
+      <Link href="#" className={styles.heroLink}>
+        <div className={styles.heroContainer}>
+          <Image
+            src={phones}
+            alt="phones"
+            layout="responsive"
+            className={styles.heroImage}
+          />
+          <h1 className={styles.heroTitle}>Mobile Phones</h1>
         </div>
-        <div className={`${styles.imageContainer} ${styles.accessories}`}>
-          <Link href="/categories/accessories">Accessories</Link>
+      </Link>
+      <Link href="#" className={styles.heroLink}>
+        <div className={styles.heroContainer}>
+          <Image
+            src={computers}
+            alt="mobile phones"
+            layout="responsive"
+            className={styles.heroImage}
+          />
+          <h1 className={styles.heroTitle}>Computers</h1>
         </div>
-        <div className={`${styles.imageContainer} ${styles.mobile_appliances}`}>
-          <Link href="/categories/appliances">Appliances</Link>
+      </Link>
+      <Link href="#" className={styles.heroLink}>
+        <div className={styles.heroContainer}>
+          <Image
+            src={accessories}
+            alt="mobile phones"
+            layout="responsive"
+            className={styles.heroImage}
+          />
+          <h1 className={styles.heroTitle}>Accessories</h1>
         </div>
-      </div>
-
-      <div
-        className={`${styles.imageContainer} ${styles.fullWidth} ${styles.appliances}`}
-      >
-        <Link href="/categories/appliances">Appliances</Link>
-      </div>
+      </Link>
+      <Link href="#" className={styles.heroLink}>
+        <div className={styles.heroContainer}>
+          <Image
+            src={appliances}
+            alt="mobile phones"
+            layout="responsive"
+            className={styles.heroImage}
+          />
+          <h1 className={styles.heroTitle}>Appliances</h1>
+        </div>
+      </Link>
     </div>
   );
 }

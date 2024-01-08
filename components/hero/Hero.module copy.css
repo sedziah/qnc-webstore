@@ -1,121 +1,47 @@
 /* components/hero/Hero.moduled.css */
 
 .heroSection {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 60vh;
-  margin: 3% 10% 0 10%;
-  border: solid red;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 20px; /* Spacing between items */
+  padding: 20px;
 }
 
-.flexContainer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 10px;
-  height: 30vh;
-}
-
-.imageContainer {
-  width: 33%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.heroItem {
+  position: relative; /* Positioning context for Image */
+  height: 300px; /* Set a fixed height for images */
+  text-decoration: none;
+  color: black;
+  background-color: white;
+  border-radius: 8px;
   overflow: hidden;
+  display: flex; /* To align the text */
+  align-items: flex-end; /* Align text at the bottom */
+  justify-content: center; /* Center text horizontally */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.fullWidth {
+.heroImage {
+  /* The Image component has absolute positioning */
+  z-index: -1; /* Ensure the image is behind the text */
+}
+
+.heroText {
+  z-index: 2; /* Ensure the text is above the image */
+  padding: 16px;
+  text-align: center;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.75); /* Semi-transparent background */
   width: 100%;
-  height: 30vh;
-}
-
-.mobile_appliances {
-  display: none;
-}
-
-/* .mobilePhones {
-  background-image: url("/images/hero/hero_mobile_phone.png");
-} */
-
-/* .computers {
-  background-image: url("/images/hero/hero_computers.png");
-} */
-
-/* .accessories {
-  background-image: url("/images/hero/hero_accessories.png");
-} */
-
-/* .appliances {
-  background-image: url("/images/hero/hero_appliances.png");
-} */
-
-.mobilePhones,
-.computers,
-.accessories,
-.appliances,
-.mobile_appliances {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border: solid purple;
+  pointer-events: none; /* Allows clicking through the text to the link below */
 }
 
 /* Media query for mobile devices */
-@media only screen and (max-width: 600px) {
+@media (max-width: 768px) {
   .heroSection {
-    display: flex;
-    flex-direction: row;
-    margin: 5%;
-    height: auto;
-    border: solid green;
+    grid-template-columns: 1fr;
   }
-
-  .flexContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 80vh;
+  .heroItem {
+    height: 200px; /* Adjust height for mobile devices */
   }
-
-  .imageContainer {
-    width: 100%;
-    position: relative;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    height: 60vh;
-    margin-bottom: 3%;
-  }
-
-  .fullWidth {
-    display: none;
-  }
-
-  .mobile_appliances {
-    background-image: url("/images/hero/hero_appliances.png");
-  }
-}
-
-/* Media query for tablets */
-@media only screen and (min-width: 601px) and (max-width: 1024px) {
-  .heroSection {
-    /* Styles specific to tablets */
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 3% 5%;
-  }
-
-  .imageContainer {
-    /* Adjust width for tablets to show 2 or 3 items per row as per design */
-    width: calc(50% - 10px);
-    margin-bottom: 10px;
-  }
-
-  .fullWidth {
-    width: 100%; /* Full width for the bottom container */
-  }
-
-  /* Additional tablet-specific styles can go here */
 }

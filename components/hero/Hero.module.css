@@ -1,18 +1,84 @@
-/* components/hero/Hero.moduled.css */
+/* components/hero/Hero.module.css */
 
 .heroSection {
+  /* margin: 2% 10% 0 10%; */
   display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-  height: 60vh;
-  margin: 3% 10% 0 10%;
+  flex-wrap: wrap;
+  height: 400px;
+}
+
+.heroItem {
+  width: 100%;
+  border: solid purple;
+}
+
+.linkWithoutStyle {
+  all: unset;
   border: solid red;
 }
 
-.flexContainer {
-  display: flex;
-  justify-content: space-between;
+.fullWidth {
+  grid-column: 1 / -1; /* This will make the box span all columns */
   width: 100%;
-  margin-bottom: 10px;
-  height: 30vh;
+  border: solid purple;
+}
+
+.heroImage {
+  /* The Image component has absolute positioning */
+  /* z-index: -1; Ensure the image is behind the text */
+}
+
+.heroText {
+  z-index: 2; /* Ensure the text is above the image */
+  padding: 16px;
+  text-align: center;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.75); /* Semi-transparent background */
+  width: 100%;
+  pointer-events: none; /* Allows clicking through the text to the link below */
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .heroSection {
+    margin: 2% 5% 0 5%;
+    height: auto;
+  }
+
+  .heroContainer {
+    position: relative;
+  }
+
+  .heroCard {
+    position: relative; /* Needed for Image with layout="fill" */
+    height: 200px; /* Fixed height for cards */
+    margin-bottom: 25px; /* Space between cards */
+    border: 1px solid #ccc; /* Optional border */
+  }
+
+  .heroLink {
+    width: 100%;
+  }
+
+  .heroImage {
+    height: 100%;
+    width: inherit;
+    object-fit: contain;
+  }
+
+  .heroItem {
+    height: 200px; /* Adjust height for mobile devices */
+  }
+
+  .heroTitle {
+    position: absolute;
+    top: 65%; /* Adjust as needed */
+    left: 25%; /* Adjust as needed */
+    transform: translate(-50%, -50%);
+    color: black; /* Adjust text color */
+    font-size: 15px; /* Adjust font size */
+    font-weight: bold; /* Adjust font weight */
+    font-family: montserrat;
+    text-align: center;
+  }
 }
