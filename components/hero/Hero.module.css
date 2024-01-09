@@ -1,37 +1,53 @@
 /* components/hero/Hero.module.css */
 
 .heroSection {
-  /* margin: 2% 10% 0 10%; */
+  margin: 2% 10% 0 10%;
   display: flex;
   flex-wrap: wrap;
-  height: 400px;
+  height: 600px;
 }
 
-.heroItem {
+.heroLink {
+  width: 33.33%;
+}
+
+.appliancesContainer {
   width: 100%;
-  border: solid purple;
 }
 
-.linkWithoutStyle {
-  all: unset;
-  border: solid red;
+.heroContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center; /* Centers children horizontally */
+  align-items: center; /* Centers children vertically */
+  flex-direction: column; /* Stacks children vertically */
+  position: relative;
 }
 
-.fullWidth {
-  grid-column: 1 / -1; /* This will make the box span all columns */
-  width: 100%;
-  border: solid purple;
+.heroImage {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  width: inherit;
+  object-fit: cover;
 }
 
-
-.heroText {
-  z-index: 2; /* Ensure the text is above the image */
-  padding: 16px;
-  text-align: center;
+.heroTitle {
+  position: absolute; /* Absolute positioning within the relative container */
+  top: 60%; /* Centers vertically */
+  left: 25%; /* Centers horizontally */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Ensures the center of the title is in the center of the container */
+  color: black;
+  font-size: 15px; /* You may want to adjust this depending on your design */
   font-weight: bold;
-  background: rgba(255, 255, 255, 0.75); /* Semi-transparent background */
-  width: 100%;
-  pointer-events: none; /* Allows clicking through the text to the link below */
+  font-family: Montserrat, sans-serif; /* Ensure font-family is correctly formatted */
+  text-align: center;
+  width: 100%; /* Ensures text is centered within the container */
+  pointer-events: none; /* Allows clicks to pass through to the link below */
 }
 
 /* Media query for mobile devices */
@@ -45,13 +61,6 @@
     position: relative;
   }
 
-  .heroCard {
-    position: relative; /* Needed for Image with layout="fill" */
-    height: 200px; /* Fixed height for cards */
-    margin-bottom: 25px; /* Space between cards */
-    border: 1px solid #ccc; /* Optional border */
-  }
-
   .heroLink {
     width: 100%;
   }
@@ -60,10 +69,6 @@
     height: 100%;
     width: inherit;
     object-fit: contain;
-  }
-
-  .heroItem {
-    height: 200px; /* Adjust height for mobile devices */
   }
 
   .heroTitle {

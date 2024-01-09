@@ -48,7 +48,10 @@ function Hero() {
           <h1 className={styles.heroTitle}>Accessories</h1>
         </div>
       </Link>
-      <Link href="#" className={styles.heroLink}>
+      <Link
+        href="#"
+        className={` ${styles.heroLink} ${styles.appliancesContainer}`}
+      >
         <div className={styles.heroContainer}>
           <Image
             src={appliances}
