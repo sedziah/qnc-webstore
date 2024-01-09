@@ -15,7 +15,7 @@ import appliances from "../../public/images/hero/hero_appliances.png";
 function Hero() {
   return (
     <div className={styles.heroSection}>
-      <Link href="#" className={styles.heroLink}>
+      <Link href="/products/phones" className={styles.heroLink}>
         <div className={styles.heroContainer}>
           <Image
             src={phones}
@@ -26,7 +26,7 @@ function Hero() {
           <h1 className={styles.heroTitle}>Mobile Phones</h1>
         </div>
       </Link>
-      <Link href="#" className={styles.heroLink}>
+      <Link href="/products/computers" className={styles.heroLink}>
         <div className={styles.heroContainer}>
           <Image
             src={computers}
@@ -37,7 +37,7 @@ function Hero() {
           <h1 className={styles.heroTitle}>Computers</h1>
         </div>
       </Link>
-      <Link href="#" className={styles.heroLink}>
+      <Link href="/products/accessories" className={styles.heroLink}>
         <div className={styles.heroContainer}>
           <Image
             src={accessories}
@@ -49,7 +49,7 @@ function Hero() {
         </div>
       </Link>
       <Link
-        href="#"
+        href="/products/appliances"
         className={` ${styles.heroLink} ${styles.appliancesContainer}`}
       >
         <div className={styles.heroContainer}>

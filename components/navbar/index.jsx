@@ -50,7 +50,7 @@ function Navbar() {
           </div>
           <div>
             <ul className={styles.navLinks}>
-              <Link href="/products">
+              {/* <Link href="/products">
                 <li>featured</li>
               </Link>
               <Link href="/products">
@@ -58,6 +58,9 @@ function Navbar() {
               </Link>
               <Link href="/categories">
                 <li>categories</li>
+              </Link> */}
+              <Link href="/categories">
+                <li>Store Credits</li>
               </Link>
               <Link href="/cart">
                 <li>
