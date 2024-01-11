@@ -3,7 +3,8 @@
   background: var(--Primary, #111);
   padding-bottom: 1%;
   /* height: 300px; */
-  border: slodi white;
+  /* border: solid green; */
+  margin-top: 20px;
 }
 
 .desktopFooter {

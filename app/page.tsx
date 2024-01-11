@@ -5,7 +5,7 @@ import SearchBar from '../components/searchbar';
 import DealsHeader from '../components/deals/index';
 import Carousel from "../components/imageSlider/index";
 import React from 'react'
-import SubFooter from 'components/subfooter';
+// import SubFooter from 'components/subfooter';
 import Footer from 'components/footer';
 
 export default function Home() {
@@ -16,7 +16,7 @@ export default function Home() {
       <DealsHeader />
       <Carousel />
       <Footer />
-      <SubFooter />
+      {/* <SubFooter /> */}
     </div>
   );
 }
