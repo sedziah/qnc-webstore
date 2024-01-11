@@ -274,5 +274,69 @@ export const apiService = {
     return response.json();
   },
 
+  getMobilePhones: async (): Promise<TransformedProduct[]> => {
+    return await apiService.getProductsByCategory("mobile-phones");
+  },
+
+  getComputers: async (): Promise<TransformedProduct[]> => {
+    return await apiService.getProductsByCategory("computers");
+  },
+
+  getAccessories: async (): Promise<TransformedProduct[]> => {
+    return await apiService.getProductsByCategory("accessories");
+  },
+
+  getAppliances: async (): Promise<TransformedProduct[]> => {
+    return await apiService.getProductsByCategory("appliances");
+  },
+
+  // Helper function to fetch products by category
+  getProductsByCategory: async (
+    categorySlug: string
+  ): Promise<TransformedProduct[]> => {
+    const response = await fetch(`${API_BASE_URL}/category/${categorySlug}/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        // 'Authorization': `Token ${userToken}`, // Add this if your endpoint requires authentication
+      },
+    });
+
+    if (!response.ok) {
+      // Handle error response
+      throw new Error(
+        `Failed to fetch products for category: ${categorySlug}.`
+      );
+    }
+
+    const productVariants: Variant[] = await response.json();
+
+    return productVariants.map((variant) =>
+      apiService.transformProduct(variant)
+    );
+  },
+
+  // Function to transform the product data
+  transformProduct: (variant: Variant): TransformedProduct => {
+    const basePrice =
+      variant.prices.find((price: Price) => price.price_type === "BASE")
+        ?.amount || "0.00";
+    const firstImage =
+      variant.images.length > 0
+        ? variant.images[0].image
+        : "/default-image.png";
+
+    return {
+      id: variant.id,
+      name: variant.product.name,
+      brand: variant.product.brand.name,
+      category: variant.product.category.name,
+      price: parseFloat(basePrice),
+      image: firstImage,
+      condition: variant.condition.condition_type,
+      // ... add other fields as needed
+    };
+  },
+
   // Add other endpoints as needed
 };
