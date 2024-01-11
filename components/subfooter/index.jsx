@@ -7,32 +7,17 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 function SubFooter() {
   return (
     <footer className={styles.container}>
-      <div className={styles.desktopSubFooter}>
-        <span>©2023 Quality ‘n’ Cheap</span>
-        <div className={styles.icons}>
-          <span>Follow us</span>
-          <TwitterIcon />
-          <InstagramIcon />
-          <FacebookIcon />
+      <div className={styles.subFooter}>
+        <div>
+          <p> ©2023 QnC </p>
         </div>
-      </div>
-
-      <div className={styles.mobileSubFooter}>
-        <span>©2023 Quality ‘n’ Cheap</span>
-        <div className={styles.icons}>
-          <span>Follow us</span>
+        <div className={styles.followUs}>
+          <h5>Follow us</h5>
+          <hr></hr>
           <TwitterIcon />
+          <hr></hr>
           <InstagramIcon />
-          <FacebookIcon />
-        </div>
-      </div>
-
-      <div className={styles.tabletSubFooter}>
-        <span>©2023 Quality ‘n’ Cheap</span>
-        <div className={styles.icons}>
-          <span>Follow us</span>
-          <TwitterIcon />
-          <InstagramIcon />
+          <hr></hr>
           <FacebookIcon />
         </div>
       </div>
