@@ -6,6 +6,7 @@ import DealsHeader from '../components/deals/index';
 import Carousel from "../components/imageSlider/index";
 import React from 'react'
 import Footer from '../components/footer/index';
+import SubFooter from '../components/subfooter/index';
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <DealsHeader />
       <Carousel />
       <Footer />
+      <SubFooter />
     </div>
   );
 }

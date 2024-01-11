@@ -35,9 +35,7 @@ function Footer() {
         <h1>Quick Links</h1>
         <br />
         <p>{quickLink1} </p>
-        <br />
         <p>{quickLink2} </p>
-        <br />
         <p>{quickLink3} </p>
       </div>
     </footer>
