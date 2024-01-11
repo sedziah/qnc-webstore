@@ -1,7 +1,7 @@
 import styles from "./Footer.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import Stack from "@mui/material/Stack";
+import logo from "../../public/images/logo.png"
 
 function Footer() {
   // Footer content
@@ -17,8 +17,29 @@ function Footer() {
   var quickLink3 = "Our Team";
 
   return (
-    <footer>
-      <h1>Footer</h1>
+    <footer className={styles.footerContainer}>
+      <div className={styles.footerItems}>
+        <Link href="/">
+          <div>
+            <Image src={logo} alt="QnC Logo" width={121} height={51.5} />
+          </div>
+        </Link>
+        <br></br>
+        <p>{footerText}</p>
+        <br></br>
+        <p>{contact}</p>
+        <br></br>
+        <p>{address}</p>
+        <br></br>
+        <br></br>
+        <h1>Quick Links</h1>
+        <br />
+        <p>{quickLink1} </p>
+        <br />
+        <p>{quickLink2} </p>
+        <br />
+        <p>{quickLink3} </p>
+      </div>
     </footer>
   );
 }
