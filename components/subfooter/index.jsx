@@ -9,9 +9,9 @@ function SubFooter() {
     <footer className={styles.container}>
       <div className={styles.subFooter}>
         <div>
-          <p> ©2023 QnC </p>
+          <p> ©2023 QnC. All Rights Reserved </p>
         </div>
-        <div className={styles.followUs}>
+        {/* <div className={styles.followUs}>
           <h5>Follow us</h5>
           <hr></hr>
           <TwitterIcon />
@@ -19,7 +19,7 @@ function SubFooter() {
           <InstagramIcon />
           <hr></hr>
           <FacebookIcon />
-        </div>
+        </div> */}
       </div>
     </footer>
   );

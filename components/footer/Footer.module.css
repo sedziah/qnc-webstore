@@ -1,6 +1,6 @@
 .footerContainer {
-  border: solid red;
   background: var(--Primary, #111);
+  margin: 15% 0 0 0;
 }
 
 @media (max-width: 768px) {
@@ -13,7 +13,7 @@
   }
 
   .footerItems p{
-    font-size: 11px !important;
+    font-size: 12px !important;
     font-family: var(--poppins) !important;
     font-style: bold !important;
     line-height: 140% !important;
@@ -28,5 +28,9 @@
     font-family: var(--poppins) !important;
     font-style: bold !important;
     line-height: 140% !important;
+  }
+
+  .quickLinks {
+    margin-bottom: 2px;
   }
 }

@@ -1,32 +1,54 @@
 .container {
   display: flex;
   padding-top: 0.5em;
-  border: solid rebeccapurple;
+  justify-content: space-between; /* Adjust the spacing on the main axis */
+  align-items: center; /* Align items vertically */
+  border: none; /* Assuming no border is desired */
+}
+
+.subFooter p {
+  width: 100%; /* Full width for the copyright text */
+  margin-bottom: 0.5em; /* Add some margin below */
 }
 
 @media (max-width: 768px) {
   .container {
-    padding: 0 5% 0 5%;
+    flex-direction: column; /* Stack the elements for mobile */
+    padding: 1em; /* Add more padding on mobile */
   }
 
   .subFooter {
-    border: solid brown;
-    display: flex;
+    border: none; /* Remove the brown border for mobile */
+    flex-direction: column; /* Stack the copyright and social media icons */
     text-align: center;
     align-items: center;
-    width: 100%;
+    gap: 0.5em; /* Add space between elements */
   }
 
   .subFooter p {
-    width: 40%;
+    width: 100%; /* Full width for the copyright text */
+    margin-bottom: 0.5em; /* Add some margin below */
   }
 
   .followUs {
-   display: flex;
-  
+    flex-direction: row; /* Align icons in a row */
+    justify-content: center; /* Center icons horizontally */
+    gap: 0.5em; /* Space out the icons */
+  }
+
+  .followUs hr {
+    display: none; /* Hide the <hr> elements on mobile */
+  }
+
+  /* Add styles for the icons */
+  .TwitterIcon,
+  .InstagramIcon,
+  .FacebookIcon {
+    font-size: 24px; /* Adjust the size as needed */
+    color: #333; /* Change the color as needed */
   }
 
   .subFooter h5 {
-    border: solid green;
+    margin-bottom: 0.5em; /* Add some margin below the heading */
   }
 }
