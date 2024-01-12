@@ -1,5 +1,4 @@
 .footerContainer {
-  border: solid red;
   background: var(--Primary, #111);
 }
 
