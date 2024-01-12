@@ -15,6 +15,7 @@ function Footer() {
   var quickLink1 = "About Us";
   var quickLink2 = "Terms and Conditions";
   var quickLink3 = "Our Team";
+  var quickLink4 = "Store Credits";
 
   return (
     <footer className={styles.footerContainer}>
@@ -34,9 +35,11 @@ function Footer() {
         <br></br>
         <h1>Quick Links</h1>
         <br />
-        <p>{quickLink1} </p>
-        <p>{quickLink2} </p>
-        <p>{quickLink3} </p>
+        <p className={styles.quickLinks}>{quickLink1} </p>
+        <p className={styles.quickLinks}>{quickLink2} </p>
+        <p className={styles.quickLinks}>{quickLink3} </p>
+        <p className={styles.quickLinks}>{quickLink4} </p>
+        <br></br>
       </div>
     </footer>
   );
