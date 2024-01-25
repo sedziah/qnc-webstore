@@ -155,11 +155,11 @@ const Page = () => {
       </div>
       <div className={styles.imageSide}>
         <Image
-          src="/images/signup.png" // Replace with the path to your actual image
+          src="/images/signup.png" 
           alt="Workspace Background"
           layout="fill"
           objectFit="cover"
-          priority // This will prioritize loading of the image
+          priority 
         />
       </div>
     </div>
