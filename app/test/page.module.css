@@ -1,7 +1,6 @@
 /* login.module.css */
 .container {
   display: flex;
-  flex-direction: row;
   min-height: 100vh;
 }
 
@@ -70,24 +69,4 @@
 .loginButton:hover,
 .loginButton:focus {
   background-color: #0056b3;
-}
-
-/* Media Query for mobile devices */
-@media (max-width: 768px) {
-  .imageSide {
-    display: none;
-  }
-
-  .formSide {
-    width: 100%;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 20px;
-    height: calc(100vh - 60px);
-  }
-
-  .loginForm {
-    margin: 20px auto 0;
-    max-width: 80%;
-  }
 }
