@@ -4,7 +4,6 @@ import styles from "./modal.module.css"; // Ensure this is the correct path to y
 
 interface SignUpSuccessModalProps {
   onSignInClick: () => void;
-  onClose: () => void; // Added for closing the modal
 }
 
 const SignUpSuccessModal: React.FC<SignUpSuccessModalProps> = ({
