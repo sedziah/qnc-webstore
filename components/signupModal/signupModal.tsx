@@ -8,10 +8,9 @@ interface SignUpSuccessModalProps {
 
 const SignUpSuccessModal: React.FC<SignUpSuccessModalProps> = ({
   onSignInClick,
-  onClose,
 }) => {
   return (
-    <div className={styles.modalOverlay} onClick={onClose}>
+    <div className={styles.modalOverlay}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         {" "}
         {/* Prevents click inside the modal from closing it */}
