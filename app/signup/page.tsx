@@ -7,6 +7,7 @@ import { useAuth } from "../auth/contexts/AuthContext"; // Adjust path as needed
 import { apiService } from "../../services/apiService";
 import Head from "next/head";
 import Image from "next/image";
+import SignUpSuccessModal from "../../components/signupModal/signupModal";
 
 const Page = () => {
   const router = useRouter();
@@ -51,7 +52,7 @@ const Page = () => {
 
       // Handle response, store token, etc.
 
-      router.push("/signin"); // Redirect to signin after sign up completion
+      // router.push("/signin"); // Redirect to signin after sign up completion
       setSignedUp(true); // Set signedUp to true after successful registration
       setError(""); // Clear any previous errors
     } catch (err) {
@@ -85,6 +86,10 @@ const Page = () => {
         setError("An unexpected error occurred"); // Generic error message for unknown types
       }
     }
+  };
+
+  const handleSignInClick = () => {
+    router.push("/signin"); // Redirect to sign-in page
   };
 
   return (
@@ -155,13 +160,14 @@ const Page = () => {
       </div>
       <div className={styles.imageSide}>
         <Image
-          src="/images/signup.png" 
+          src="/images/signup.png"
           alt="Workspace Background"
           layout="fill"
           objectFit="cover"
-          priority 
+          priority
         />
       </div>
+      {signedUp && <SignUpSuccessModal onSignInClick={handleSignInClick} />}
     </div>
   );
 };
