@@ -1,4 +1,71 @@
-.cart {
+.dashboardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px; /* Adjust if you have a top navbar */
+}
+
+.dashboardHeading {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tabContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.activeTab {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.content {
+  width: 100%;
+  max-width: 600px; /* Max width for content area */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .dashboardHeading {
+    font-size: 1.5rem;
+  }
+
+  /* .tabContainer {
+    justify-content: space-around;
+
+  } */
+
+  .tab {
+    padding: 8px 16px;
+  }
+
+  .content {
+    padding: 15px;
+  }
+}
+
+
+/* .cart {
   display: flex;
   height: 18vh;
   background: #f89132;
@@ -11,12 +78,12 @@
   margin-left: 10%;
   margin-right: 10%;
 
-  /* H3 */
+  
   font-family: var(--montserrat);
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
-  line-height: 120%; /* 48px */
+  line-height: 120%; 
 }
 
 .emptyCart {
@@ -33,7 +100,7 @@
   font-size: 24px;
   font-style: normal;
   font-weight: 500;
-  line-height: 130%; /* 36.4px */
+  line-height: 130%; 
   padding-right: 10px;
 }
 
@@ -41,16 +108,15 @@
   color: var(--qnc-orange, #f89132);
   font-feature-settings: "clig" off, "liga" off;
 
-  /* H5 */
   font-family: Montserrat;
   font-size: 24px;
   font-style: normal;
   font-weight: 700;
-  line-height: 140%; /* 33.6px */
+  line-height: 140%;
 }
 
 @media (max-width: 768px) {
   .cartText {
     font-size: 25px;
   }
-}
+} */
