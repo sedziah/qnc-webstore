@@ -1,72 +1,66 @@
-/* login.module.css */
-.container {
+/* Dashboard.module.css */
+.dashboardContainer {
   display: flex;
-  min-height: 100vh;
-}
-
-.imageSide {
-  position: relative;
-  width: 50%;
-  overflow: hidden;
-}
-
-.formSide {
-  width: 50%;
-  display: flex;
+  flex-direction: column;
   align-items: center;
+  padding-top: 20px; /* Adjust if you have a top navbar */
+}
+
+.dashboardHeading {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tabContainer {
+  display: flex;
   justify-content: center;
-}
-
-.loginForm {
-  max-width: 320px;
-  width: 100%;
-}
-
-.inputGroup {
+  flex-wrap: wrap; /* Allow tabs to wrap on smaller screens */
   margin-bottom: 20px;
 }
 
-.inputGroup label {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.inputGroup input {
-  width: 100%;
-  padding: 10px;
+.tab {
+  padding: 10px 20px;
+  margin: 5px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
-
-.options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.forgotPassword {
-  text-decoration: none;
-  color: #0070f3;
-}
-
-.forgotPassword:hover {
-  text-decoration: underline;
-}
-
-.loginButton {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  background-color: #0070f3;
-  color: white;
-  border-radius: 4px;
+  background: none;
   cursor: pointer;
-  font-size: 16px;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  font-weight: bold;
 }
 
-.loginButton:hover,
-.loginButton:focus {
-  background-color: #0056b3;
+.activeTab {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.content {
+  width: 100%;
+  max-width: 600px; /* Max width for content area */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  text-align: center;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .dashboardHeading {
+    font-size: 1.5rem;
+  }
+
+  /* .tabContainer {
+    justify-content: space-around;
+
+  } */
+
+  .tab {
+    padding: 8px 16px;
+  }
+
+  .content {
+    padding: 15px;
+  }
 }
