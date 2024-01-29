@@ -1,7 +1,6 @@
 // services/apiService.ts
 
-// const API_BASE_URL = "http://127.0.0.1:8000"; // Adjust this as needed
-const API_BASE_URL = "http://167.172.52.195"; // Adjust this as needed
+const API_BASE_URL = "http://167.172.52.195";
 
 interface Variant {
   id: string;
@@ -135,6 +134,30 @@ export const apiService = {
       throw new Error(errorMessage);
     }
     return response.json();
+  },
+
+  // Add the type for the email parameter
+
+  resetPasswordRequest: async (email: string) => {
+    const response = await fetch(
+      `${API_BASE_URL}/accounts/reset-password-request/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      }
+    );
+
+    if (!response.ok) {
+      // If the response is not okay, throw an error with the message from the response
+      const errorData = await response.json();
+      throw new Error(errorData.detail || "An unexpected error occurred.");
+    }
+
+    // If the response is okay, return the successful response message
+    return await response.json();
   },
 
   // Add an item to the cart on the backend
