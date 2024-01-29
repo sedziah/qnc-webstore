@@ -31,8 +31,8 @@
   align-items: center;
   gap: 1rem;
   padding: 0;
-}
 
+}
 .navLinks li {
   position: relative; /* This is important for positioning the cart count */
   /* ... other styles ... */
@@ -72,11 +72,12 @@
 
 .signup_button {
   background-color: blue;
+  border: solid blue;
   color: var(--Secondary, #f4f4f4);
 }
 
 .signin_button {
-  border: solid;
+  border: solid grey;
 }
 
 .mobileNav,
