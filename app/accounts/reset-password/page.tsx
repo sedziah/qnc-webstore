@@ -2,6 +2,7 @@
 
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { apiService } from "../../../services/apiService";
 import styles from "./page.module.css";
 import Image from "next/image";
@@ -12,16 +13,25 @@ const PasswordResetRequestForm = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState(""); // Added state for error message
+  const [isLoading, setIsLoading] = useState(false); // State to control spinner visibility
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setMessage(""); // Clear previous success message
     setError(""); // Clear previous error message
+    setIsLoading(true); // Show the spinner
     try {
       const response = await apiService.resetPasswordRequest(email);
-      setMessage(response.message); // Set the success message
+      setMessage(response.message);
+      setIsLoading(false); // Hide the spinner before starting the delay
+
+      setTimeout(() => {
+        router.push("/accounts/signin");
+      }, 4000); // Delay before redirection
     } catch (error: unknown) {
       // Catch clause has type 'unknown'
+      setIsLoading(false); // Ensure spinner is hidden in case of an error
       if (error instanceof Error) {
         setError(error.message); // TypeScript knows error is an Error object
       } else {
@@ -53,7 +63,7 @@ const PasswordResetRequestForm = () => {
           </div>
 
           <button type="submit" className={styles.loginButton}>
-            Login
+            Send Reset Link
           </button>
           <br></br>
           {message && <p className={styles.message}>{message}</p>}
