@@ -3,11 +3,11 @@
 import styles from "./page.module.css";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "../auth/contexts/AuthContext"; // Adjust path as needed
-import { apiService } from "../../services/apiService";
+import { useAuth } from "../../auth/contexts/AuthContext"; // Adjust path as needed
+import { apiService } from "../../../services/apiService";
 import Head from "next/head";
 import Image from "next/image";
-import SignUpSuccessModal from "../../components/signupModal/signupModal";
+import SignUpSuccessModal from "../../../components/signupModal/signupModal";
 
 const Page = () => {
   const router = useRouter();
