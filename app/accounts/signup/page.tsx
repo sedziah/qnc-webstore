@@ -1,4 +1,5 @@
-// SignUp.jsx
+//  app/acoounts/signup/signUp.tsx
+
 "use client";
 import styles from "./page.module.css";
 import { useState, useEffect } from "react";
