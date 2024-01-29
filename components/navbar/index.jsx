@@ -81,10 +81,10 @@ function Navbar() {
                 </>
               ) : (
                 <>
-                  <Link href="accounts/signin" className={styles.links}>
+                  <Link href="/accounts/signin" className={styles.links}>
                     <li className={styles.signin_button}>Sign in</li>
                   </Link>
-                  <Link href="accounts/signup" className={styles.links}>
+                  <Link href="/accounts/signup" className={styles.links}>
                     <li className={styles.signup_button}>Sign up</li>
                   </Link>
                 </>
@@ -96,7 +96,7 @@ function Navbar() {
           /* Hidden on desktop views */}
           <div className={styles.mobileNav}>
             <ul>
-              <Link className={styles.link} href="accounts/signin">
+              <Link className={styles.link} href="/accounts/signin">
                 <li className={styles.link}>
                   <PermIdentityIcon />
                 </li>
@@ -116,27 +116,6 @@ function Navbar() {
               </li>
             </ul>
           </div>
-
-          {/* Tablet Navigation Menu (Hamburger Menu) */
-          /* Hidden on desktop views */}
-          {/* <div className={styles.tabletNav}>
-            <ul>
-              <li>
-                <PermIdentityIcon />
-              </li>
-              <li>
-                <AddShoppingCartIcon />
-              </li>
-              <li
-                className={`${styles.tabletNav} ${
-                  isTabletNavOpen ? styles.active : ""
-                }`}
-                onClick={toggleTabletNav}
-              >
-                <MenuIcon />
-              </li>
-            </ul>
-          </div> */}
         </div>
       </div>
 
