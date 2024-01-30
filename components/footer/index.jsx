@@ -11,8 +11,9 @@ function Footer() {
         <br></br>
         <br></br>
         <p>
-          Facilis fringilla malesuada et aliquam nunc. Egestas consetetur et eos
-          odio aliquam et. Expedita veniam, nunc, ea.
+          At QnC, we're not just a brand; we're a beacon of excellence in a
+          world that demands the best. We believe that quality isn't just a
+          goal—it's our promise to you.
         </p>
         <br></br>
         <br></br>
@@ -22,7 +23,7 @@ function Footer() {
       <div className={styles.linksSection}>
         <h2>Quick Links</h2>
         <br></br>
-        <Link href="/about-us">About Us</Link>
+        <Link href="/about">About Us</Link>
         <Link href="/mobile-phones">Mobile Phones</Link>
         <Link href="/appliances">Appliances</Link>
         <Link href="/computers">Computers</Link>
@@ -30,10 +31,7 @@ function Footer() {
       <div className={styles.dealsSection}>
         <h2>Receive daily deals</h2>
         <br></br>
-        <p>
-          Facilis fringilla malesuada et aliquam nunc. Egestas consetetur et eos
-          odio aliquam.
-        </p>
+        <p>Sign up for exclusive offers and savings straight to your inbox.</p>
         <div className={styles.newsletterForm}>
           <input
             type="email"
