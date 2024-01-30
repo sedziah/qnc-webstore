@@ -1,56 +1,71 @@
+/* page.module.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .heading {
   display: flex;
   height: 18vh;
   background: #f89132;
-  align-items: center;
+  color: var(--white);
 }
 
 .headingText {
-  color: var(--Secondary, #f4f4f4);
-  font-feature-settings: "clig" off, "liga" off;
-  margin-left: 10%;
-  margin-right: 10%;
-
-  /* H3 */
+  color: var(--Secondary);
+  margin: 0 5%; /* Adjusted margin */
   font-family: var(--montserrat);
   font-size: 40px;
-  font-style: normal;
   font-weight: 700;
-  line-height: 120%; /* 48px */
+  line-height: 120%;
+  text-align: center; /* Center the text for smaller screens */
 }
 
-.emptyCart {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40vh;
+.content {
+  flex: 1;
+  padding: 1% 10% 0 10%;
+  font-family: var(--montserrat);
+  padding-bottom: 2%;
+  text-align: justify;
 }
 
-.emptyCart :first-child {
-  color: var(--QnC-Heading-Black, #191919);
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: Poppins;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 130%; /* 36.4px */
-  padding-right: 10px;
+.content h1 {
+  font-weight: bold;
+  padding-bottom: 1%;
 }
 
-.emptyCart :nth-child(2) {
-  color: var(--qnc-orange, #f89132);
-  font-feature-settings: "clig" off, "liga" off;
-
-  /* H5 */
-  font-family: Montserrat;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 140%; /* 33.6px */
-}
-
+/* Responsive design for smaller screens */
 @media (max-width: 768px) {
-  .cartText {
-    font-size: 25px;
+  .heading {
+    height: auto;
+    padding: 20px;
+    margin-bottom: 5%;
+  }
+
+  .content {
+    padding-left: 5%;
+    padding-left: 5%;
+    align-items: justify;
+    line-height: 1.5;
+  }
+
+  .content strong {
+    font-weight: 600;
+  }
+
+  .headingText {
+    font-size: 24px; /* Adjust font size for smaller screens */
+  }
+
+  .content p {
+    font-size: 16px; /* Adjust content font size for readability on mobile */
+  }
+
+  .content li {
+    /* border: solid green; */
   }
 }
+
+/* Additional media queries can be added for more breakpoints, if necessary */

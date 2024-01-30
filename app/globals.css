@@ -30,6 +30,10 @@
   --br-9xs-9: 3.9px;
 }
 
+/* Apply a natural box layout model to all elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 
 
