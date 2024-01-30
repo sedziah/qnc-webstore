@@ -4,7 +4,6 @@
   display: flex;
   justify-content: space-between;
   padding: 40px;
-  border: solid red;
   padding: 2% 10% 2%;
   font-family: var(--poppins);
   margin: 10% 0 0 0;
@@ -12,10 +11,8 @@
 
 .footer p {
   font-size: 14px;
-}
-
-.footer h2 {
-  font-size: 20px;
+  font-style: bold !important;
+  line-height: 140% !important;
 }
 
 .logoSection {
@@ -31,12 +28,19 @@
 
 .linksSection h2,
 .dealsSection h2 {
-  color: #f96;
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--Neutral, #fff);
+  font-family: var(--poppins) !important;
+  font-style: bold !important;
+  line-height: 140% !important;
 }
 
 .linksSection a,
 .dealsSection p {
   margin-bottom: 15px;
+  text-decoration: none;
+  color: var(--Neutral, #fff);
 }
 
 .newsletterForm {
@@ -60,18 +64,42 @@
 @media (max-width: 1024px) {
   .footer {
     flex-direction: column;
-    text-align: center;
+    text-align: left;
   }
 
-  .logoSection, .linksSection, .dealsSection {
+  .footer p {
+    font-size: 12px !important;
+    font-family: var(--poppins) !important;
+    font-style: bold !important;
+    line-height: 140% !important;
+    text-align: justify;
+    text-decoration: none;
+  }
+
+  .footer h2 {
+    text-decoration: none;
+    font-size: 15px !important;
+    color: var(--Neutral, #fff);
+    font-family: var(--poppins) !important;
+    font-style: bold !important;
+    line-height: 140% !important;
+  }
+
+  .logoSection,
+  .linksSection,
+  .dealsSection {
     max-width: 100%;
     margin-bottom: 20px;
+  }
+
+  .dealsSection a{
+    font-size: 15px !important;
   }
 
   .newsletterForm {
     flex-direction: column;
   }
-  
+
   .emailInput,
   .sendButton {
     width: 100%;
