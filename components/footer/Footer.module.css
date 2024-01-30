@@ -1,18 +1,73 @@
-.footerContainer {
-  background: var(--Primary, #111);
-  margin: 15% 0 0 0;
+.footer {
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  padding: 2% 10% 2%;
+  font-family: var(--poppins);
+  margin: 10% 0 0 0;
 }
 
-@media (max-width: 768px) {
-  .footerContainer {
-    padding: 5% 5% 0 5%;
+.footer p {
+  font-size: 14px;
+  font-style: bold !important;
+  line-height: 140% !important;
+}
+
+.logoSection {
+  max-width: 33%;
+}
+
+.linksSection,
+.dealsSection {
+  max-width: 33%;
+  display: flex;
+  flex-direction: column;
+}
+
+.linksSection h2,
+.dealsSection h2 {
+  font-size: 20px;
+  text-decoration: none;
+  color: var(--Neutral, #fff);
+  font-family: var(--poppins) !important;
+  font-style: bold !important;
+  line-height: 140% !important;
+}
+
+.linksSection a,
+.dealsSection p {
+  margin-bottom: 15px;
+  text-decoration: none;
+  color: var(--Neutral, #fff);
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 10px;
+}
+
+.emailInput {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.sendButton {
+  background-color: #f96;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    flex-direction: column;
+    text-align: left;
   }
 
-  .footerItems {
-    color: var(--neutral)
-  }
-
-  .footerItems p{
+  .footer p {
     font-size: 12px !important;
     font-family: var(--poppins) !important;
     font-style: bold !important;
@@ -21,7 +76,7 @@
     text-decoration: none;
   }
 
-  .footerItems h1 {
+  .footer h2 {
     text-decoration: none;
     font-size: 15px !important;
     color: var(--Neutral, #fff);
@@ -30,7 +85,25 @@
     line-height: 140% !important;
   }
 
-  .quickLinks {
-    margin-bottom: 2px;
+  .logoSection,
+  .linksSection,
+  .dealsSection {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .dealsSection a{
+    font-size: 15px !important;
+  }
+
+  .newsletterForm {
+    flex-direction: column;
+  }
+
+  .emailInput,
+  .sendButton {
+    width: 100%;
   }
 }
+
+/* Further adjustments may be necessary to perfectly match the layout in the provided image */
