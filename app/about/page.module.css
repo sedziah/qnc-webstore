@@ -11,16 +11,19 @@
   height: 18vh;
   background: #f89132;
   color: var(--white);
+  padding-left: 10%;
+  align-items: center;
 }
 
 .headingText {
   color: var(--Secondary);
-  margin: 0 5%; /* Adjusted margin */
+  /* margin: 0 5%; Adjusted margin */
   font-family: var(--montserrat);
   font-size: 40px;
   font-weight: 700;
   line-height: 120%;
-  text-align: center; /* Center the text for smaller screens */
+  justify-items: center;
+  /* text-align: center; Center the text for smaller screens */
 }
 
 .content {
@@ -29,11 +32,16 @@
   font-family: var(--montserrat);
   padding-bottom: 2%;
   text-align: justify;
+  line-height: 1.5;
 }
 
 .content h1 {
   font-weight: bold;
   padding-bottom: 1%;
+}
+
+.content strong {
+  font-weight: 600;
 }
 
 /* Responsive design for smaller screens */

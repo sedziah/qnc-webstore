@@ -133,7 +133,16 @@ function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/categories">categories</Link>
+              <Link href="/categories">Featured</Link>
+            </li>
+            <li>
+              <Link href="/categories">Deals</Link>
+            </li>
+            <li>
+              <Link href="/categories">Categories</Link>
+            </li>
+            <li>
+              <Link href="/accounts/signin">Sign In</Link>
             </li>
             {/* <li>
               <Link href="/signin">Account</Link>
