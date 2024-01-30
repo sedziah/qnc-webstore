@@ -32,7 +32,10 @@ export default function RootLayout({
         <AuthProvider>
           <body>
             <Navbar />
-            {children}          </body>
+            {children}
+            <Footer />
+            <SubFooter />
+          </body>
         </AuthProvider>
       </CartProvider>
     </html>

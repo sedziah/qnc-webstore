@@ -1,45 +1,49 @@
 import styles from "./Footer.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "../../public/images/logo.png"
+import logo from "../../public/images/logo.png"; // Make sure this path is correct
 
 function Footer() {
-  // Footer content
-  var footerText =
-    "At QnC, we believe affordability and excellence can go hand in hand. Explore our curated selection of quality products and services that won't break the bank. Discover the best deals today and enjoy the perfect balance of savings and satisfaction!";
-  var contact = "+233 (0) 207-597-903";
-  var address = "Banana Street, East Legon";
-  var dealsHeading = "Receive daily deals";
-  var dealsText =
-    "Be the first to unlock incredible savings every day. Subscribe to start saving now!";
-  var quickLink1 = "About Us";
-  var quickLink2 = "Terms and Conditions";
-  var quickLink3 = "Our Team";
-  var quickLink4 = "Store Credits";
-
   return (
-    <footer className={styles.footerContainer}>
-      <div className={styles.footerItems}>
-        <Link href="/">
-          <div>
-            <Image src={logo} alt="QnC Logo" width={121} height={51.5} />
-          </div>
-        </Link>
-        <br></br>
-        <p>{footerText}</p>
-        <br></br>
-        <p>{contact}</p>
-        <br></br>
-        <p>{address}</p>
+    <footer className={styles.footer}>
+      <div className={styles.logoSection}>
+        <Image src={logo} alt="QnC Logo" width={121} height={51.5} />
         <br></br>
         <br></br>
-        <h1>Quick Links</h1>
-        <br />
-        <p className={styles.quickLinks}>{quickLink1} </p>
-        <p className={styles.quickLinks}>{quickLink2} </p>
-        <p className={styles.quickLinks}>{quickLink3} </p>
-        <p className={styles.quickLinks}>{quickLink4} </p>
+        <p>
+          Facilis fringilla malesuada et aliquam nunc. Egestas consetetur et eos
+          odio aliquam et. Expedita veniam, nunc, ea.
+        </p>
         <br></br>
+        <br></br>
+        <p>+233 54 1234 567</p>
+        <p>Banana Street, East Legon</p>
+      </div>
+      <div className={styles.linksSection}>
+        <h2>Quick Links</h2>
+        <br></br>
+        <Link href="/about-us">About Us</Link>
+        <Link href="/mobile-phones">Mobile Phones</Link>
+        <Link href="/appliances">Appliances</Link>
+        <Link href="/computers">Computers</Link>
+      </div>
+      <div className={styles.dealsSection}>
+        <h2>Receive daily deals</h2>
+        <br></br>
+        <p>
+          Facilis fringilla malesuada et aliquam nunc. Egestas consetetur et eos
+          odio aliquam.
+        </p>
+        <div className={styles.newsletterForm}>
+          <input
+            type="email"
+            placeholder="Enter email here"
+            className={styles.emailInput}
+          />
+          <button type="submit" className={styles.sendButton}>
+            Send
+          </button>
+        </div>
       </div>
     </footer>
   );
