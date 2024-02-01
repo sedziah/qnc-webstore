@@ -339,25 +339,45 @@ export const apiService = {
     );
   },
 
+  getElectronics: async (): Promise<TransformedProduct[]> => {
+    const response = await fetch(
+      `${API_BASE_URL}/products/category/electronics/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Authorization': `Token ${userToken}`, // Include this if your endpoint requires authentication
+        },
+      }
+    );
+
+    if (!response.ok) {
+      // Handle error response
+      throw new Error("Failed to fetch electronic products.");
+    }
+
+    const productVariants: Variant[] = await response.json();
+
+    return productVariants.map((variant) =>
+      apiService.transformProduct(variant)
+    );
+  },
+
   // Function to transform the product data
-  transformProduct: (variant: Variant): TransformedProduct => {
-    const basePrice =
-      variant.prices.find((price: Price) => price.price_type === "BASE")
-        ?.amount || "0.00";
-    const firstImage =
-      variant.images.length > 0
-        ? variant.images[0].image
-        : "/default-image.png";
+  transformProduct: (productData: any): TransformedProduct => {
+    const mainImage =
+      productData.images.find((image: any) => image.is_main_image) ||
+      productData.images[0];
 
     return {
-      id: variant.id,
-      name: variant.product.name,
-      brand: variant.product.brand.name,
-      category: variant.product.category.name,
-      price: parseFloat(basePrice),
-      image: firstImage,
-      condition: variant.condition.condition_type,
-      // ... add other fields as needed
+      id: productData.id,
+      name: productData.product, // Assuming 'product' field contains the name
+      brand: productData.brand_name,
+      category: productData.category_name,
+      price: parseFloat(productData.actual_price),
+      image: mainImage ? mainImage.image : "/default-image.png", // Fallback to default image if no images are provided
+      condition: productData.condition,
+      // You can add other fields as needed, ensuring they match the actual API response structure
     };
   },
 

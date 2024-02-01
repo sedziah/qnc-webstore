@@ -24,7 +24,7 @@ function Footer() {
         <h2>Quick Links</h2>
         <br></br>
         <Link href="/about">About Us</Link>
-        <Link href="/mobile-phones">Mobile Phones</Link>
+        <Link href="/store-credits">Store Credits</Link>
         <Link href="/appliances">Appliances</Link>
         <Link href="/computers">Computers</Link>
       </div>
