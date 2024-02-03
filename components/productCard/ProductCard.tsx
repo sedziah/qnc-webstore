@@ -1,43 +1,83 @@
 import React from "react";
-import Image from "next/image";
 import styles from "./ProductCard.module.css";
 
-type ProductProps = {
-  id: string;
-  title: string;
-  image: string;
+// Define the props interface
+interface ProductCardProps {
+  name: string;
+  category: string;
+  // description: string;
   price: number;
-  onAddToCart: (id: string) => void;
-};
+  imageSrc: string;
+  imageAlt: string;
+}
 
-const ProductCard: React.FC<ProductProps> = ({
-  id,
-  title,
-  image,
+// Apply the interface to the component props
+const ProductCard: React.FC<ProductCardProps> = ({
+  name,
+  category,
+  description,
   price,
-  onAddToCart,
+  imageSrc,
+  imageAlt,
 }) => {
-  console.log('Product Data:', { id, title, image, price });
   return (
     <div className={styles.card}>
-      <div className={styles.image}>
-        <Image
-          src={image}
-          alt={title}
-          layout="responsive"
-          width={500}
-          height={300}
-        />
+      <div className={styles.imageWrapper}>
+        <img src={imageSrc} alt={imageAlt} className={styles.productImage} />
       </div>
-      <div className={styles.info}>
-        <h3 className={styles.title}>{title}</h3>
-        <p className={styles.price}>${price.toFixed(2)}</p>
-        <button className={styles.button} onClick={() => onAddToCart(id)}>
-          Add to Cart
-        </button>
+      <div className={styles.details}>
+        <h2 className={styles.productTitle}>{name}</h2>
+        <p className={styles.category}>{category}</p>
+        {/* <p className={styles.description}>{description}</p> */}
+        <div className={styles.pricing}>
+          <span className={styles.price}>GHS {price}</span>
+        </div>
+        <button className={styles.addToCartButton}>Add to cart</button>
       </div>
     </div>
   );
 };
 
 export default ProductCard;
+
+
+// components/ProductCard.js
+// import React from "react";
+
+
+// const ProductCard = () => {
+//   return (
+//     <div className={styles.card}>
+//       <div className={styles.imageWrapper}>
+//         <img
+//           src="images/iphone_14.png"
+//           alt="Apple iPhone XR (Red, 128 GB)"
+//           className={styles.productImage}
+//         />
+//       </div>
+//       <div className={styles.details}>
+//         <h2 className={styles.productTitle}>Apple iPhone XR (Red, 128 GB)</h2>
+//         <p className={styles.category}>Mobile Phones </p>
+//         <p className={styles.description}>
+//           128 GB ROM | 15.49 cm (6.1 inch) Display | 12MP Rear Camera | 7MP
+//           Front Camera | A12 Bionic Chip Processor | Gorilla Glass with high
+//           quality display
+//         </p>
+//         <div className={styles.extraDetails}>
+//           {/* <span className={styles.store}>All items from Mobile point</span> */}
+//           {/* <button className={styles.wishlistButton}>Add to wishlist</button> */}
+//         </div>
+//         <div className={styles.pricing}>
+//           <span className={styles.price}>$459.99</span>
+//           {/* <div className={styles.ratings}>
+//             <span className={styles.stars}>★★★★☆</span>
+//             <span className={styles.reviews}>1985 reviews</span>
+//           </div> */}
+//         </div>
+//         <button className={styles.addToCartButton}>Add to cart</button>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default ProductCard;
