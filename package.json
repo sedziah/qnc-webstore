@@ -21,6 +21,7 @@
     "react-slick": "^0.29.0",
     "redux": "^4.2.1",
     "reset-css": "^5.0.2",
+    "sharp": "^0.33.2",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.0.5"
   },
