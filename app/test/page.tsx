@@ -8,7 +8,7 @@ interface TransformedProduct {
   id: string;
   name: string;
   category: string;
-  description: string; // Make sure to include a description in your TransformedProduct
+  // description: string; // Make sure to include a description in your TransformedProduct
   price: number;
   image: string;
   // Add any other fields you expect from your API
@@ -39,7 +39,7 @@ const ElectronicsProducts = () => {
           key={product.id}
           name={product.name}
           category={product.category}
-          description={'Test product'} // Ensure your API or transform function provides this
+          // description={'Test product'} // Ensure your API or transform function provides this
           price={product.price}
           imageSrc={product.image}
           imageAlt={`Image of ${product.name}`}
