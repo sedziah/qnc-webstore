@@ -15,7 +15,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({
   name,
   category,
-  description,
+  // description,
   price,
   imageSrc,
   imageAlt,
