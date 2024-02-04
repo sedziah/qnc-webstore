@@ -110,7 +110,15 @@
   }
 
   .card {
-    margin: 0 auto; /* This will center the card in the flex container if it's not full width */
+    margin: 0 5%; /* This will center the card in the flex container if it's not full width */
     max-width: 90%; /* Adjust this to control how much width the card can take */
+    width: auto;
   }
+
+  .productImage {
+    height: auto; 
+    min-height: 200px; 
+    border: solid green;
+  }
+
 }
