@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import ProductCard from "../../../components/productCard/ProductCard"
-import { apiService } from "../../../services/apiService"; // Adjust the path as necessary
-import styles from "./Electronics.module.css"
+import ProductCard from "../../../components/productCard/ProductCard";
+import { apiService } from "../../../services/apiService";
+import styles from "./page.module.css";
 
 // Ensure this interface is defined and matches the structure of your product data
 interface TransformedProduct {
@@ -16,17 +16,20 @@ interface TransformedProduct {
 }
 
 const ElectronicsProducts = () => {
-  // Explicitly define the state type
   const [products, setProducts] = useState<TransformedProduct[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await apiService.getElectronics(); // Assuming getElectronics is correctly implemented
-        console.log("Fetched products:", data);
-        setProducts(data); // This should now work without type errors
+        // Start loading
+        const data = await apiService.getElectronics();
+        setProducts(data);
       } catch (error) {
         console.error("Failed to fetch products:", error);
+      } finally {
+        // End loading
+        setIsLoading(false);
       }
     };
 
@@ -34,19 +37,23 @@ const ElectronicsProducts = () => {
   }, []);
 
   return (
-    <div className={styles.imageBox}>
-        
-      {products.map((product) => (
-        <ProductCard
-          key={product.id}
-          name={product.name}
-          category={product.category}
-          // description={'Test product'} // Ensure your API or transform function provides this
-          price={product.price}
-          imageSrc={product.image}
-          imageAlt={`Image of ${product.name}`}
-        />
-      ))}
+    <div className={styles.pageContainer}>
+      {isLoading && <div className={styles.loadingOverlay}>Loading...</div>}
+
+      {!isLoading && (
+        <div className={styles.imageBox}>
+          {products.map((product) => (
+            <ProductCard
+              key={product.id}
+              name={product.name}
+              category={product.category}
+              price={product.price}
+              imageSrc={product.image}
+              imageAlt={`Image of ${product.name}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
