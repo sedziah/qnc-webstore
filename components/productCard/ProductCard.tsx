@@ -5,6 +5,7 @@ import styles from "./ProductCard.module.css";
 interface ProductCardProps {
   name: string;
   category: string;
+  condition: string;
   // description: string;
   price: number;
   imageSrc: string;
@@ -15,6 +16,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({
   name,
   category,
+  condition,
   // description,
   price,
   imageSrc,
@@ -28,7 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className={styles.details}>
         <h2 className={styles.productTitle}>{name}</h2>
         <p className={styles.category}>{category}</p>
-        {/* <p className={styles.description}>{description}</p> */}
+        <p className={styles.description}>{condition}</p>
         <div className={styles.pricing}>
           <span className={styles.price}>GHS {price}</span>
         </div>
