@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import ProductCard from "../../components/productCard/ProductCard";
-import { apiService } from "../../services/apiService"; // Adjust the path as necessary
+import ProductCard from "../../../components/productCard/ProductCard"
+import { apiService } from "../../../services/apiService"; // Adjust the path as necessary
+import styles from "./Electronics.module.css"
 
 // Ensure this interface is defined and matches the structure of your product data
 interface TransformedProduct {
@@ -33,17 +34,7 @@ const ElectronicsProducts = () => {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        flexWrap: "wrap",
-        gap: "20px",
-        border: "solid red",
-        marginTop: "3%"
-      }}
-    >
+    <div className={styles.imageBox}>
       {products.map((product) => (
         <ProductCard
           key={product.id}

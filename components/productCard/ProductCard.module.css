@@ -96,3 +96,18 @@
   cursor: pointer;
   margin-top: 12px;
 }
+
+/* Add this at the bottom of your CSS file */
+@media (max-width: 768px) { /* Adjust this max-width to suit your responsive breakpoint */
+  .container { /* Replace '.container' with the actual class of the parent container holding your cards */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card {
+    margin: 0 auto; /* This will center the card in the flex container if it's not full width */
+    max-width: 90%; /* Adjust this to control how much width the card can take */
+  }
+}

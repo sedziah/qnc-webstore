@@ -15,7 +15,7 @@ import appliances from "../../public/images/hero/hero_appliances.png";
 function Hero() {
   return (
     <div className={styles.heroSection}>
-      <Link href="/products/phones" className={styles.heroLink}>
+      <Link href="/products/electronics" className={styles.heroLink}>
         <div className={styles.heroContainer}>
           <Image
             src={phones}
