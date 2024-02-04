@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useEffect, useState } from "react";
 import ProductCard from "../../components/productCard/ProductCard";
@@ -10,6 +9,7 @@ interface TransformedProduct {
   id: string;
   name: string;
   category: string;
+  condition: string;
   // description: string; // Make sure to include a description in your TransformedProduct
   price: number;
   image: string;
@@ -48,6 +48,7 @@ const ElectronicsProducts = () => {
               key={product.id}
               name={product.name}
               category={product.category}
+              condition = {product.condition}
               price={product.price}
               imageSrc={product.image}
               imageAlt={`Image of ${product.name}`}
@@ -60,9 +61,6 @@ const ElectronicsProducts = () => {
 };
 
 export default ElectronicsProducts;
-
-
-
 
 // "use client";
 // import React, { useEffect, useState } from "react";
