@@ -1,0 +1,17 @@
+/* app/products/electronics/Electronics.module.css */
+
+.imageBox {
+  display: flex;
+  justify-content: center; /* Center children horizontally */
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  border: solid red;
+  margin-top: 1%;
+}
+
+@media (max-width: 768px) {
+  .imageBox {
+    margin-top: 3%;
+  }
+}
