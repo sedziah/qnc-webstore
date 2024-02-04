@@ -118,7 +118,6 @@
   .productImage {
     height: auto; 
     min-height: 200px; 
-    border: solid green;
   }
 
 }
