@@ -35,6 +35,7 @@ const ElectronicsProducts = () => {
 
   return (
     <div className={styles.imageBox}>
+        
       {products.map((product) => (
         <ProductCard
           key={product.id}
