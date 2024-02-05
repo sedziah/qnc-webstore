@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../../../components/productCard/ProductCard";
 import { apiService } from "../../../services/apiService";
 import styles from "./page.module.css";
+import SearchBar from "components/searchbar";
 
 interface TransformedProduct {
   id: string;
@@ -37,25 +38,30 @@ const ElectronicsProducts = () => {
   }, []);
 
   return (
-    <div className={styles.pageContainer}>
-      {isLoading && <div className={styles.loadingOverlay}>Loading...</div>}
+    <>
+      <div>
+        <SearchBar />
+      </div>
+      <div className={styles.pageContainer}>
+        {isLoading && <div className={styles.loadingOverlay}>Loading...</div>}
 
-      {!isLoading && (
-        <div className={styles.imageBox}>
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              category={product.category}
-              condition = {product.condition}
-              price={product.price}
-              imageSrc={product.image}
-              imageAlt={`Image of ${product.name}`}
-            />
-          ))}
-        </div>
-      )}
-    </div>
+        {!isLoading && (
+          <div className={styles.imageBox}>
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                name={product.name}
+                category={product.category}
+                condition={product.condition}
+                price={product.price}
+                imageSrc={product.image}
+                imageAlt={`Image of ${product.name}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
