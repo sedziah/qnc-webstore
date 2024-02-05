@@ -33,11 +33,16 @@
 
 .details {
   text-align: center;
+  width: 100%
 }
 
 .productTitle {
   font-size: 18px;
   margin: 8px 0;
+  white-space: nowrap;       /* Keeps the text on a single line */
+  overflow: hidden;          /* Keeps the content from spilling out */
+  text-overflow: ellipsis;   /* Adds the ellipsis (...) at the end */
+  width: 100%; 
 }
 
 .category {
