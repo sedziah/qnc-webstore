@@ -30,7 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className={styles.details}>
         <h2 className={styles.productTitle}>{name}</h2>
         <p className={styles.category}>{category}</p>
-        <p className={styles.description}>{condition}</p>
+        <p className={styles.description}> |Brand New | 64GB | Unlocked | Red |</p>
         <div className={styles.pricing}>
           <span className={styles.price}>GHS {price}</span>
         </div>
