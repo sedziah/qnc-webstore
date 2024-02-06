@@ -4,6 +4,7 @@ import ProductCard from "../../../components/productCard/ProductCard";
 import { apiService } from "../../../services/apiService";
 import styles from "./page.module.css";
 import SearchBar from "components/searchbar";
+import Breadcrumbs from "components/breadcrumbs";
 
 interface TransformedProduct {
   id: string;
@@ -19,6 +20,11 @@ interface TransformedProduct {
 const ElectronicsProducts = () => {
   const [products, setProducts] = useState<TransformedProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const crumbs = [
+    { title: "Home", href: "/" },
+    { title: "Posts", href: "/posts" },
+  ];
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -41,6 +47,9 @@ const ElectronicsProducts = () => {
     <>
       <div>
         <SearchBar />
+      </div>
+      <div>
+        <Breadcrumbs crumbs={crumbs} />
       </div>
       <div className={styles.pageContainer}>
         {isLoading && <div className={styles.loadingOverlay}>Loading...</div>}
