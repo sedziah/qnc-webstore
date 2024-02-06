@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import ProductCard from "../../../components/productCard/ProductCard";
 import { apiService } from "../../../services/apiService";
 import styles from "./page.module.css";
-import SearchBar from "components/searchbar";
-import Breadcrumbs from "components/breadcrumbs";
+import SearchBar from "../../../components/searchbar/index";
+import Breadcrumbs from "../../../components/breadcrumbs/index";
 
 interface TransformedProduct {
   id: string;
@@ -23,7 +23,8 @@ const ElectronicsProducts = () => {
 
   const crumbs = [
     { title: "Home", href: "/" },
-    { title: "Posts", href: "/posts" },
+    { title: "Products", href: "/products" },
+    { title: "Mobile Phones", href: "/electronics" },
   ];
 
   useEffect(() => {
