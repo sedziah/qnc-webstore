@@ -24,7 +24,7 @@ const ElectronicsProducts = () => {
   const crumbs = [
     { title: "Home", href: "/" },
     { title: "Products", href: "/products" },
-    { title: "Mobile Phones", href: "/electronics" },
+    { title: "Mobile Phones", href: "/products/electronics" },
   ];
 
   useEffect(() => {
