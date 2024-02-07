@@ -1,126 +1,70 @@
+// Home.js or Home.tsx
 "use client";
-import React, { useEffect, useState } from "react";
-import ProductCard from "../../components/productCard/ProductCard";
-import { apiService } from "../../services/apiService";
-import styles from "./page.module.css";
 
-// Ensure this interface is defined and matches the structure of your product data
-interface TransformedProduct {
-  id: string;
-  name: string;
-  category: string;
-  condition: string;
-  // description: string; // Make sure to include a description in your TransformedProduct
-  price: number;
-  image: string;
-  // Add any other fields you expect from your API
+import React, { useEffect, useState } from "react";
+import ImageCarousel from "../../components/imageCarousel";
+import styles from "./page.module.css"; // Ensure this path is correct
+
+interface CarouselImage {
+  src: string;
+  alt?: string;
 }
 
-const ElectronicsProducts = () => {
-  const [products, setProducts] = useState<TransformedProduct[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+export default function Home() {
+  const [images, setImages] = useState<CarouselImage[]>([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        // Start loading
-        const data = await apiService.getElectronics();
-        setProducts(data);
-      } catch (error) {
-        console.error("Failed to fetch products:", error);
-      } finally {
-        // End loading
-        setIsLoading(false);
-      }
-    };
+    // This is where you would fetch or import your images
+    const imageFiles = [
+      "deals_1.png",
+      "deals_2.png",
+      "deals_3.png",
+      "deals_4.png",
+      "deals_5.jpg",
+      "deals_6.jpg",
+    ];
 
-    fetchProducts();
+    const loadedImages: CarouselImage[] = imageFiles.map((fileName) => ({
+      src: `/images/deals/${fileName}`,
+      alt: fileName,
+    }));
+
+    setImages(loadedImages);
   }, []);
 
   return (
-    <div className={styles.pageContainer}>
-      {isLoading && <div className={styles.loadingOverlay}>Loading...</div>}
-
-      {!isLoading && (
-        <div className={styles.imageBox}>
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              category={product.category}
-              condition = {product.condition}
-              price={product.price}
-              imageSrc={product.image}
-              imageAlt={`Image of ${product.name}`}
-            />
-          ))}
+    <div className={styles.productPage}>
+      <div className={styles.carouselContainer}>
+        <ImageCarousel images={images} />
+      </div>
+      <div className={styles.productDetails}>
+        <h1 className={styles.productTitle}>JBL BOOMBOX 3</h1>
+        <div className={styles.priceSection}>
+          <span className={styles.salePrice}>Ghs 2279</span>
+          <span className={styles.originalPrice}>Ghs 1,999</span>
         </div>
-      )}
+        <p className={styles.productDescription}>
+          JBL Boombox 3 - Portable Bluetooth Speaker, Powerful Sound and
+          Monstrous bass, IPX7 Waterproof, 24 Hours of Playtime, powerbank, JBL
+          PartyBoost for Speaker Pairing, and eco-Friendly Packaging (Black)
+        </p>
+        <div className={styles.quantitySection}>
+          <button className={styles.quantityButton}>-</button>
+          <input
+            className={styles.quantityInput}
+            type="number"
+            defaultValue={1}
+          />
+          <button className={styles.quantityButton}>+</button>
+        </div>
+        <button className={styles.addToCartButton}>Add to Cart</button>
+        <div className={styles.tabs}>
+          <div className={styles.tab}>Description</div>
+          <div className={styles.tab}>Additional Information</div>
+          <div className={styles.tab}>Reviews (1)</div>
+        </div>
+        {/* Content for the selected tab would go here */}
+      </div>
     </div>
   );
-};
-
-export default ElectronicsProducts;
-
-// "use client";
-// import React, { useEffect, useState } from "react";
-// import ProductCard from "../../components/productCard/ProductCard";
-// import { apiService } from "../../services/apiService"; // Adjust the path as necessary
-// import styles from "./page.module.css";
-
-// // Ensure this interface is defined and matches the structure of your product data
-// interface TransformedProduct {
-//   id: string;
-//   name: string;
-//   category: string;
-//   // description: string; // Make sure to include a description in your TransformedProduct
-//   price: number;
-//   image: string;
-//   // Add any other fields you expect from your API
-// }
-
-// const ElectronicsProducts = () => {
-//   const [products, setProducts] = useState<TransformedProduct[]>([]);
-//   const [isLoading, setIsLoading] = useState<boolean>(true); // Add a loading state
-
-//   useEffect(() => {
-//     const fetchProducts = async () => {
-//       try {
-//         setIsLoading(true); // Start loading
-//         const data = await apiService.getElectronics();
-//         console.log("Fetched products:", data);
-//         setProducts(data);
-//         setIsLoading(false); // End loading
-//       } catch (error) {
-//         console.error("Failed to fetch products:", error);
-//         setIsLoading(false); // End loading even if there is an error
-//       }
-//     };
-
-//     fetchProducts();
-//   }, []);
-
-//   // Define the number of placeholders you want to display
-//   const placeholderCount = 5; // For example
-
-//   return (
-//     <div className={styles.imageBox}>
-//       {isLoading
-//         ? Array.from({ length: placeholderCount }, (_, index) => (
-//             <div key={index} className={styles.placeholderCard}></div>
-//           ))
-//         : products.map((product) => (
-//             <ProductCard
-//               key={product.id}
-//               name={product.name}
-//               category={product.category}
-//               price={product.price}
-//               imageSrc={product.image}
-//               imageAlt={`Image of ${product.name}`}
-//             />
-//           ))}
-//     </div>
-//   );
-// };
-
-// export default ElectronicsProducts;
+}
