@@ -1,21 +1,21 @@
-// Home.js or Home.tsx
+// page.tsx
 
-"use client";
+"use client"
 
 import React, { useEffect, useState } from "react";
 import ImageCarousel from "../../components/imageCarousel";
-import styles from "./page.module.css"; // Ensure this path is correct
+import styles from "./page.module.css";
 
 interface CarouselImage {
   src: string;
   alt?: string;
 }
 
-export default function Home() {
+const Home: React.FC = () => {
   const [images, setImages] = useState<CarouselImage[]>([]);
 
   useEffect(() => {
-    // This is where you would fetch or import your images
+    // Fetch or import your images
     const imageFiles = [
       "deals_1.png",
       "deals_2.png",
@@ -27,7 +27,7 @@ export default function Home() {
 
     const loadedImages: CarouselImage[] = imageFiles.map((fileName) => ({
       src: `/images/deals/${fileName}`,
-      alt: fileName,
+      alt: `Image of ${fileName}`,
     }));
 
     setImages(loadedImages);
@@ -35,23 +35,23 @@ export default function Home() {
 
   return (
     <div className={styles.productPage}>
-      <div className={styles.topSection}>
+      <div className={styles.upperContainer}>
         <div className={styles.carouselContainer}>
           <ImageCarousel images={images} />
         </div>
-        <div className={styles.productDetails}>
+        <div className={styles.purchaseContainer}>
           <h1 className={styles.productTitle}>JBL BOOMBOX 3</h1>
-          <div className={styles.priceSection}>
-            <span className={styles.salePrice}>Ghs 2279</span>
-            <span className={styles.originalPrice}>Ghs 1,999</span>
-          </div>
           <p className={styles.productDescription}>
             JBL Boombox 3 - Portable Bluetooth Speaker, Powerful Sound and
             Monstrous bass, IPX7 Waterproof, 24 Hours of Playtime, powerbank,
             JBL PartyBoost for Speaker Pairing, and eco-Friendly Packaging
             (Black)
           </p>
-          <div className={styles.quantitySection}>
+          <div className={styles.priceSection}>
+            <span className={styles.salePrice}>Ghs 2279</span>
+            <span className={styles.originalPrice}>Ghs 1,999</span>
+          </div>
+          <div className={styles.addToCartSection}>
             <button className={styles.quantityButton}>-</button>
             <input
               className={styles.quantityInput}
@@ -59,8 +59,8 @@ export default function Home() {
               defaultValue={1}
             />
             <button className={styles.quantityButton}>+</button>
+            <button className={styles.addToCartButton}>Add to Cart</button>
           </div>
-          <button className={styles.addToCartButton}>Add to Cart</button>
         </div>
       </div>
       <div className={styles.tabs}>
@@ -73,4 +73,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Home;
