@@ -5,6 +5,7 @@ import { apiService } from "../../../services/apiService";
 import styles from "./page.module.css";
 import SearchBar from "../../../components/searchbar/index";
 import Breadcrumbs from "../../../components/breadcrumbs/index";
+import Link from "next/link";
 
 interface TransformedProduct {
   id: string;
@@ -14,7 +15,7 @@ interface TransformedProduct {
   // description: string; // Make sure to include a description in your TransformedProduct
   price: number;
   image: string;
-  // Add any other fields you expect from your API
+  // Add any other fields you expect from your API...
 }
 
 const ElectronicsProducts = () => {
@@ -58,15 +59,17 @@ const ElectronicsProducts = () => {
         {!isLoading && (
           <div className={styles.imageBox}>
             {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                name={product.name}
-                category={product.category}
-                condition={product.condition}
-                price={product.price}
-                imageSrc={product.image}
-                imageAlt={`Image of ${product.name}`}
-              />
+              <Link href={`/products/electronics/${product.id}`} key={product.id}>
+                <ProductCard
+                  key={product.id}
+                  name={product.name}
+                  category={product.category}
+                  condition={product.condition}
+                  price={product.price}
+                  imageSrc={product.image}
+                  imageAlt={`Image of ${product.name}`}
+                />
+              </Link>
             ))}
           </div>
         )}
@@ -76,4 +79,3 @@ const ElectronicsProducts = () => {
 };
 
 export default ElectronicsProducts;
-

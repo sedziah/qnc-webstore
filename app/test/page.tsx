@@ -63,14 +63,14 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className={styles.tabs}>
+      {/* <div className={styles.tabs}>
         <div className={`${styles.tab} ${styles.active}`}>Description</div>
         <div className={styles.tab}>Additional Information</div>
         <div className={styles.tab}>Reviews (1)</div>
       </div>
       <div className={styles.tabContent}>
-        {/* Content for the selected tab would go here */}
-      </div>
+     
+      </div> */}
     </div>
   );
 };
