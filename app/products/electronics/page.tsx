@@ -15,6 +15,7 @@ interface TransformedProduct {
   // description: string; // Make sure to include a description in your TransformedProduct
   price: number;
   image: string;
+  features: string;
   // Add any other fields you expect from your API...
 }
 
@@ -33,6 +34,7 @@ const ElectronicsProducts = () => {
       try {
         // Start loading
         const data = await apiService.getElectronics();
+        console.log("Electronics Data:", data);
         setProducts(data);
       } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -65,6 +67,7 @@ const ElectronicsProducts = () => {
                   name={product.name}
                   category={product.category}
                   condition={product.condition}
+                  features={product.features}
                   price={product.price}
                   imageSrc={product.image}
                   imageAlt={`Image of ${product.name}`}
