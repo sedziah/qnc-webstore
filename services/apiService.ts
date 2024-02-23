@@ -223,42 +223,15 @@ export const apiService = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        // Include your authentication token header here if required
-        // 'Authorization': `Token ${userToken}`,
       },
     });
 
     if (!response.ok) {
-      // Handle error response
       throw new Error("Failed to fetch products.");
     }
 
     const productVariants: Variant[] = await response.json();
-
-    const transformedProducts: TransformedProduct[] = productVariants.map(
-      (variant) => {
-        const basePrice =
-          variant.prices.find((price: Price) => price.price_type === "BASE")
-            ?.amount || "0.00";
-        const firstImage =
-          variant.images.length > 0
-            ? variant.images[0].image
-            : "/default-image.png";
-
-        return {
-          id: variant.id,
-          name: variant.product.name,
-          brand: variant.product.brand.name,
-          category: variant.product.category.name,
-          price: parseFloat(basePrice),
-          image: firstImage,
-          condition: variant.condition.condition_type,
-          // ... add other fields as needed
-        };
-      }
-    );
-
-    return transformedProducts;
+    return productVariants.map(apiService.transformProduct);
   },
 
   getCategories: async () => {
