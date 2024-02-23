@@ -8,6 +8,7 @@ interface ProductCardProps {
   condition: string;
   // description: string;
   price: number;
+  features: string;
   imageSrc: string;
   imageAlt: string;
 }
@@ -17,7 +18,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   name,
   category,
   condition,
-  // description,
+  features,
   price,
   imageSrc,
   imageAlt,
@@ -30,7 +31,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
       <div className={styles.details}>
         <h2 className={styles.productTitle}>{name}</h2>
         <p className={styles.category}>{category}</p>
-        <p className={styles.description}> | Brand New | 256GB | Locked | All Colours |</p>
+        <p className={styles.description}> {condition} | {features}</p>
         <div className={styles.pricing}>
           <span className={styles.price}>GHS {price}</span>
         </div>

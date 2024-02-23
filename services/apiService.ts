@@ -28,6 +28,7 @@ export interface TransformedProduct {
   price: number;
   image: string;
   condition: string;
+  features: string;
   // Add other fields as needed
 }
 
@@ -317,13 +318,16 @@ export const apiService = {
   getProductsByCategory: async (
     categorySlug: string
   ): Promise<TransformedProduct[]> => {
-    const response = await fetch(`${API_BASE_URL}/category/${categorySlug}/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        // 'Authorization': `Token ${userToken}`, // Add this if your endpoint requires authentication
-      },
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/products/category/${categorySlug}/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Authorization': `Token ${userToken}`, // Add this if your endpoint requires authentication
+        },
+      }
+    );
 
     if (!response.ok) {
       // Handle error response
@@ -357,27 +361,40 @@ export const apiService = {
     }
 
     const productVariants: Variant[] = await response.json();
+    console.log("Raw electronics data:", productVariants); // This will print the raw data to the console
 
     return productVariants.map((variant) =>
       apiService.transformProduct(variant)
     );
   },
 
-  // Function to transform the product data
   transformProduct: (productData: any): TransformedProduct => {
-    const mainImage =
-      productData.images.find((image: any) => image.is_main_image) ||
-      productData.images[0];
+    // Extract just the values and take only the first three
+    const featureValues = productData.features
+      .map((feature: any) => feature.value)
+      .slice(0, 3); // Take only the first three feature values
+
+    // Log transformed product for debugging
+    console.log("Transformed product:", {
+      id: productData.id,
+      name: productData.product, // Updated to use product_name
+      brand: productData.brand_name, // Assuming brand name is directly under productData
+      category: productData.category_name, // Assuming category name is directly under productData
+      price: productData.actual_price, // Updated to use actual_price
+      image: productData.main_image, // Updated to use the direct image
+      condition: productData.condition,
+      features: featureValues.join(" | "), // Join the first three feature values with ' | '
+    });
 
     return {
       id: productData.id,
-      name: productData.product, // Assuming 'product' field contains the name
-      brand: productData.brand_name,
-      category: productData.category_name,
-      price: parseFloat(productData.actual_price),
-      image: mainImage ? mainImage.image : "/default-image.png", // Fallback to default image if no images are provided
+      name: productData.product, // Updated to use product_name
+      brand: productData.brand_name, // Assuming this structure based on the previous pattern
+      category: productData.category_name, // Assuming this structure based on the previous pattern
+      price: productData.actual_price,
+      image: productData.main_image, // Updated to use the direct image
       condition: productData.condition,
-      // You can add other fields as needed, ensuring they match the actual API response structure
+      features: featureValues.join(" | "), // Join the first three feature values with ' | '
     };
   },
 
