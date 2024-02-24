@@ -34,7 +34,6 @@ const ElectronicsProducts = () => {
       try {
         // Start loading
         const data = await apiService.getElectronics();
-        console.log("Electronics Data:", data);
         setProducts(data);
       } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -61,7 +60,10 @@ const ElectronicsProducts = () => {
         {!isLoading && (
           <div className={styles.imageBox}>
             {products.map((product) => (
-              <Link href={`/products/electronics/${product.id}`} key={product.id}>
+              <Link
+                href={`/products/electronics/${product.id}`}
+                key={product.id}
+              >
                 <ProductCard
                   key={product.id}
                   name={product.name}

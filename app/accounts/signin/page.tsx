@@ -29,7 +29,6 @@ const Page = () => {
       await login(emailOrUsername, password);
       // Check if isAuthenticated is updated before redirecting
       if (isAuthenticated) {
-        console.log("Login successful, redirecting...");
         router.push("/dashboard"); // Redirect to dashboard instead of home
       }
     } catch (error) {
@@ -40,7 +39,6 @@ const Page = () => {
         // If it's not an Error, we handle it as an unknown error
         setLoginError("An unknown error occurred.");
       }
-      console.log(`This is a test: ${error}`);
     }
   };
 
