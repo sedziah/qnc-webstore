@@ -334,7 +334,6 @@ export const apiService = {
     }
 
     const productVariants: Variant[] = await response.json();
-    console.log("Raw electronics data:", productVariants); // This will print the raw data to the console
 
     return productVariants.map((variant) =>
       apiService.transformProduct(variant)
@@ -346,18 +345,6 @@ export const apiService = {
     const featureValues = productData.features
       .map((feature: any) => feature.value)
       .slice(0, 3); // Take only the first three feature values
-
-    // Log transformed product for debugging
-    console.log("Transformed product:", {
-      id: productData.id,
-      name: productData.product, // Updated to use product_name
-      brand: productData.brand_name, // Assuming brand name is directly under productData
-      category: productData.category_name, // Assuming category name is directly under productData
-      price: productData.actual_price, // Updated to use actual_price
-      image: productData.main_image, // Updated to use the direct image
-      condition: productData.condition,
-      features: featureValues.join(" | "), // Join the first three feature values with ' | '
-    });
 
     return {
       id: productData.id,

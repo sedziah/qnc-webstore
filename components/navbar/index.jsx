@@ -19,8 +19,6 @@ function Navbar() {
     logoutUser();
   };
 
-  console.log("Is Authenticated:", isAuthenticated);
-
   const toggleMobileNav = () => {
     setMobileNavOpen(!isMobileNavOpen);
   };

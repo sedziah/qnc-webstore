@@ -3,7 +3,7 @@ name: Deploy to server
 on:
   push:
     branches:
-      - main
+      - test #Change the name of the branch name
 
 jobs:
   deploy:
