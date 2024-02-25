@@ -48,12 +48,9 @@ const ElectronicsProducts = () => {
 
   return (
     <>
-      <div>
-        <SearchBar />
-      </div>
-      <div>
-        <Breadcrumbs crumbs={crumbs} />
-      </div>
+      <SearchBar />
+      <Breadcrumbs crumbs={crumbs} />
+
       <div className={styles.pageContainer}>
         {isLoading && <div className={styles.loadingOverlay}>Loading...</div>}
 
