@@ -15,7 +15,7 @@ import appliances from "../../public/images/hero/hero_appliances.png";
 function Hero() {
   return (
     <div className={styles.heroSection}>
-      <Link href="/products/electronics" className={styles.heroLink}>
+      <Link href="/products/mobile-phones" className={styles.heroLink}>
         <div className={styles.heroContainer}>
           <Image
             src={phones}
@@ -30,7 +30,7 @@ function Hero() {
         <div className={styles.heroContainer}>
           <Image
             src={computers}
-            alt="mobile phones"
+            alt="computers"
             layout="responsive"
             className={styles.heroImage}
           />

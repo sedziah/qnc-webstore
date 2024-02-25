@@ -19,20 +19,21 @@ interface TransformedProduct {
   // Add any other fields you expect from your API...
 }
 
-const ElectronicsProducts = () => {
+const AccessoriesPage = () => {
   const [products, setProducts] = useState<TransformedProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const crumbs = [
     { title: "Home", href: "/" },
-    { title: "Mobile Phones", href: "/products/mobile-phones" },
+    { title: "Products", href: "/products/accessories" },
+    { title: "Accessories", href: "/products/accessories" },
   ];
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         // Start loading
-        const data = await apiService.getMobilePhones();
+        const data = await apiService.getAccessories();
         setProducts(data);
       } catch (error) {
         console.error("Failed to fetch products:", error);
@@ -74,9 +75,15 @@ const ElectronicsProducts = () => {
             ))}
           </div>
         )}
+
+        {!isLoading && products.length === 0 && (
+          <div className={styles.noProductsMessage}>
+            No products found in this category.
+          </div>
+        )}
       </div>
     </>
   );
 };
 
-export default ElectronicsProducts;
+export default AccessoriesPage;

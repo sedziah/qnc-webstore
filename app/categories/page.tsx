@@ -4,6 +4,8 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./page.module.css"; // Import the CSS module
+import Breadcrumbs from "../../components/breadcrumbs/index"; // Import the Breadcrumbs component
+
 
 // Sample JSON data
 const sampleCategories = [
@@ -65,16 +67,23 @@ const CategoryItem: React.FC<CategoryItemProps> = ({
 };
 
 const Page: React.FC = () => {
+  const crumbs = [
+    { title: "Home", href: "/" },
+    { title: "Categories", href: "/categories" },
+  ];
   return (
-    <div className={styles.categoriesContainer}>
-      {sampleCategories.map((category) => (
-        <CategoryItem
-          key={category.id}
-          name={category.name}
-          imageUrl={category.icon}
-        />
-      ))}
-    </div>
+    <>
+      <Breadcrumbs crumbs={crumbs} />
+      <div className={styles.categoriesContainer}>
+        {sampleCategories.map((category) => (
+          <CategoryItem
+            key={category.id}
+            name={category.name}
+            imageUrl={category.icon}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 

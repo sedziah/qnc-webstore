@@ -48,18 +48,18 @@ function Navbar() {
           </div>
           <div>
             <ul className={styles.navLinks}>
-              <Link href="/products">
+              <Link href="/products/featured">
                 <li>featured</li>
               </Link>
-              <Link href="/products">
+              <Link href="/products/deals">
                 <li>deals</li>
               </Link>
-              <Link href="/categories">
-                <li>categories</li>
-              </Link>
               {/* <Link href="/categories">
-                <li>Store Credits</li>
+                <li>categories</li>
               </Link> */}
+              <Link href="/categories">
+                <li>store credits</li>
+              </Link>
               <Link href="/cart">
                 <li>
                   <AddShoppingCartIcon />

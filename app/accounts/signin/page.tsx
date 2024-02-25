@@ -8,12 +8,19 @@ import { useAuth } from "../../auth/contexts/AuthContext";
 import Head from "next/head";
 import Image from "next/image";
 
+
 const Page = () => {
   const router = useRouter();
   const { isAuthenticated, error, login } = useAuth(); // Destructure isAuthenticated
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginError, setLoginError] = useState("");
+
+  const crumbs = [
+    { title: "Home", href: "/" },
+    { title: "Products", href: "/products" },
+    { title: "Mobile Phones", href: "/products/electronics" },
+  ];
 
   useEffect(() => {
     if (isAuthenticated) {

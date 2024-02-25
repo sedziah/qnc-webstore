@@ -19,25 +19,24 @@ interface TransformedProduct {
   // Add any other fields you expect from your API...
 }
 
-const ElectronicsProducts = () => {
+const AppliancesProducts = () => {
   const [products, setProducts] = useState<TransformedProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const crumbs = [
     { title: "Home", href: "/" },
-    { title: "Mobile Phones", href: "/products/mobile-phones" },
+    { title: "Products", href: "/products/mobile-phones" },
+    { title: "Appliances", href: "/products/appliances" },
   ];
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // Start loading
-        const data = await apiService.getMobilePhones();
+        const data = await apiService.getAppliances();
         setProducts(data);
       } catch (error) {
         console.error("Failed to fetch products:", error);
       } finally {
-        // End loading
         setIsLoading(false);
       }
     };
@@ -53,25 +52,33 @@ const ElectronicsProducts = () => {
       <div className={styles.pageContainer}>
         {isLoading && <div className={styles.loadingOverlay}>Loading...</div>}
 
-        {!isLoading && (
+        {!isLoading && products.length > 0 && (
           <div className={styles.imageBox}>
             {products.map((product) => (
               <Link
-                href={`/products/electronics/${product.id}`}
+                href={`/products/appliances/${product.id}`}
                 key={product.id}
               >
-                <ProductCard
-                  key={product.id}
-                  name={product.name}
-                  category={product.category}
-                  condition={product.condition}
-                  features={product.features}
-                  price={product.price}
-                  imageSrc={product.image}
-                  imageAlt={`Image of ${product.name}`}
-                />
+                <a>
+                  <ProductCard
+                    key={product.id}
+                    name={product.name}
+                    category={product.category}
+                    condition={product.condition}
+                    features={product.features}
+                    price={product.price}
+                    imageSrc={product.image}
+                    imageAlt={`Image of ${product.name}`}
+                  />
+                </a>
               </Link>
             ))}
+          </div>
+        )}
+
+        {!isLoading && products.length === 0 && (
+          <div className={styles.noProductsMessage}>
+            No products found in this category.
           </div>
         )}
       </div>
@@ -79,4 +86,4 @@ const ElectronicsProducts = () => {
   );
 };
 
-export default ElectronicsProducts;
+export default AppliancesProducts;
