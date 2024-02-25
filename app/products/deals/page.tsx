@@ -19,13 +19,14 @@ interface TransformedProduct {
   // Add any other fields you expect from your API...
 }
 
-const ElectronicsProducts = () => {
+const DealsProducts = () => {
   const [products, setProducts] = useState<TransformedProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const crumbs = [
     { title: "Home", href: "/" },
-    { title: "Mobile Phones", href: "/products/mobile-phones" },
+    { title: "Products", href: "/products/deals" },
+    { title: "Deals", href: "/products/deals" },
   ];
 
   useEffect(() => {
@@ -79,4 +80,4 @@ const ElectronicsProducts = () => {
   );
 };
 
-export default ElectronicsProducts;
+export default DealsProducts;
