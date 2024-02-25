@@ -116,6 +116,7 @@ const Page = () => {
           priority // This will prioritize loading of the image
         />
       </div>
+
     </div>
   );
 };
