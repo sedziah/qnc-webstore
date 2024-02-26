@@ -54,10 +54,7 @@ function Navbar() {
               <Link href="/products/deals">
                 <li>deals</li>
               </Link>
-              {/* <Link href="/categories">
-                <li>categories</li>
-              </Link> */}
-              <Link href="/categories">
+              <Link href="/store-credits">
                 <li>store credits</li>
               </Link>
               <Link href="/cart">
@@ -131,13 +128,13 @@ function Navbar() {
               <Link href="/">Home</Link>
             </li>
             <li>
-              <Link href="/categories">Featured</Link>
+              <Link href="/products/featured">Featured</Link>
             </li>
             <li>
-              <Link href="/categories">Deals</Link>
+              <Link href="/products/deals">Deals</Link>
             </li>
             <li>
-              <Link href="/categories">Categories</Link>
+              <Link href="/store-credits">Store Credits</Link>
             </li>
             <li>
               <Link href="/accounts/signin">Sign In</Link>
