@@ -26,7 +26,7 @@ const AppliancesProducts = () => {
   const crumbs = [
     { title: "Home", href: "/" },
     { title: "Products", href: "/products/mobile-phones" },
-    { title: "Appliances", href: "/products/appliances" },
+    { title: "Home Appliances", href: "/products/appliances" },
   ];
 
   useEffect(() => {
@@ -59,7 +59,6 @@ const AppliancesProducts = () => {
                 href={`/products/appliances/${product.id}`}
                 key={product.id}
               >
-                <a>
                   <ProductCard
                     key={product.id}
                     name={product.name}
@@ -70,7 +69,6 @@ const AppliancesProducts = () => {
                     imageSrc={product.image}
                     imageAlt={`Image of ${product.name}`}
                   />
-                </a>
               </Link>
             ))}
           </div>
