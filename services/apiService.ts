@@ -284,7 +284,7 @@ export const apiService = {
   },
 
   getAppliances: async (): Promise<TransformedProduct[]> => {
-    return await apiService.getProductsByCategory("appliances");
+    return await apiService.getProductsByCategory("home-appliances");
   },
 
   // Helper function to fetch products by category
@@ -355,6 +355,49 @@ export const apiService = {
       image: productData.main_image, // Updated to use the direct image
       condition: productData.condition,
       features: featureValues.join(" | "), // Join the first three feature values with ' | '
+    };
+  },
+
+  // Inside services/apiService.ts
+
+  // Update the getProductById function to use the correct endpoint and fetch details for a single product by its ID
+  getProductById: async (productId: string): Promise<TransformedProduct> => {
+    const response = await fetch(
+      `${API_BASE_URL}/products/product-detail/${productId}/`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // 'Authorization': `Token ${userToken}`, // Include this if your endpoint requires authentication
+        },
+      }
+    );
+
+    if (!response.ok) {
+      // Handle error response
+      throw new Error(`Failed to fetch product details for ID: ${productId}.`);
+    }
+
+    const productData = await response.json();
+    return apiService.transformProduct(productData); // Use the transformProduct function to format the response
+  },
+
+  // This is the single transformProduct function, updated to include all features without slicing
+  transformProduct: (productData: any): TransformedProduct => {
+    // Map all feature values, no need to slice
+    const featureValues = productData.features
+      .map((feature: any) => feature.value)
+      .join(" | "); // Join all feature values with ' | '
+
+    return {
+      id: productData.id,
+      name: productData.product,
+      brand: productData.brand_name,
+      category: productData.category_name,
+      price: productData.actual_price, // Adjust based on actual structure
+     // image: productData.images.length > 0 ? productData.images[0].image : "", // Assuming the first image is the main one
+      condition: productData.condition,
+      features: featureValues,
     };
   },
 
