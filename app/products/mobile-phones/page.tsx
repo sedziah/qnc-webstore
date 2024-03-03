@@ -57,21 +57,17 @@ const ElectronicsProducts = () => {
         {!isLoading && (
           <div className={styles.imageBox}>
             {products.map((product) => (
-              <Link
-                href={`/products/electronics/${product.id}`}
+              <ProductCard
                 key={product.id}
-              >
-                <ProductCard
-                  key={product.id}
-                  name={product.name}
-                  category={product.category}
-                  condition={product.condition}
-                  features={product.features}
-                  price={product.price}
-                  imageSrc={product.image}
-                  imageAlt={`Image of ${product.name}`}
-                />
-              </Link>
+                name={product.name}
+                category={product.category}
+                condition={product.condition}
+                features={product.features}
+                price={product.price}
+                imageSrc={product.image}
+                imageAlt={`Image of ${product.name}`}
+                onAddToCart={() => console.log(`Add ${product.name} to cart`)} // Example callback
+              />
             ))}
           </div>
         )}
