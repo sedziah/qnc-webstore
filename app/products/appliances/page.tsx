@@ -55,21 +55,16 @@ const AppliancesProducts = () => {
         {!isLoading && products.length > 0 && (
           <div className={styles.imageBox}>
             {products.map((product) => (
-              <Link
-                href={`/products/appliances/${product.id}`}
+              <ProductCard
                 key={product.id}
-              >
-                  <ProductCard
-                    key={product.id}
-                    name={product.name}
-                    category={product.category}
-                    condition={product.condition}
-                    features={product.features}
-                    price={product.price}
-                    imageSrc={product.image}
-                    imageAlt={`Image of ${product.name}`}
-                  />
-              </Link>
+                name={product.name}
+                category={product.category}
+                condition={product.condition}
+                features={product.features}
+                price={product.price}
+                imageSrc={product.image}
+                imageAlt={`Image of ${product.name}`}
+              />
             ))}
           </div>
         )}
