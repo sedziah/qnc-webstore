@@ -35,7 +35,12 @@ export default function Page() {
 
   const subtotal = cartProducts.reduce((acc, product) => {
     const cartItem = cart.find((item) => item.id === product.id);
-    return acc + product.price * (cartItem ? cartItem.quantity : 0);
+    // Ensure product.price is a number before multiplying
+    const price =
+      typeof product.price === "number"
+        ? product.price
+        : parseFloat(product.price);
+    return acc + price * (cartItem ? cartItem.quantity : 0);
   }, 0);
 
   return (
@@ -51,7 +56,11 @@ export default function Page() {
               {cartProducts.map((product) => {
                 const cartItem = cart.find((item) => item.id === product.id);
                 const quantity = cartItem ? cartItem.quantity : 0;
-                const productPrice = parseFloat(product.price).toFixed(2);
+                // Directly use toFixed on price if it's a number
+                const productPrice =
+                  typeof product.price === "number"
+                    ? product.price.toFixed(2)
+                    : parseFloat(product.price).toFixed(2);
 
                 return (
                   <div key={product.id} className={styles.cartItem}>
