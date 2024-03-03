@@ -382,24 +382,5 @@ export const apiService = {
     return apiService.transformProduct(productData); // Use the transformProduct function to format the response
   },
 
-  // This is the single transformProduct function, updated to include all features without slicing
-  transformProduct: (productData: any): TransformedProduct => {
-    // Map all feature values, no need to slice
-    const featureValues = productData.features
-      .map((feature: any) => feature.value)
-      .join(" | "); // Join all feature values with ' | '
-
-    return {
-      id: productData.id,
-      name: productData.product,
-      brand: productData.brand_name,
-      category: productData.category_name,
-      price: productData.actual_price, // Adjust based on actual structure
-     // image: productData.images.length > 0 ? productData.images[0].image : "", // Assuming the first image is the main one
-      condition: productData.condition,
-      features: featureValues,
-    };
-  },
-
   // Add other endpoints as needed
 };
