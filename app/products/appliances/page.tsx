@@ -1,3 +1,5 @@
+// app/products/appliances/page.tsx
+
 "use client";
 import React, { useEffect, useState } from "react";
 import ProductCard from "../../../components/productCard/ProductCard";
@@ -5,7 +7,8 @@ import { apiService } from "../../../services/apiService";
 import styles from "./page.module.css";
 import SearchBar from "../../../components/searchbar/index";
 import Breadcrumbs from "../../../components/breadcrumbs/index";
-import Link from "next/link";
+import { useCart } from "../../cart/CartContext";
+
 
 interface TransformedProduct {
   id: string;
@@ -22,6 +25,7 @@ interface TransformedProduct {
 const AppliancesProducts = () => {
   const [products, setProducts] = useState<TransformedProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { handleAddToCart } = useCart();
 
   const crumbs = [
     { title: "Home", href: "/" },
@@ -64,6 +68,7 @@ const AppliancesProducts = () => {
                 price={product.price}
                 imageSrc={product.image}
                 imageAlt={`Image of ${product.name}`}
+                onAddToCart={() => handleAddToCart(product.id)}
               />
             ))}
           </div>
