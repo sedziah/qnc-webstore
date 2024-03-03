@@ -5,23 +5,24 @@ import { apiService } from "../../../services/apiService";
 import styles from "./page.module.css";
 import SearchBar from "../../../components/searchbar/index";
 import Breadcrumbs from "../../../components/breadcrumbs/index";
-import Link from "next/link";
+// Import the useCart hook from your CartContext
+import { useCart } from "../../cart/CartContext";
 
 interface TransformedProduct {
   id: string;
   name: string;
   category: string;
   condition: string;
-  // description: string; // Make sure to include a description in your TransformedProduct
   price: number;
   image: string;
   features: string;
-  // Add any other fields you expect from your API...
 }
 
 const ElectronicsProducts = () => {
   const [products, setProducts] = useState<TransformedProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  // Use the useCart hook to access the handleAddToCart function from the context
+  const { handleAddToCart } = useCart();
 
   const crumbs = [
     { title: "Home", href: "/" },
@@ -32,13 +33,11 @@ const ElectronicsProducts = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        // Start loading
         const data = await apiService.getMobilePhones();
         setProducts(data);
       } catch (error) {
         console.error("Failed to fetch products:", error);
       } finally {
-        // End loading
         setIsLoading(false);
       }
     };
@@ -66,7 +65,8 @@ const ElectronicsProducts = () => {
                 price={product.price}
                 imageSrc={product.image}
                 imageAlt={`Image of ${product.name}`}
-                onAddToCart={() => console.log(`Add ${product.name} to cart`)} // Example callback
+                // Use the handleAddToCart function from the context
+                onAddToCart={() => handleAddToCart(product.id)}
               />
             ))}
           </div>

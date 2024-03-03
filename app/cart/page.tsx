@@ -1,128 +1,104 @@
+// app/cart/page.tsx
+
 "use client";
+import React, { useEffect, useState } from "react";
+import { useCart } from "./CartContext"; // Update the import path as necessary
+import Breadcrumbs from "../../components/breadcrumbs/index"; // Update the import path as necessary
 import styles from "./page.module.css";
-import { useCart } from "./CartContext";
-import { useEffect, useState } from "react";
-import { TransformedProduct, apiService } from "../../services/apiService";
-import Breadcrumbs from "../../components/breadcrumbs/index"; 
+import { TransformedProduct, apiService } from "../../services/apiService"; // Update the import path as necessary
 
 export default function Page() {
-  const { cart, updateCartItemQuantity, removeCartItem } = useCart();
-  const [products, setProducts] = useState<TransformedProduct[]>([]);
+  const { cart, updateCartItemQuantity } = useCart();
+  const [cartProducts, setCartProducts] = useState<TransformedProduct[]>([]);
   const crumbs = [
     { title: "Home", href: "/" },
     { title: "Cart", href: "/cart" },
   ];
 
-
   useEffect(() => {
-    // Fetch products data when the component mounts
-    const loadProducts = async () => {
+    const loadCartProducts = async () => {
+      const productRequests = cart.map((cartItem) =>
+        apiService.getProductById(cartItem.id)
+      );
       try {
-        const allProducts = await apiService.getProducts();
-        setProducts(allProducts);
+        const productResponses = await Promise.all(productRequests);
+        setCartProducts(productResponses);
       } catch (error) {
-        console.error("Error loading products:", error);
+        console.error("Error loading cart products:", error);
       }
     };
 
-    loadProducts();
-  }, []);
+    if (cart.length > 0) {
+      loadCartProducts();
+    }
+  }, [cart]);
 
-  if (cart.length === 0) {
-    return (
-      <>
-        <Breadcrumbs crumbs={crumbs} />
-        <div className={styles.emptyCart}>
-          <span>Your cart is currently empty.</span>
-          <a href="/shop">Click here to shop</a>
-        </div>
-      </>
-    );
-  }
-
-  // Calculate the total cost of items in the cart
-  const total = cart.reduce((sum, cartItem) => {
-    const product = products.find((p) => p.id === cartItem.id);
-    // Check if product is found and price is a number
-    const price = product && !isNaN(product.price) ? product.price : 0;
-    return sum + price * cartItem.quantity;
+  const subtotal = cartProducts.reduce((acc, product) => {
+    const cartItem = cart.find((item) => item.id === product.id);
+    return acc + product.price * (cartItem ? cartItem.quantity : 0);
   }, 0);
 
   return (
     <>
       <Breadcrumbs crumbs={crumbs} />
-      <div className={styles.cartPage}>
-        <h1>Cart</h1>
-        <div className={styles.cartContents}>
-          <table className={styles.cartTable}>
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart.map((cartItem) => {
-                const product = products.find((p) => p.id === cartItem.id);
-                if (!product) return null; // Handle this case appropriately
+      <div className={styles.cartContainer}>
+        <h2>Shopping Cart</h2>
+        {cart.length === 0 ? (
+          <div className={styles.emptyCart}>No items in cart.</div>
+        ) : (
+          <>
+            <div className={styles.cartList}>
+              {cartProducts.map((product) => {
+                const cartItem = cart.find((item) => item.id === product.id);
+                const quantity = cartItem ? cartItem.quantity : 0;
+                const productPrice = parseFloat(product.price).toFixed(2);
 
                 return (
-                  <tr key={cartItem.id}>
-                    <td>
-                      {/* Product Information */}
-                      <span>{product.name}</span>
-                    </td>
-                    <td>GHS {product.price}</td>
-                    <td>
-                      <button
-                        onClick={() =>
-                          updateCartItemQuantity(
-                            cartItem.id,
-                            cartItem.quantity - 1
-                          )
-                        }
-                      >
-                        -
-                      </button>
-                      <span>{cartItem.quantity}</span>
-                      <button
-                        onClick={() =>
-                          updateCartItemQuantity(
-                            cartItem.id,
-                            cartItem.quantity + 1
-                          )
-                        }
-                      >
-                        +
-                      </button>
-                    </td>
-                    <td>
-                      GHS {(product.price * cartItem.quantity).toFixed(2)}
-                    </td>
-                    <td>
-                      <button onClick={() => removeCartItem(cartItem.id)}>
-                        Remove
-                      </button>
-                    </td>
-                  </tr>
+                  <div key={product.id} className={styles.cartItem}>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className={styles.productImage}
+                    />
+                    <div className={styles.productDetails}>
+                      <div className={styles.productInfo}>
+                        <h3>{product.name}</h3>
+                        <p>{product.features}</p>
+                      </div>
+                      <div className={styles.productMeta}>
+                        <div className={styles.price}>GHS {productPrice}</div>
+                        <div className={styles.controls}>
+                          <button
+                            onClick={() =>
+                              updateCartItemQuantity(
+                                product.id,
+                                Math.max(1, quantity - 1)
+                              )
+                            }
+                          >
+                            -
+                          </button>
+                          <span>{quantity}</span>
+                          <button
+                            onClick={() =>
+                              updateCartItemQuantity(product.id, quantity + 1)
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 );
               })}
-            </tbody>
-          </table>
-          <div className={styles.cartTotals}>
-            <div className={styles.total}>
-              <span>Total</span>
-              <span>GHS {isNaN(total) ? "0.00" : total.toFixed(2)}</span>
             </div>
-
-            <button className={styles.checkoutButton}>
-              Proceed to Checkout
-            </button>
-          </div>
-        </div>
+            <div className={styles.cartSummary}>
+              <p>Sub-Total: GHS {subtotal.toFixed(2)}</p>
+              <button className={styles.checkoutButton}>Checkout</button>
+            </div>
+          </>
+        )}
       </div>
     </>
   );
