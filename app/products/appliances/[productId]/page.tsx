@@ -23,6 +23,7 @@
 // }
 
 // const ProductDetailsPage: React.FC = () => {
+// }
 //   const { productId } = useParams<{ productId: string }>();
 //   const [product, setProduct] = useState<ProductDetails | null>(null);
 
@@ -73,5 +74,10 @@
 // };
 
 
-// export default ProductDetailsPage;
+const ProductDetailsPage: React.FC = () => {
+  return <h1>Hello World</h1>;
+};
+
+
+export default ProductDetailsPage;
 
