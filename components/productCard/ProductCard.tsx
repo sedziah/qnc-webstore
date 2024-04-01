@@ -26,6 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
   // Handler to stop link navigation and call onAddToCart if provided
   const handleAddToCartClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation(); // Stop event propagation to prevent link navigation
+    console.log(`Adding ${name} to cart...`);
     onAddToCart?.(); // Call the onAddToCart callback if provided
   };
 

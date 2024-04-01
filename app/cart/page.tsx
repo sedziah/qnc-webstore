@@ -10,6 +10,7 @@ import Link from "next/link";
 
 export default function Page() {
   const { cart, updateCartItemQuantity } = useCart();
+  console.log("Current items in cart:", cart); // Log the current cart items
   const [cartProducts, setCartProducts] = useState<TransformedProduct[]>([]);
   const crumbs = [
     { title: "Home", href: "/" },
@@ -23,7 +24,7 @@ export default function Page() {
       );
       try {
         const productResponses = await Promise.all(productRequests);
-        console.log("Loaded cart products:", productResponses); 
+        console.log("Loaded cart products:", productResponses);
         setCartProducts(productResponses);
       } catch (error) {
         console.error("Error loading cart products:", error);
