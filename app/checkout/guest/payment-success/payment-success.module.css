@@ -1,0 +1,28 @@
+/* payment-success.module.css */
+.successPage {
+  text-align: center;
+  padding: 50px;
+  color: #4BB543; /* Success color */
+}
+
+.declinedPage {
+  text-align: center;
+  padding: 50px;
+  color: #D8000C; /* Declined color */
+}
+
+.button {
+  background-color: #4BB543; /* Success color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.button:hover {
+  background-color: #367C2B;
+}
+
+/* Add any additional styling you need */

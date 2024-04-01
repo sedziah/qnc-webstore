@@ -6,9 +6,11 @@ import { useCart } from "./CartContext"; // Update the import path as necessary
 import Breadcrumbs from "../../components/breadcrumbs/index"; // Update the import path as necessary
 import styles from "./page.module.css";
 import { TransformedProduct, apiService } from "../../services/apiService"; // Update the import path as necessary
+import Link from "next/link";
 
 export default function Page() {
   const { cart, updateCartItemQuantity } = useCart();
+  console.log("Current items in cart:", cart); // Log the current cart items
   const [cartProducts, setCartProducts] = useState<TransformedProduct[]>([]);
   const crumbs = [
     { title: "Home", href: "/" },
@@ -22,6 +24,7 @@ export default function Page() {
       );
       try {
         const productResponses = await Promise.all(productRequests);
+        console.log("Loaded cart products:", productResponses);
         setCartProducts(productResponses);
       } catch (error) {
         console.error("Error loading cart products:", error);
@@ -64,11 +67,11 @@ export default function Page() {
 
                 return (
                   <div key={product.id} className={styles.cartItem}>
-                    <img
+                    {/* <img
                       src={product.image}
                       alt={product.name}
                       className={styles.productImage}
-                    />
+                    /> */}
                     <div className={styles.productDetails}>
                       <div className={styles.productInfo}>
                         <h3>{product.name}</h3>
@@ -104,7 +107,13 @@ export default function Page() {
             </div>
             <div className={styles.cartSummary}>
               <p>Sub-Total: GHS {subtotal.toFixed(2)}</p>
-              <button className={styles.checkoutButton}>Checkout</button>
+              <Link href="/checkout/guest" className={styles.checkoutButton}>
+                Guest Checkout
+              </Link>
+              <br />
+              <Link href="/accounts/signin" className={styles.checkoutButton}>
+                Login to Checkout
+              </Link>
             </div>
           </>
         )}

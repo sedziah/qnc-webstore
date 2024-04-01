@@ -1,6 +1,7 @@
 // services/apiService.ts
 
 const API_BASE_URL = "http://167.172.52.195";
+// const API_BASE_URL = "http://127.0.0.1:8000";
 
 interface Variant {
   id: string;
@@ -380,6 +381,32 @@ export const apiService = {
 
     const productData = await response.json();
     return apiService.transformProduct(productData); // Use the transformProduct function to format the response
+  },
+
+
+  // Method for guest checkout, creating profile, order, and initiating Paystack payment
+  guestCheckout: async (payload: any) => {
+    const response = await fetch(`${API_BASE_URL}/orders/guest-checkout/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      // Handle any errors that come back from the API
+      const errorData = await response.json();
+      let errorMessage = "An unexpected error occurred.";
+
+      // Simplified error handling: Take the first error message available
+      errorMessage = errorData[Object.keys(errorData)[0]].join(" ");
+
+      throw new Error(errorMessage);
+    }
+
+    // The response should contain the order details and the Paystack payment URL
+    return response.json();
   },
 
   // Add other endpoints as needed

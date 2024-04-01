@@ -57,20 +57,32 @@ const ElectronicsProducts = () => {
 
         {!isLoading && (
           <div className={styles.imageBox}>
-            {products.map((product) => (
-              <ProductCard
-                key={product.id}
-                name={product.name}
-                category={product.category}
-                condition={product.condition}
-                features={product.features}
-                price={product.price}
-                imageSrc={product.image}
-                imageAlt={`Image of ${product.name}`}
-                // Use the handleAddToCart function from the context
-                onAddToCart={() => handleAddToCart(product.id)}
-              />
-            ))}
+            {products.map((product) => {
+              // Log the details of the current product
+              console.log("Displaying product details:", product);
+
+              // Construct a CartItem object
+              const cartItem = {
+                id: product.id,
+                quantity: 1, // Assuming you want to add 1 quantity of the product to the cart
+                price: product.price, // Use the product's price
+              };
+
+              // Return the ProductCard component
+              return (
+                <ProductCard
+                  key={product.id}
+                  name={product.name}
+                  category={product.category}
+                  condition={product.condition}
+                  features={product.features}
+                  price={product.price}
+                  imageSrc={product.image}
+                  imageAlt={`Image of ${product.name}`}
+                  onAddToCart={() => handleAddToCart(cartItem)} // Pass the CartItem object instead of just the ID
+                />
+              );
+            })}
           </div>
         )}
       </div>
