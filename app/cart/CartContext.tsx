@@ -8,11 +8,12 @@ import React, {
   ReactNode,
 } from "react";
 
-interface CartItem {
+export interface CartItem {
   id: string;
   quantity: number;
   price: number; // Assuming each cart item has a price field
 }
+
 
 interface CartContextType {
   cart: CartItem[];
