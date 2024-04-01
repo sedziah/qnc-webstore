@@ -1,118 +1,123 @@
-// app/cart/CartContext.js
+// app/cart/page.tsx
+
 "use client";
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import React, { useEffect, useState } from "react";
+import { useCart } from "./CartContext"; // Update the import path as necessary
+import Breadcrumbs from "../../components/breadcrumbs/index"; // Update the import path as necessary
+import styles from "./page.module.css";
+import { TransformedProduct, apiService } from "../../services/apiService"; // Update the import path as necessary
+import Link from "next/link";
 
-interface CartItem {
-  id: string;
-  quantity: number;
-  price: number; // Assuming each cart item has a price field
-}
-
-interface CartContextType {
-  cart: CartItem[];
-  cartCount: number;
-  totalAmount: number;
-  handleAddToCart: (item: CartItem) => void;
-  updateCartItemQuantity: (productId: string, newQuantity: number) => void;
-  removeCartItem: (productId: string) => void;
-  clearCart: () => void; // Changed from '() => {}' to '() => void'
-}
-
-const CartContext = createContext<CartContextType>({
-  cart: [],
-  cartCount: 0,
-  totalAmount: 0,
-  handleAddToCart: () => {},
-  updateCartItemQuantity: () => {},
-  removeCartItem: () => {},
-  clearCart: () => {
-    return;
-  }, // Explicitly returning void
-});
-
-export const CartProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
-  const [cart, setCart] = useState<CartItem[]>([]);
+export default function Page() {
+  const { cart, updateCartItemQuantity } = useCart();
+  console.log("Current items in cart:", cart); // Log the current cart items
+  const [cartProducts, setCartProducts] = useState<TransformedProduct[]>([]);
+  const crumbs = [
+    { title: "Home", href: "/" },
+    { title: "Cart", href: "/cart" },
+  ];
 
   useEffect(() => {
-    // Initialize cart from local storage or other persistent storage here
-    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCart(storedCart);
-  }, []);
+    const loadCartProducts = async () => {
+      const productRequests = cart.map((cartItem) =>
+        apiService.getProductById(cartItem.id)
+      );
+      try {
+        const productResponses = await Promise.all(productRequests);
+        console.log("Loaded cart products:", productResponses);
+        setCartProducts(productResponses);
+      } catch (error) {
+        console.error("Error loading cart products:", error);
+      }
+    };
 
-  const saveCartToLocalStorage = (updatedCart: CartItem[]) => {
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  };
-
-  const handleAddToCart = (item: CartItem) => {
-    let updatedCart = [...cart]; // Create a shallow copy of the cart array
-    const itemIndex = updatedCart.findIndex(
-      (cartItem) => cartItem.id === item.id
-    );
-
-    if (itemIndex >= 0) {
-      // Update the quantity of the existing item
-      const updatedItem = {
-        ...updatedCart[itemIndex],
-        quantity: updatedCart[itemIndex].quantity + item.quantity,
-      };
-      updatedCart[itemIndex] = updatedItem; // Replace the item in the array
-    } else {
-      // Add the new item to the cart
-      updatedCart.push(item);
+    if (cart.length > 0) {
+      loadCartProducts();
     }
+  }, [cart]);
 
-    setCart(updatedCart); // Update the cart state
-    saveCartToLocalStorage(updatedCart); // Save the updated cart to local storage
-  };
-
-  const updateCartItemQuantity = (productId: string, newQuantity: number) => {
-    const updatedCart = cart.map((item) =>
-      item.id === productId ? { ...item, quantity: newQuantity } : item
-    );
-    setCart(updatedCart);
-    saveCartToLocalStorage(updatedCart);
-  };
-
-  const removeCartItem = (productId: string) => {
-    const updatedCart = cart.filter((item) => item.id !== productId);
-    setCart(updatedCart);
-    saveCartToLocalStorage(updatedCart);
-  };
-
-  const clearCart = () => {
-    setCart([]); // Reset the cart state to an empty array
-    localStorage.removeItem("cart"); // Clear the cart from localStorage if you're using it
-  };
-
-  const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
-  const totalAmount = cart.reduce(
-    (total, item) => total + item.price * item.quantity,
-    0
-  );
+  const subtotal = cartProducts.reduce((acc, product) => {
+    const cartItem = cart.find((item) => item.id === product.id);
+    // Ensure product.price is a number before multiplying
+    const price =
+      typeof product.price === "number"
+        ? product.price
+        : parseFloat(product.price);
+    return acc + price * (cartItem ? cartItem.quantity : 0);
+  }, 0);
 
   return (
-    <CartContext.Provider
-      value={{
-        cart,
-        cartCount,
-        totalAmount,
-        handleAddToCart,
-        updateCartItemQuantity,
-        removeCartItem,
-        clearCart,
-      }}
-    >
-      {children}
-    </CartContext.Provider>
-  );
-};
+    <>
+      <Breadcrumbs crumbs={crumbs} />
+      <div className={styles.cartContainer}>
+        <h2>Shopping Cart</h2>
+        {cart.length === 0 ? (
+          <div className={styles.emptyCart}>No items in cart.</div>
+        ) : (
+          <>
+            <div className={styles.cartList}>
+              {cartProducts.map((product) => {
+                const cartItem = cart.find((item) => item.id === product.id);
+                const quantity = cartItem ? cartItem.quantity : 0;
+                // Directly use toFixed on price if it's a number
+                const productPrice =
+                  typeof product.price === "number"
+                    ? product.price.toFixed(2)
+                    : parseFloat(product.price).toFixed(2);
 
-export const useCart = () => useContext(CartContext);
+                return (
+                  <div key={product.id} className={styles.cartItem}>
+                    {/* <img
+                      src={product.image}
+                      alt={product.name}
+                      className={styles.productImage}
+                    /> */}
+                    <div className={styles.productDetails}>
+                      <div className={styles.productInfo}>
+                        <h3>{product.name}</h3>
+                        <p>{product.features}</p>
+                      </div>
+                      <div className={styles.productMeta}>
+                        <div className={styles.price}>GHS {productPrice}</div>
+                        <div className={styles.controls}>
+                          <button
+                            onClick={() =>
+                              updateCartItemQuantity(
+                                product.id,
+                                Math.max(1, quantity - 1)
+                              )
+                            }
+                          >
+                            -
+                          </button>
+                          <span>{quantity}</span>
+                          <button
+                            onClick={() =>
+                              updateCartItemQuantity(product.id, quantity + 1)
+                            }
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className={styles.cartSummary}>
+              <p>Sub-Total: GHS {subtotal.toFixed(2)}</p>
+              <Link href="/checkout/guest" className={styles.checkoutButton}>
+                Guest Checkout
+              </Link>
+              <br />
+              <Link href="/accounts/signin" className={styles.checkoutButton}>
+                Login to Checkout
+              </Link>
+            </div>
+          </>
+        )}
+      </div>
+    </>
+  );
+}
