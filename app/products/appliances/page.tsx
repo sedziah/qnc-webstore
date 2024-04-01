@@ -68,7 +68,7 @@ const AppliancesProducts = () => {
                 price={product.price}
                 imageSrc={product.image}
                 imageAlt={`Image of ${product.name}`}
-                onAddToCart={() => handleAddToCart(product.id)}
+                // onAddToCart={() => handleAddToCart(product.id)}
               />
             ))}
           </div>
