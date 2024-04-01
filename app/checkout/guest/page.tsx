@@ -18,20 +18,29 @@ const CheckoutPage: React.FC = () => {
   const [region, setRegion] = useState("");
   const [subtotal, setSubtotal] = useState(0); // Subtotal in Pesewas
   const [isGuestInfoValid, setIsGuestInfoValid] = useState(false);
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
   const router = useRouter();
+  
 
   useEffect(() => {
+    // Print the public key when the component mounts or when the cart changes
+    console.log(
+      "Paystack Public Key:",
+      process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY
+    );
+    
     const fetchProductDetailsAndCalculateSubtotal = async () => {
-      let newSubtotal = 0;
+      let newSubtotal = 0; // Assume this will be in GHS
       for (const cartItem of cart) {
         try {
           const productDetails = await apiService.getProductById(cartItem.id);
-          newSubtotal += productDetails.price * cartItem.quantity;
+          // If productDetails.price is in GHS, convert to Pesewas by multiplying by 100
+          newSubtotal += productDetails.price * 100 * cartItem.quantity;
         } catch (error) {
           console.error("Error fetching product details:", error);
         }
       }
+      // Set subtotal in state already converted to Pesewas
       setSubtotal(newSubtotal);
     };
 
@@ -44,7 +53,7 @@ const CheckoutPage: React.FC = () => {
     email,
     amount: subtotal,
     currency: "GHS",
-    publicKey: "pk_test_yourkey", // Replace with your actual Paystack public key
+    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY, // Replace with your actual Paystack public key
     text: "Pay Now",
     metadata: {
       custom_fields: [
@@ -63,7 +72,8 @@ const CheckoutPage: React.FC = () => {
     onSuccess: (response: any) => {
       console.log(response);
       alert("Payment successful! Reference: " + response.reference);
-      router.push("/order-success");
+      clearCart(); // Clear the cart after a successful payment
+      router.push("guest/payment-success");
     },
     onClose: () => alert("Payment was not completed."),
   };

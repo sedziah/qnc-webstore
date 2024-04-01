@@ -21,6 +21,7 @@ interface CartContextType {
   handleAddToCart: (item: CartItem) => void;
   updateCartItemQuantity: (productId: string, newQuantity: number) => void;
   removeCartItem: (productId: string) => void;
+  clearCart: () => void; // Changed from '() => {}' to '() => void'
 }
 
 const CartContext = createContext<CartContextType>({
@@ -30,6 +31,9 @@ const CartContext = createContext<CartContextType>({
   handleAddToCart: () => {},
   updateCartItemQuantity: () => {},
   removeCartItem: () => {},
+  clearCart: () => {
+    return;
+  }, // Explicitly returning void
 });
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
@@ -83,6 +87,11 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
     saveCartToLocalStorage(updatedCart);
   };
 
+  const clearCart = () => {
+    setCart([]); // Reset the cart state to an empty array
+    localStorage.removeItem("cart"); // Clear the cart from localStorage if you're using it
+  };
+
   const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
   const totalAmount = cart.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -98,6 +107,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
         handleAddToCart,
         updateCartItemQuantity,
         removeCartItem,
+        clearCart,
       }}
     >
       {children}
