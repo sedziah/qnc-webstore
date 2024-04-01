@@ -20,7 +20,8 @@ const CheckoutPage: React.FC = () => {
   const [isGuestInfoValid, setIsGuestInfoValid] = useState(false);
   const { cart, clearCart } = useCart();
   const router = useRouter();
-  
+  // Add a state for the Paystack public key
+  const [publicKey, setPublicKey] = useState("");
 
   useEffect(() => {
     // Print the public key when the component mounts or when the cart changes
@@ -28,7 +29,14 @@ const CheckoutPage: React.FC = () => {
       "Paystack Public Key:",
       process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY
     );
-    
+
+    // When the component mounts, set the public key from environment variables
+    if (process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY) {
+      setPublicKey(process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY);
+    } else {
+      console.error("Paystack public key is not set in environment variables.");
+    }
+
     const fetchProductDetailsAndCalculateSubtotal = async () => {
       let newSubtotal = 0; // Assume this will be in GHS
       for (const cartItem of cart) {
@@ -151,6 +159,7 @@ const CheckoutPage: React.FC = () => {
         {isGuestInfoValid ? (
           <PaystackButton
             {...componentProps}
+            publicKey={publicKey}
             className={styles.proceedButton}
           />
         ) : (
