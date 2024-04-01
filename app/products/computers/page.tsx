@@ -6,6 +6,8 @@ import styles from "./page.module.css";
 import SearchBar from "../../../components/searchbar/index";
 import Breadcrumbs from "../../../components/breadcrumbs/index";
 import { useCart } from "../../cart/CartContext";
+import { CartItem } from "../../cart/CartContext";
+
 
 interface TransformedProduct {
   id: string;
@@ -66,7 +68,14 @@ const ComputerProducts = () => {
                 price={product.price}
                 imageSrc={product.image}
                 imageAlt={`Image of ${product.name}`}
-                onAddToCart={() => handleAddToCart(product.id)}
+                onAddToCart={() => {
+                  const itemToAdd: CartItem = {
+                    id: product.id,
+                    quantity: 1, // Assuming a default quantity of 1
+                    price: product.price, // Ensure your product object has a price field
+                  };
+                  handleAddToCart(itemToAdd);
+                }}
               />
             ))}
           </div>
