@@ -1,85 +1,92 @@
-// app/checkout/page.tsx
+// app/checkout/guest/page.tsx
 
-"use client";
-import React, { useState } from "react";
-import Breadcrumbs from "../../../components/breadcrumbs";
-import { useRouter } from "next/navigation"; // import useRouter from Next.js
-import styles from "./page.module.css"; // Update the import path as necessary
-import { useCart } from "../../cart/CartContext"; // Update the import path as necessary
-import { apiService } from "../../../services/apiService"; // Update the import path as necessary
+"use client"
+import React, { useState, useEffect } from "react";
+import { PaystackButton } from "react-paystack";
+import { useRouter } from "next/navigation";
+import { useCart } from "../../cart/CartContext"; // Adjust import path as necessary
+import styles from "./page.module.css";
+import { apiService } from "../../../services/apiService"; // Adjust import path as necessary
 
-const Page: React.FC = () => {
-  // Personal details for GuestUser
+const CheckoutPage: React.FC = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-
-  // Additional profile information
   const [primaryPhoneNumber, setPrimaryPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [region, setRegion] = useState("");
-
-  // Cart items (this might come from a global state or context in your actual application)
-  const { cart } = useCart(); // Placeholder, replace with actual cart items
-
+  const [subtotal, setSubtotal] = useState(0); // Subtotal in Pesewas
+  const [isGuestInfoValid, setIsGuestInfoValid] = useState(false);
+  const { cart } = useCart();
   const router = useRouter();
 
-  const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "Cart", href: "/cart" },
-    { title: "Checkout", href: "/checkout" },
-  ];
-
-  const handleGuestCheckout = async (
-    event: React.FormEvent<HTMLFormElement>
-  ) => {
-    event.preventDefault();
-
-    // Construct profile data
-    const profileData = {
-      email,
-      first_name: firstName,
-      last_name: lastName,
-      primary_phone_number: primaryPhoneNumber,
-      address,
-      city,
-      region,
-    };
-
-    // Transform cart items to match the expected format
-    const cartItemsTransformed = cart.map((item) => ({
-      product_id: item.id, // Ensure 'id' matches your product identifier in the cart items
-      quantity: item.quantity,
-    }));
-
-    // Combine guest user data and cart items in the expected format
-    const payload = {
-      guest_user: profileData,
-      cart_items: cartItemsTransformed,
-    };
-
-    try {
-      // Call the service to perform the entire guest checkout process
-      // Now passing profileData and cartItems as separate arguments
-      const response = await apiService.guestCheckout(payload);
-
-      // Redirect to the payment URL provided by Paystack
-      if (response.payment_url) {
-        window.location.href = response.payment_url;
-      } else {
-        console.error("Payment URL not provided");
+  useEffect(() => {
+    const fetchProductDetailsAndCalculateSubtotal = async () => {
+      let newSubtotal = 0;
+      for (const cartItem of cart) {
+        try {
+          const productDetails = await apiService.getProductById(cartItem.id);
+          newSubtotal += productDetails.price * cartItem.quantity;
+        } catch (error) {
+          console.error("Error fetching product details:", error);
+        }
       }
-    } catch (error) {
-      console.error("Guest checkout error:", error);
-      // Handle errors here, e.g., show an error message to the user
+      setSubtotal(newSubtotal);
+    };
+
+    if (cart.length > 0) {
+      fetchProductDetailsAndCalculateSubtotal();
+    }
+  }, [cart]);
+
+  const componentProps = {
+    email,
+    amount: subtotal,
+    currency: "GHS",
+    publicKey: "pk_test_yourkey", // Replace with your actual Paystack public key
+    text: "Pay Now",
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Name",
+          variable_name: "name",
+          value: `${firstName} ${lastName}`,
+        },
+        {
+          display_name: "Phone Number",
+          variable_name: "phone",
+          value: primaryPhoneNumber,
+        },
+      ],
+    },
+    onSuccess: (response: any) => {
+      console.log(response);
+      alert("Payment successful! Reference: " + response.reference);
+      router.push("/order-success");
+    },
+    onClose: () => alert("Payment was not completed."),
+  };
+
+  const handleGuestCheckout = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (
+      email &&
+      firstName &&
+      lastName &&
+      primaryPhoneNumber &&
+      address &&
+      city &&
+      region
+    ) {
+      setIsGuestInfoValid(true);
+    } else {
+      alert("Please fill in all the required fields.");
     }
   };
 
-
   return (
-    <>
-      <Breadcrumbs crumbs={crumbs} />
+    <div>
       <h1 className={styles.title}>Guest Checkout</h1>
       <form onSubmit={handleGuestCheckout} className={styles.checkoutForm}>
         <input
@@ -131,12 +138,19 @@ const Page: React.FC = () => {
           onChange={(e) => setRegion(e.target.value)}
           required
         />
-        <button type="submit" className={styles.proceedButton}>
-          Proceed to Payment
-        </button>
+        {isGuestInfoValid ? (
+          <PaystackButton
+            {...componentProps}
+            className={styles.proceedButton}
+          />
+        ) : (
+          <button type="submit" className={styles.proceedButton}>
+            Validate Info
+          </button>
+        )}
       </form>
-    </>
+    </div>
   );
 };
 
-export default Page;
+export default CheckoutPage;

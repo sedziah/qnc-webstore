@@ -383,36 +383,6 @@ export const apiService = {
     return apiService.transformProduct(productData); // Use the transformProduct function to format the response
   },
 
-  // Function to create a guest account
-  // createGuestUser: async (
-  //   email: string,
-  //   firstName: string,
-  //   lastName: string
-  // ) => {
-  //   const response = await fetch(`${API_BASE_URL}/accounts/guest-user/`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       email,
-  //       first_name: firstName,
-  //       last_name: lastName,
-  //     }),
-  //   });
-
-  //   if (!response.ok) {
-  //     const errorData = await response.json();
-  //     let errorMessage = "An unexpected error occurred.";
-
-  //     // Simplified error handling: Take the first error message available
-  //     errorMessage = errorData[Object.keys(errorData)[0]].join(" ");
-
-  //     throw new Error(errorMessage);
-  //   }
-
-  //   return response.json();
-  // },
 
   // Method for guest checkout, creating profile, order, and initiating Paystack payment
   guestCheckout: async (payload: any) => {
