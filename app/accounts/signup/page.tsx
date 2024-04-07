@@ -90,7 +90,7 @@ const Page = () => {
   };
 
   const handleSignInClick = () => {
-    router.push("/signin"); // Redirect to sign-in page
+    router.push("signin"); // Redirect to sign-in page
   };
 
   return (

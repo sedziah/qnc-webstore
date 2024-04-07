@@ -383,7 +383,6 @@ export const apiService = {
     return apiService.transformProduct(productData); // Use the transformProduct function to format the response
   },
 
-
   // Method for guest checkout, creating profile, order, and initiating Paystack payment
   guestCheckout: async (payload: any) => {
     const response = await fetch(`${API_BASE_URL}/orders/guest-checkout/`, {
@@ -406,6 +405,37 @@ export const apiService = {
     }
 
     // The response should contain the order details and the Paystack payment URL
+    return response.json();
+  },
+
+  subscribeToNewsletter: async (email: string) => {
+    const response = await fetch(`${API_BASE_URL}/accounts/subscribe/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      let errorMessage = "An unexpected error occurred.";
+
+      // Handle non-field errors first
+      if (errorData.non_field_errors) {
+        errorMessage = errorData.non_field_errors.join(" ");
+      } else {
+        // Handle specific field errors if present
+        const errorFields = Object.keys(errorData);
+        if (errorFields.length > 0) {
+          const firstErrorField = errorFields[0];
+          errorMessage = errorData[firstErrorField].join(" ");
+        }
+      }
+
+      throw new Error(errorMessage);
+    }
+
     return response.json();
   },
 
