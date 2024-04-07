@@ -85,6 +85,12 @@ const ElectronicsProducts = () => {
             })}
           </div>
         )}
+
+        {!isLoading && products.length === 0 && (
+          <div className={styles.noProductsMessage}>
+            No products found in this category.
+          </div>
+        )}
       </div>
     </>
   );

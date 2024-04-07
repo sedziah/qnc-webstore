@@ -8,9 +8,9 @@ const Page = () => {
         <h1 className={styles.headingText}>Store Credits</h1>
       </div>
       <div className={styles.content}>
-        <h2>What are Store Credits?</h2>
+        <h2>What is Q&C Credit?</h2>
         <p>
-          Store credits at QnC are approved lines of credit that allow our
+          Q&C offers an approved amount of credit that allow our
           customers the flexibility to purchase now and pay later. This
           convenient option empowers you to shop for your favorite products
           without immediate payment, giving you the comfort to manage your
@@ -18,7 +18,7 @@ const Page = () => {
         </p>
         <br />
 
-        <h2>How to Apply for Store Credits</h2>
+        <h2>How to Apply for Q&C Credit</h2>
         <ol>
           <li>
             <strong>Submit Your Application:</strong> Begin by filling out our
