@@ -41,6 +41,21 @@
   align-items: center;
 }
 
+.noProductsMessage {
+  text-align: center;
+  margin-top: 2em; /* Use ems for scalable spacing */
+  padding: 1em;
+  font-size: 1.5rem; /* Larger text size for clarity, but will scale with user's browser settings */
+  color: #333; /* Dark gray for readability, adjust based on your site's theme */
+  background-color: #f8f8f8; /* Light background to stand out */
+  border: 1px solid #eaeaea; /* Subtle border */
+  border-radius: 4px; /* Rounded corners for a softer look */
+  max-width: 90%; /* Max width with a percentage to be responsive */
+  box-sizing: border-box; /* Makes sure padding doesn't affect the overall width */
+  margin-left: auto; /* Centers the div in the parent */
+  margin-right: auto; /* Centers the div in the parent */
+}
+
 @media (max-width: 768px) {
   .imageBox {
     margin-top: 3%;
