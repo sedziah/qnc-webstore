@@ -2,10 +2,9 @@
 
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter from Next.js
+import { useRouter } from "next/navigation"; 
 import styles from "./SearchBar.module.css";
 import SearchIcon from '@mui/icons-material/Search';
-import Stack from "@mui/material/Stack";
 import "../../app/globals.css"
 
 
