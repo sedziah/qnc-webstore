@@ -59,7 +59,7 @@ const ElectronicsProducts = () => {
           <div className={styles.imageBox}>
             {products.map((product) => {
               // Log the details of the current product
-              console.log("Displaying product details:", product);
+              // console.log("Displaying product details:", product);
 
               // Construct a CartItem object
               const cartItem = {
