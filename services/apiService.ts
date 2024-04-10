@@ -273,7 +273,7 @@ export const apiService = {
   },
 
   getMobilePhones: async (): Promise<TransformedProduct[]> => {
-    return await apiService.getProductsByCategory("smartphones");
+    return await apiService.getProductsByCategory("cell-phones-accessories");
   },
 
   getComputers: async (): Promise<TransformedProduct[]> => {
