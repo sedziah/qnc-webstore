@@ -1,110 +1,92 @@
 // app/checkout/guest/page.tsx
 
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
-import { PaystackButton } from "react-paystack";
 import { useRouter } from "next/navigation";
-import { useCart } from "../../cart/CartContext"; // Adjust import path as necessary
+import { useCart } from "../../cart/CartContext"; // Adjust the import path as necessary
 import styles from "./page.module.css";
-import { apiService } from "../../../services/apiService"; // Adjust import path as necessary
+import { apiService } from "../../../services/apiService"; // Adjust the import path as necessary
 
 const CheckoutPage: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [primaryPhoneNumber, setPrimaryPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [region, setRegion] = useState("");
-  const [subtotal, setSubtotal] = useState(0); // Subtotal in Pesewas
-  const [isGuestInfoValid, setIsGuestInfoValid] = useState(false);
+  const [email, setEmail] = useState<string>("");
+  const [firstName, setFirstName] = useState<string>("");
+  const [lastName, setLastName] = useState<string>("");
+  const [primaryPhoneNumber, setPrimaryPhoneNumber] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [region, setRegion] = useState<string>("");
   const { cart, clearCart } = useCart();
   const router = useRouter();
-  // Add a state for the Paystack public key
-  const [publicKey, setPublicKey] = useState("");
 
-  useEffect(() => {
-    // Print the public key when the component mounts or when the cart changes
-    console.log(
-      "Paystack Public Key:",
-      process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY
-    );
+  const handleGuestCheckout = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
 
-    // When the component mounts, set the public key from environment variables
-    if (process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY) {
-      setPublicKey(process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY);
-    } else {
-      console.error("Paystack public key is not set in environment variables.");
-    }
-
-    const fetchProductDetailsAndCalculateSubtotal = async () => {
-      let newSubtotal = 0; // Assume this will be in GHS
-      for (const cartItem of cart) {
-        try {
-          const productDetails = await apiService.getProductById(cartItem.id);
-          // If productDetails.price is in GHS, convert to Pesewas by multiplying by 100
-          newSubtotal += productDetails.price * 100 * cartItem.quantity;
-        } catch (error) {
-          console.error("Error fetching product details:", error);
-        }
-      }
-      // Set subtotal in state already converted to Pesewas
-      setSubtotal(newSubtotal);
+    const guestUserData = {
+      email: email,
+      first_name: firstName,
+      last_name: lastName,
+      address: address,
+      city: city,
+      region: region,
+      primary_phone_number: primaryPhoneNumber.replace(/[^0-9]/g, ""),
     };
 
-    if (cart.length > 0) {
-      fetchProductDetailsAndCalculateSubtotal();
-    }
-  }, [cart]);
+    const cartItemsData = cart.map((item) => ({
+      product_id: item.id,
+      quantity: item.quantity,
+    }));
 
-  const componentProps = {
-    email,
-    amount: subtotal,
-    currency: "GHS",
-    publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY, // Replace with your actual Paystack public key
-    text: "Pay Now",
-    metadata: {
-      custom_fields: [
-        {
-          display_name: "Name",
-          variable_name: "name",
-          value: `${firstName} ${lastName}`,
-        },
-        {
-          display_name: "Phone Number",
-          variable_name: "phone",
-          value: primaryPhoneNumber,
-        },
-      ],
-    },
-    onSuccess: (response: any) => {
-      console.log(response);
-      alert("Payment successful! Reference: " + response.reference);
-      clearCart(); // Clear the cart after a successful payment
-      router.push("guest/payment-success");
-    },
-    onClose: () => alert("Payment was not completed."),
+    // Payload to be sent to the backend
+    const payload = {
+      guest_user: guestUserData,
+      cart_items: cartItemsData,
+    };
+
+    // // Log the payload to the console for debugging
+    
+    // const staticPayload = {
+    //   guest_user: {
+    //     email: "guest@example.com",
+    //     first_name: "John",
+    //     last_name: "Doe",
+    //     address: "123 Main St",
+    //     city: "Anytown",
+    //     region: "State",
+    //     primary_phone_number: "1234567890",
+    //   },
+    //   cart_items: [
+    //     {
+    //       product_id: "fd5ebab8-697a-4ebe-821a-e7353985f404",
+    //       quantity: 2,
+    //     },
+    //     {
+    //       product_id: "371b9087-a49a-4124-a51f-0c681076d2cc",
+    //       quantity: 1,
+    //     },
+    //   ],
+    // };
+
+    try {
+      const response = await apiService.guestCheckout(payload);
+
+      if (response.payment_url) {
+        window.location.href = response.payment_url;
+      } else {
+        alert("Failed to create order or initiate payment.");
+      }
+    } catch (error: any) {
+      console.error("Error during guest checkout:", error);
+      alert(
+        error.message || "An error occurred while processing your checkout."
+      );
+    }
   };
 
-  const handleGuestCheckout = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (
-      email &&
-      firstName &&
-      lastName &&
-      primaryPhoneNumber &&
-      address &&
-      city &&
-      region
-    ) {
-      setIsGuestInfoValid(true);
-    } else {
-      alert("Please fill in all the required fields.");
-    }
-  };
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1 className={styles.title}>Guest Checkout</h1>
       <form onSubmit={handleGuestCheckout} className={styles.checkoutForm}>
         <input
@@ -156,17 +138,9 @@ const CheckoutPage: React.FC = () => {
           onChange={(e) => setRegion(e.target.value)}
           required
         />
-        {isGuestInfoValid ? (
-          <PaystackButton
-            {...componentProps}
-            publicKey={publicKey}
-            className={styles.proceedButton}
-          />
-        ) : (
-          <button type="submit" className={styles.proceedButton}>
-            Validate Info
-          </button>
-        )}
+        <button type="submit" className={styles.proceedButton}>
+          Proceed to Payment
+        </button>
       </form>
     </div>
   );

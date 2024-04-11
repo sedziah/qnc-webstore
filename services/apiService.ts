@@ -399,7 +399,7 @@ export const apiService = {
       let errorMessage = "An unexpected error occurred.";
 
       // Simplified error handling: Take the first error message available
-      errorMessage = errorData[Object.keys(errorData)[0]].join(" ");
+      // errorMessage = errorData[Object.keys(errorData)[0]].join(" ");
 
       throw new Error(errorMessage);
     }
