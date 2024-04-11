@@ -44,29 +44,6 @@ const CheckoutPage: React.FC = () => {
       cart_items: cartItemsData,
     };
 
-    // // Log the payload to the console for debugging
-    
-    // const staticPayload = {
-    //   guest_user: {
-    //     email: "guest@example.com",
-    //     first_name: "John",
-    //     last_name: "Doe",
-    //     address: "123 Main St",
-    //     city: "Anytown",
-    //     region: "State",
-    //     primary_phone_number: "1234567890",
-    //   },
-    //   cart_items: [
-    //     {
-    //       product_id: "fd5ebab8-697a-4ebe-821a-e7353985f404",
-    //       quantity: 2,
-    //     },
-    //     {
-    //       product_id: "371b9087-a49a-4124-a51f-0c681076d2cc",
-    //       quantity: 1,
-    //     },
-    //   ],
-    // };
 
     try {
       const response = await apiService.guestCheckout(payload);
