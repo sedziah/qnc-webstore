@@ -30,7 +30,6 @@ export default function Page() {
       );
       try {
         const productResponses = await Promise.all(productRequests);
-        console.log("Loaded cart products:", productResponses);
         setCartProducts(productResponses);
       } catch (error) {
         console.error("Error loading cart products:", error);
