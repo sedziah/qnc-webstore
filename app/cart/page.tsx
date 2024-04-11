@@ -9,13 +9,19 @@ import { TransformedProduct, apiService } from "../../services/apiService"; // U
 import Link from "next/link";
 
 export default function Page() {
-  const { cart, updateCartItemQuantity } = useCart();
+  const { cart, updateCartItemQuantity, removeCartItem } = useCart();
   console.log("Current items in cart:", cart); // Log the current cart items
   const [cartProducts, setCartProducts] = useState<TransformedProduct[]>([]);
   const crumbs = [
     { title: "Home", href: "/" },
     { title: "Cart", href: "/cart" },
   ];
+
+  const handleRemoveItem = (productId: string) => {
+    // Assuming your useCart context has a method named 'removeCartItem'
+    // Call this method with the productId to remove the item from the cart
+    removeCartItem(productId);
+  };
 
   useEffect(() => {
     const loadCartProducts = async () => {
@@ -101,9 +107,16 @@ export default function Page() {
                         </div>
                       </div>
                     </div>
+                    <button
+                      onClick={() => handleRemoveItem(product.id)}
+                      className={styles.removeButton}
+                    >
+                      Remove
+                    </button>
                   </div>
                 );
               })}
+              
             </div>
             <div className={styles.cartSummary}>
               <p>Sub-Total: GHS {subtotal.toFixed(2)}</p>
