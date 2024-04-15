@@ -1,14 +1,17 @@
 /* payment-success.module.css */
 .successPage {
-  text-align: center;
-  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
   color: #4BB543; /* Success color */
+  font-family: Arial, sans-serif;
 }
 
-.declinedPage {
-  text-align: center;
-  padding: 50px;
-  color: #D8000C; /* Declined color */
+.details {
+  margin: 20px 0;
 }
 
 .button {
@@ -19,10 +22,16 @@
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .button:hover {
   background-color: #367C2B;
 }
 
-/* Add any additional styling you need */
+@media (max-width: 768px) {
+  .successPage {
+    padding: 10px;
+  }
+}

@@ -7,21 +7,35 @@ import { useRouter } from "next/navigation";
 import { useCart } from "../../../cart/CartContext"; // Adjust import path as necessary
 import styles from "./payment-success.module.css"; // Ensure you have this CSS module
 
+// Define a type for your payment details state
+interface PaymentDetails {
+  reference: string | null;
+  orderNumber: string | null;
+  totalPaid: string | null;
+}
+
 const PaymentSuccessPage: React.FC = () => {
   const router = useRouter();
   const { clearCart } = useCart();
-  const [reference, setReference] = useState<string | null>(null);
+  // Initialize your state with the correct types
+  const [paymentDetails, setPaymentDetails] = useState<PaymentDetails>({
+    reference: null,
+    orderNumber: null,
+    totalPaid: null,
+  });
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const urlParams = new URLSearchParams(window.location.search);
-      const ref = urlParams.get("reference"); // Assuming 'reference' is the query param
-      setReference(ref);
-      console.log("Fetched reference:", ref); // Log the fetched reference
+      // Fetch values from the URL parameters
+      const reference = urlParams.get("reference");
+      const orderNumber = urlParams.get("orderNumber");
+      const totalPaid = urlParams.get("totalPaid");
 
-      if (ref) {
-        clearCart(); // Clear the cart if the reference is successfully fetched
-      }
+      // Update state with the fetched values
+      // TypeScript now understands that these values can be either string or null
+      setPaymentDetails({ reference, orderNumber, totalPaid });
+      clearCart();
     }
   }, [clearCart]);
 
@@ -29,7 +43,11 @@ const PaymentSuccessPage: React.FC = () => {
     <div className={styles.successPage}>
       <h1>Payment Successful!</h1>
       <p>Your payment was successful. Your order is being processed.</p>
-      <p>Payment Reference: {reference}</p>
+      <div className={styles.details}>
+        <p>Order Number: {paymentDetails.orderNumber}</p>
+        <p>Total Paid: ${paymentDetails.totalPaid}</p>
+        <p>Payment Reference: {paymentDetails.reference}</p>
+      </div>
       <button className={styles.button} onClick={() => router.push("/")}>
         Continue Shopping
       </button>
