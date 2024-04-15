@@ -100,8 +100,55 @@ const CheckoutPage: React.FC = () => {
       <div className={styles.container}>
         <h1 className={styles.title}>Guest Checkout</h1>
         <form onSubmit={handleGuestCheckout} className={styles.checkoutForm}>
-          {/* Form fields remain unchanged */}
-          {/* ... */}
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+          <input
+            type="tel"
+            placeholder="Primary Phone Number"
+            value={primaryPhoneNumber}
+            onChange={(e) => setPrimaryPhoneNumber(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="City"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Region"
+            value={region}
+            onChange={(e) => setRegion(e.target.value)}
+            required
+          />
           <button type="submit" className={styles.proceedButton}>
             Proceed to Payment
           </button>
