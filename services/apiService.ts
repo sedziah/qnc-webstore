@@ -1,7 +1,10 @@
 // services/apiService.ts
 
-const API_BASE_URL = "http://167.172.52.195";
+// const API_BASE_URL = "http://167.172.52.195";
 // const API_BASE_URL = "http://127.0.0.1:8000";
+
+const API_BASE_URL = "https://api.qualityncare.com";
+
 
 interface Variant {
   id: string;
