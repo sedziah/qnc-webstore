@@ -3,8 +3,10 @@
 .heroSection {
   margin: 2% 10% 0 10%;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  height: 600px;
+  border: solid red;
+  /* height: 600px; */
 }
 
 .heroLink {
@@ -13,16 +15,6 @@
 
 .appliancesContainer {
   width: 100%;
-}
-
-.heroContainer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center; /* Centers children horizontally */
-  align-items: center; /* Centers children vertically */
-  flex-direction: column; /* Stacks children vertically */
-  position: relative;
 }
 
 .heroImage {
@@ -34,23 +26,37 @@
 }
 
 .heroTitle {
-  position: absolute; /* Absolute positioning within the relative container */
-  top: 60%; /* Centers vertically */
-  left: 25%; /* Centers horizontally */
-  transform: translate(
-    -50%,
-    -50%
-  ); /* Ensures the center of the title is in the center of the container */
+  position: absolute;
+  top: 60%;
+  left: 25%;
+  transform: translate(-50%, -50%);
   color: black;
-  font-size: 15px; /* You may want to adjust this depending on your design */
+  font-size: 15px;
   font-weight: bold;
-  font-family: Montserrat, sans-serif; /* Ensure font-family is correctly formatted */
+  font-family: Montserrat, sans-serif;
   text-align: center;
-  width: 100%; /* Ensures text is centered within the container */
-  pointer-events: none; /* Allows clicks to pass through to the link below */
+  width: 100%;
+  pointer-events: none;
 }
 
-/* Media query for mobile devices */
+.heroContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .heroSection {
+    margin: 1% 5% 0 5%;
+    height: auto;
+  }
+}
+
+
 @media (max-width: 768px) {
   .heroSection {
     margin: 2% 5% 5% 5%;
@@ -71,21 +77,9 @@
     object-fit: contain;
   }
 
-  .heroTitle {
-    position: absolute;
-    top: 65%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-    color: black;
-    font-size: 15px;
-    font-weight: bold;
-    font-family: montserrat;
-    text-align: center;
-  }
 }
 
-
-@media (min-device-width: 769px) and (max-device-width: 1024px) {
+/* @media (min-device-width: 769px) and (max-device-width: 1024px) {
   .heroSection {
     margin: 2% 10% 0 10%;
     display: flex;
@@ -93,4 +87,4 @@
     height: 600px;
     border: solid red;
   }
-}
+} */
