@@ -1,42 +1,41 @@
 // SignIn.jsx
-"use client";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import styles from "./page.module.css";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../../auth/contexts/AuthContext";
-import Head from "next/head";
-import Image from "next/image";
-
+'use client';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import styles from './page.module.css';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../../auth/contexts/AuthContext';
+import Head from 'next/head';
+import Image from 'next/image';
 
 const Page = () => {
   const router = useRouter();
   const { isAuthenticated, error, login } = useAuth(); // Destructure isAuthenticated
-  const [emailOrUsername, setEmailOrUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState("");
+  const [emailOrUsername, setEmailOrUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "Products", href: "/products" },
-    { title: "Mobile Phones", href: "/products/electronics" },
+    { title: 'Home', href: '/' },
+    { title: 'Products', href: '/products' },
+    { title: 'Mobile Phones', href: '/products/electronics' },
   ];
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.replace("/dashboard"); // Use replace to prevent going back to the sign-in page
+      router.replace('/dashboard'); // Use replace to prevent going back to the sign-in page
     }
   }, [isAuthenticated, router]); // Depend on isAuthenticated and router
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoginError(""); // Clear previous errors before trying to log in
+    setLoginError(''); // Clear previous errors before trying to log in
 
     try {
       await login(emailOrUsername, password);
       // Check if isAuthenticated is updated before redirecting
       if (isAuthenticated) {
-        router.push("/dashboard"); // Redirect to dashboard instead of home
+        router.push('/dashboard'); // Redirect to dashboard instead of home
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -44,7 +43,7 @@ const Page = () => {
         setLoginError(error.message);
       } else {
         // If it's not an Error, we handle it as an unknown error
-        setLoginError("An unknown error occurred.");
+        setLoginError('An unknown error occurred.');
       }
     }
   };
@@ -64,49 +63,53 @@ const Page = () => {
       <div className={styles.formSide}>
         <form className={styles.loginForm} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
-            <label htmlFor="username">Username or Email address *</label>
+            <label htmlFor='username'>Username or Email address *</label>
             <input
-              type="text"
-              id="username"
-              name="username"
-              onChange={(e) => setEmailOrUsername(e.target.value)}
+              type='text'
+              id='username'
+              name='username'
+              onChange={(e) => {
+                setEmailOrUsername(e.target.value);
+              }}
               value={emailOrUsername}
               required
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="password">Password *</label>
+            <label htmlFor='password'>Password *</label>
             <input
-              type="password"
-              id="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
+              type='password'
+              id='password'
+              name='password'
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
               value={password}
               required
             />
           </div>
           <div className={styles.options}>
             <label>
-              <input type="checkbox" id="rememberMe" name="rememberMe" />
+              <input type='checkbox' id='rememberMe' name='rememberMe' />
               Remember me
             </label>
             <Link
               className={styles.forgotPassword}
-              href="/accounts/reset-password"
+              href='/accounts/reset-password'
               passHref
             >
               Forgot password
             </Link>
           </div>
-          <button type="submit" className={styles.loginButton}>
+          <button type='submit' className={styles.loginButton}>
             Login
           </button>
 
           {loginError && (
             <div
               style={{
-                color: "red",
-                marginTop: "10px",
+                color: 'red',
+                marginTop: '10px',
               }}
             >
               {loginError}
@@ -116,14 +119,13 @@ const Page = () => {
       </div>
       <div className={styles.imageSide}>
         <Image
-          src="/images/login.png" // Replace with the path to your actual image
-          alt="Workspace Background"
-          layout="fill"
-          objectFit="cover"
+          src='/images/login.png' // Replace with the path to your actual image
+          alt='Workspace Background'
+          layout='fill'
+          objectFit='cover'
           priority // This will prioritize loading of the image
         />
       </div>
-
     </div>
   );
 };

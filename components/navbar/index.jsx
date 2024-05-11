@@ -1,15 +1,15 @@
-//Components/Navbar/index.jsx
+// Components/Navbar/index.jsx
 
-"use client";
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import styles from "./Navbar.module.css";
-import Image from "next/image";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import MenuIcon from "@mui/icons-material/Menu";
-import { useAuth } from "../../app/auth/contexts/AuthContext";
-import { useCart } from "../../app/cart/CartContext";
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import styles from './Navbar.module.css';
+import Image from 'next/image';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import MenuIcon from '@mui/icons-material/Menu';
+import { useAuth } from '../../app/auth/contexts/AuthContext';
+import { useCart } from '../../app/cart/CartContext';
 
 function Navbar() {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
@@ -39,10 +39,10 @@ function Navbar() {
       <div className={styles.container}>
         <div className={styles.navbar}>
           <div className={styles.logo}>
-            <Link href="/">
+            <Link href='/'>
               <Image
-                src="/images/logo.png"
-                alt="QnC Logo"
+                src='/images/logo.png'
+                alt='QnC Logo'
                 width={121}
                 height={51.5}
               />
@@ -50,16 +50,16 @@ function Navbar() {
           </div>
           <div>
             <ul className={styles.navLinks}>
-              <Link href="/products/featured">
+              <Link href='/products/featured'>
                 <li>featured</li>
               </Link>
-              <Link href="/products/deals">
+              <Link href='/products/deals'>
                 <li>deals</li>
               </Link>
-              <Link href="/store-credits">
+              <Link href='/store-credits'>
                 <li>store credits</li>
               </Link>
-              <Link href="/cart">
+              <Link href='/cart'>
                 <li>
                   <AddShoppingCartIcon />
                   {cartCount > 0 && (
@@ -69,7 +69,7 @@ function Navbar() {
               </Link>
               {isAuthenticated ? (
                 <>
-                  <Link href="/dashboard">
+                  <Link href='/dashboard'>
                     <li className={styles.myAccount}>My Account</li>
                   </Link>
                   <li onClick={handleSignOut} className={styles.signoutButton}>
@@ -78,10 +78,10 @@ function Navbar() {
                 </>
               ) : (
                 <>
-                  <Link href="/accounts/signin" className={styles.links}>
+                  <Link href='/accounts/signin' className={styles.links}>
                     <li className={styles.signin_button}>Sign in</li>
                   </Link>
-                  <Link href="/accounts/signup" className={styles.links}>
+                  <Link href='/accounts/signup' className={styles.links}>
                     <li className={styles.signup_button}>Sign up</li>
                   </Link>
                 </>
@@ -93,19 +93,19 @@ function Navbar() {
           /* Hidden on desktop views */}
           <div className={styles.mobileNav}>
             <ul>
-              <Link className={styles.link} href="/accounts/signin">
+              <Link className={styles.link} href='/accounts/signin'>
                 <li className={styles.link}>
                   <PermIdentityIcon />
                 </li>
               </Link>
-              <Link className={styles.link} href="/cart">
+              <Link className={styles.link} href='/cart'>
                 <li>
                   <AddShoppingCartIcon />
                 </li>
               </Link>
               <li
                 className={`${styles.mobileNav} ${
-                  isMobileNavOpen ? styles.active : ""
+                  isMobileNavOpen ? styles.active : ''
                 }`}
                 onClick={toggleMobileNav}
               >
@@ -127,25 +127,25 @@ function Navbar() {
           </div>
           <ul className={styles.mobileLinks}>
             <li>
-              <Link href="/">Home</Link>
+              <Link href='/'>Home</Link>
             </li>
             <li>
-              <Link href="/products/featured">Featured</Link>
+              <Link href='/products/featured'>Featured</Link>
             </li>
             <li>
-              <Link href="/products/deals">Deals</Link>
+              <Link href='/products/deals'>Deals</Link>
             </li>
             <li>
-              <Link href="/store-credits">Store Credits</Link>
+              <Link href='/store-credits'>Store Credits</Link>
             </li>
             <li>
-              <Link href="/accounts/signin">Sign In</Link>
+              <Link href='/accounts/signin'>Sign In</Link>
             </li>
             {/* <li>
               <Link href="/signin">Account</Link>
             </li> */}
             <li>
-              <Link href="/about">About</Link>
+              <Link href='/about'>About</Link>
             </li>
           </ul>
         </div>

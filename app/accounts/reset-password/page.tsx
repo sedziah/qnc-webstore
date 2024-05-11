@@ -1,25 +1,25 @@
 // app/accounts/reset-password/page.tsx
 
-"use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { apiService } from "../../../services/apiService";
-import styles from "./page.module.css";
-import Image from "next/image";
-import Link from "next/link";
-import Head from "next/head";
+'use client';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { apiService } from '../../../services/apiService';
+import styles from './page.module.css';
+import Image from 'next/image';
+import Link from 'next/link';
+import Head from 'next/head';
 
 const PasswordResetRequestForm = () => {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState(""); // Added state for error message
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState(''); // Added state for error message
   const [isLoading, setIsLoading] = useState(false); // State to control spinner visibility
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setMessage(""); // Clear previous success message
-    setError(""); // Clear previous error message
+    setMessage(''); // Clear previous success message
+    setError(''); // Clear previous error message
     setIsLoading(true); // Show the spinner
     try {
       const response = await apiService.resetPasswordRequest(email);
@@ -27,7 +27,7 @@ const PasswordResetRequestForm = () => {
       setIsLoading(false); // Hide the spinner before starting the delay
 
       setTimeout(() => {
-        router.push("/accounts/signin");
+        router.push('/accounts/signin');
       }, 4000); // Delay before redirection
     } catch (error: unknown) {
       // Catch clause has type 'unknown'
@@ -35,7 +35,7 @@ const PasswordResetRequestForm = () => {
       if (error instanceof Error) {
         setError(error.message); // TypeScript knows error is an Error object
       } else {
-        setError("Details no found"); // Generic error message for unknown types
+        setError('Details no found'); // Generic error message for unknown types
       }
     }
   };
@@ -49,20 +49,22 @@ const PasswordResetRequestForm = () => {
       <div className={styles.formSide}>
         <form className={styles.loginForm} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
-            <label htmlFor="email" className={styles.label}>
+            <label htmlFor='email' className={styles.label}>
               Email:
             </label>
             <input
-              type="email"
-              id="email"
+              type='email'
+              id='email'
               className={styles.input}
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
               required
             />
           </div>
 
-          <button type="submit" className={styles.loginButton}>
+          <button type='submit' className={styles.loginButton}>
             Send Reset Link
           </button>
           <br></br>
@@ -72,10 +74,10 @@ const PasswordResetRequestForm = () => {
       </div>
       <div className={styles.imageSide}>
         <Image
-          src="/images/login.png" // Replace with the path to your actual image
-          alt="Workspace Background"
-          layout="fill"
-          objectFit="cover"
+          src='/images/login.png' // Replace with the path to your actual image
+          alt='Workspace Background'
+          layout='fill'
+          objectFit='cover'
           priority // This will prioritize loading of the image
         />
       </div>

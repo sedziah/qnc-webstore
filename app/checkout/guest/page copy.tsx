@@ -1,24 +1,24 @@
 // app/checkout/page.tsx
 
-"use client";
-import React, { useState } from "react";
-import Breadcrumbs from "../../../components/breadcrumbs";
-import { useRouter } from "next/navigation"; // import useRouter from Next.js
-import styles from "./page.module.css"; // Update the import path as necessary
-import { useCart } from "../../cart/CartContext"; // Update the import path as necessary
-import { apiService } from "../../../services/apiService"; // Update the import path as necessary
+'use client';
+import React, { useState } from 'react';
+import Breadcrumbs from '../../../components/breadcrumbs';
+import { useRouter } from 'next/navigation'; // import useRouter from Next.js
+import styles from './page.module.css'; // Update the import path as necessary
+import { useCart } from '../../cart/CartContext'; // Update the import path as necessary
+import { apiService } from '../../../services/apiService'; // Update the import path as necessary
 
 const Page: React.FC = () => {
   // Personal details for GuestUser
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   // Additional profile information
-  const [primaryPhoneNumber, setPrimaryPhoneNumber] = useState("");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [region, setRegion] = useState("");
+  const [primaryPhoneNumber, setPrimaryPhoneNumber] = useState('');
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [region, setRegion] = useState('');
 
   // Cart items (this might come from a global state or context in your actual application)
   const { cart } = useCart(); // Placeholder, replace with actual cart items
@@ -26,13 +26,13 @@ const Page: React.FC = () => {
   const router = useRouter();
 
   const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "Cart", href: "/cart" },
-    { title: "Checkout", href: "/checkout" },
+    { title: 'Home', href: '/' },
+    { title: 'Cart', href: '/cart' },
+    { title: 'Checkout', href: '/checkout' },
   ];
 
   const handleGuestCheckout = async (
-    event: React.FormEvent<HTMLFormElement>
+    event: React.FormEvent<HTMLFormElement>,
   ) => {
     event.preventDefault();
 
@@ -68,14 +68,13 @@ const Page: React.FC = () => {
       if (response.payment_url) {
         window.location.href = response.payment_url;
       } else {
-        console.error("Payment URL not provided");
+        console.error('Payment URL not provided');
       }
     } catch (error) {
-      console.error("Guest checkout error:", error);
+      console.error('Guest checkout error:', error);
       // Handle errors here, e.g., show an error message to the user
     }
   };
-
 
   return (
     <>
@@ -83,55 +82,69 @@ const Page: React.FC = () => {
       <h1 className={styles.title}>Guest Checkout</h1>
       <form onSubmit={handleGuestCheckout} className={styles.checkoutForm}>
         <input
-          type="email"
-          placeholder="Email"
+          type='email'
+          placeholder='Email'
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
           required
         />
         <input
-          type="text"
-          placeholder="First Name"
+          type='text'
+          placeholder='First Name'
           value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
+          onChange={(e) => {
+            setFirstName(e.target.value);
+          }}
           required
         />
         <input
-          type="text"
-          placeholder="Last Name"
+          type='text'
+          placeholder='Last Name'
           value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+          onChange={(e) => {
+            setLastName(e.target.value);
+          }}
           required
         />
         <input
-          type="tel"
-          placeholder="Primary Phone Number"
+          type='tel'
+          placeholder='Primary Phone Number'
           value={primaryPhoneNumber}
-          onChange={(e) => setPrimaryPhoneNumber(e.target.value)}
+          onChange={(e) => {
+            setPrimaryPhoneNumber(e.target.value);
+          }}
           required
         />
         <input
-          type="text"
-          placeholder="Address"
+          type='text'
+          placeholder='Address'
           value={address}
-          onChange={(e) => setAddress(e.target.value)}
+          onChange={(e) => {
+            setAddress(e.target.value);
+          }}
           required
         />
         <input
-          type="text"
-          placeholder="City"
+          type='text'
+          placeholder='City'
           value={city}
-          onChange={(e) => setCity(e.target.value)}
+          onChange={(e) => {
+            setCity(e.target.value);
+          }}
           required
         />
         <input
-          type="text"
-          placeholder="Region"
+          type='text'
+          placeholder='Region'
           value={region}
-          onChange={(e) => setRegion(e.target.value)}
+          onChange={(e) => {
+            setRegion(e.target.value);
+          }}
           required
         />
-        <button type="submit" className={styles.proceedButton}>
+        <button type='submit' className={styles.proceedButton}>
           Proceed to Payment
         </button>
       </form>

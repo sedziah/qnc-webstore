@@ -1,5 +1,5 @@
-//about/page.tsx
-import styles from "./page.module.css";
+// about/page.tsx
+import styles from './page.module.css';
 
 const Page = () => {
   return (

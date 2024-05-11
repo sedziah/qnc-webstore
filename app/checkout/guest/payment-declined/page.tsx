@@ -3,8 +3,6 @@
 // import styles from './payment-declined.module.css'; // Make sure to create this CSS module
 
 const PaymentDeclinedPage: React.FC = () => {
-
-
   return (
     <h1>Payment Declined</h1>
     // <div className={styles.declinedPage}>

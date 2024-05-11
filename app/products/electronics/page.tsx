@@ -1,11 +1,11 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import ProductCard from "../../../components/productCard/ProductCard";
-import { apiService } from "../../../services/apiService";
-import styles from "./page.module.css";
-import SearchBar from "../../../components/searchbar/index";
-import Breadcrumbs from "../../../components/breadcrumbs/index";
-import Link from "next/link";
+'use client';
+import React, { useEffect, useState } from 'react';
+import ProductCard from '../../../components/productCard/ProductCard';
+import { apiService } from '../../../services/apiService';
+import styles from './page.module.css';
+import SearchBar from '../../../components/searchbar/index';
+import Breadcrumbs from '../../../components/breadcrumbs/index';
+import Link from 'next/link';
 
 interface TransformedProduct {
   id: string;
@@ -24,8 +24,8 @@ const ElectronicsProducts = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "Mobile Phones", href: "/products/mobile-phones" },
+    { title: 'Home', href: '/' },
+    { title: 'Mobile Phones', href: '/products/mobile-phones' },
   ];
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const ElectronicsProducts = () => {
         const data = await apiService.getMobilePhones();
         setProducts(data);
       } catch (error) {
-        console.error("Failed to fetch products:", error);
+        console.error('Failed to fetch products:', error);
       } finally {
         // End loading
         setIsLoading(false);

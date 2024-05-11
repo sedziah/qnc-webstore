@@ -1,11 +1,11 @@
 // app/checkout/guest/payment-success/page.tsx
 
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useCart } from "../../../cart/CartContext"; // Adjust import path as necessary
-import styles from "./payment-success.module.css"; // Ensure you have this CSS module
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useCart } from '../../../cart/CartContext'; // Adjust import path as necessary
+import styles from './payment-success.module.css'; // Ensure you have this CSS module
 
 // Define a type for your payment details state
 interface PaymentDetails {
@@ -25,12 +25,12 @@ const PaymentSuccessPage: React.FC = () => {
   });
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       const urlParams = new URLSearchParams(window.location.search);
       // Fetch values from the URL parameters
-      const reference = urlParams.get("reference");
-      const orderNumber = urlParams.get("orderNumber");
-      const totalPaid = urlParams.get("totalPaid");
+      const reference = urlParams.get('reference');
+      const orderNumber = urlParams.get('orderNumber');
+      const totalPaid = urlParams.get('totalPaid');
 
       // Update state with the fetched values
       // TypeScript now understands that these values can be either string or null
@@ -48,7 +48,12 @@ const PaymentSuccessPage: React.FC = () => {
         <p>Total Paid: ${paymentDetails.totalPaid}</p>
         <p>Payment Reference: {paymentDetails.reference}</p>
       </div>
-      <button className={styles.button} onClick={() => router.push("/")}>
+      <button
+        className={styles.button}
+        onClick={() => {
+          router.push('/');
+        }}
+      >
         Continue Shopping
       </button>
     </div>

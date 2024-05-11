@@ -1,20 +1,20 @@
-"use client";
+'use client';
 
-import styles from "./page.module.css";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../auth/contexts/AuthContext";
+import styles from './page.module.css';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../auth/contexts/AuthContext';
 
 export default function Page() {
   const router = useRouter();
   const { isAuthenticated, login } = useAuth(); // Destructure isAuthenticated
-  const [error, setError] = useState("");
-  const [activeTab, setActiveTab] = useState("Overview");
+  const [error, setError] = useState('');
+  const [activeTab, setActiveTab] = useState('Overview');
 
   useEffect(() => {
     // Redirect to Sign In if not authenticated
     if (!isAuthenticated) {
-      router.push("/signin"); // Redirect to the home page
+      router.push('/signin'); // Redirect to the home page
     }
   }, [isAuthenticated, router]); // Depend on isAuthenticated and router
 
@@ -27,33 +27,36 @@ export default function Page() {
     <div className={styles.dashboardContainer}>
       <div className={styles.dashboardHeading}>My Dashboard</div>
       <div className={styles.tabContainer}>
-        {["Overview", "Orders", "Payments", "Store Credits", "My Profile"].map(
+        {['Overview', 'Orders', 'Payments', 'Store Credits', 'My Profile'].map(
           (tab) => (
             <button
               key={tab}
               className={`${styles.tab} ${
-                activeTab === tab ? styles.activeTab : ""
+                activeTab === tab ? styles.activeTab : ''
               }`}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => {
+                setActiveTab(tab);
+              }}
             >
               {tab}
             </button>
-          )
+          ),
         )}
       </div>
       <div className={styles.content}>
         {/* Content based on the active tab */}
-        {activeTab === "Overview" && <div>Overview Content</div>}
-        {activeTab === "Orders" && <div>Orders Content</div>}
-        {activeTab === "Payments" && <div>Payments Content</div>}
-        {activeTab === "Store Credits" && <div>Store Credits Content</div>}
-        {activeTab === "My Profile" && <div>My Profile Content</div>}
+        {activeTab === 'Overview' && <div>Overview Content</div>}
+        {activeTab === 'Orders' && <div>Orders Content</div>}
+        {activeTab === 'Payments' && <div>Payments Content</div>}
+        {activeTab === 'Store Credits' && <div>Store Credits Content</div>}
+        {activeTab === 'My Profile' && <div>My Profile Content</div>}
       </div>
     </div>
   );
 }
 
-{/* <div>
+{
+  /* <div>
   <div className={styles.cart}>
     <h1 className={styles.cartText}>My Dashboard</h1>
   </div>
@@ -62,4 +65,5 @@ export default function Page() {
 
     <span>My Account</span>
   </div>
-</div>; */}
+</div>; */
+}

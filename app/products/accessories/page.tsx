@@ -1,11 +1,11 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import ProductCard from "../../../components/productCard/ProductCard";
-import { apiService } from "../../../services/apiService";
-import styles from "./page.module.css";
-import SearchBar from "../../../components/searchbar/index";
-import Breadcrumbs from "../../../components/breadcrumbs/index";
-import { useCart } from "../../cart/CartContext";
+'use client';
+import React, { useEffect, useState } from 'react';
+import ProductCard from '../../../components/productCard/ProductCard';
+import { apiService } from '../../../services/apiService';
+import styles from './page.module.css';
+import SearchBar from '../../../components/searchbar/index';
+import Breadcrumbs from '../../../components/breadcrumbs/index';
+import { useCart } from '../../cart/CartContext';
 
 interface TransformedProduct {
   id: string;
@@ -25,9 +25,9 @@ const AccessoriesPage = () => {
   const { handleAddToCart } = useCart();
 
   const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "Products", href: "/products/accessories" },
-    { title: "Accessories", href: "/products/accessories" },
+    { title: 'Home', href: '/' },
+    { title: 'Products', href: '/products/accessories' },
+    { title: 'Accessories', href: '/products/accessories' },
   ];
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const AccessoriesPage = () => {
         const data = await apiService.getAccessories();
         setProducts(data);
       } catch (error) {
-        console.error("Failed to fetch products:", error);
+        console.error('Failed to fetch products:', error);
       } finally {
         // End loading
         setIsLoading(false);

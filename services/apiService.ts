@@ -3,8 +3,7 @@
 // const API_BASE_URL = "http://167.172.52.195";
 // const API_BASE_URL = "http://127.0.0.1:8000";
 
-const API_BASE_URL = "https://api.qualityncare.com";
-
+const API_BASE_URL = 'https://api.qualityncare.com';
 
 interface Variant {
   id: string;
@@ -16,12 +15,6 @@ interface Variant {
   prices: Array<{ price_type: string; amount: string }>;
   images: Array<{ image: string }>;
   condition: { condition_type: string };
-  // Add other fields as needed
-}
-
-interface Price {
-  price_type: string;
-  amount: string;
 }
 
 export interface TransformedProduct {
@@ -33,55 +26,35 @@ export interface TransformedProduct {
   image: string;
   condition: string;
   features: string;
-  // Add other fields as needed
 }
 
 export const apiService = {
-  login: async (email: string, password: string) => {
+  login: async (email: string, password: string): Promise<any> => {
+    // Specify actual return type instead of any
     const response = await fetch(`${API_BASE_URL}/accounts/login/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      let errorMessage = "An unexpected error occurred.";
-
-      if (errorData.non_field_errors) {
-        errorMessage = Array.isArray(errorData.non_field_errors)
-          ? errorData.non_field_errors.join(" ")
-          : errorData.non_field_errors; // Handle string error messages
-      } else {
-        // If there are field-specific errors, use the first one available
-        const errorFields = Object.keys(errorData);
-        if (errorFields.length > 0) {
-          const firstErrorField = errorFields[0];
-          const firstError = errorData[firstErrorField];
-          errorMessage = Array.isArray(firstError)
-            ? firstError.join(" ")
-            : firstError; // Handle string error messages
-        }
-      }
-
-      throw new Error(errorMessage);
+      throw new Error(errorData.message || 'An unexpected error occurred.');
     }
-    return response.json();
+
+    return await response.json();
   },
 
   register: async (
     email: string,
     firstName: string,
     lastName: string,
-    password: string
-  ) => {
+    password: string,
+  ): Promise<any> => {
+    // Specify actual return type instead of any
     const response = await fetch(`${API_BASE_URL}/accounts/register/`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email,
         first_name: firstName,
@@ -89,56 +62,44 @@ export const apiService = {
         password,
       }),
     });
+
     if (!response.ok) {
       const errorData = await response.json();
-      let errorMessage = "An unexpected error occurred.";
-
-      // Check for non-field errors first
-      if (errorData.non_field_errors) {
-        errorMessage = errorData.non_field_errors.join(" ");
-      } else {
-        // If there are field-specific errors, use the first one available
-        const errorFields = Object.keys(errorData);
-        if (errorFields.length > 0) {
-          const firstErrorField = errorFields[0];
-          errorMessage = errorData[firstErrorField].join(" ");
-        }
-      }
-
-      throw new Error(errorMessage);
+      throw new Error(errorData.message || 'An unexpected error occurred.');
     }
-    return response.json();
+
+    return await response.json();
   },
 
   resendVerificationEmail: async (email: string) => {
     const response = await fetch(
       `${API_BASE_URL}/accounts/resend-verification/`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email }),
-      }
+      },
     );
 
     if (!response.ok) {
       const errorData = await response.json();
-      let errorMessage = "An unexpected error occurred.";
+      let errorMessage = 'An unexpected error occurred.';
 
       if (errorData.non_field_errors) {
-        errorMessage = errorData.non_field_errors.join(" ");
+        errorMessage = errorData.non_field_errors.join(' ');
       } else {
         const errorFields = Object.keys(errorData);
         if (errorFields.length > 0) {
           const firstErrorField = errorFields[0];
-          errorMessage = errorData[firstErrorField].join(" ");
+          errorMessage = errorData[firstErrorField].join(' ');
         }
       }
 
       throw new Error(errorMessage);
     }
-    return response.json();
+    return await response.json();
   },
 
   // Add the type for the email parameter
@@ -147,18 +108,18 @@ export const apiService = {
     const response = await fetch(
       `${API_BASE_URL}/accounts/reset-password-request/`,
       {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email }),
-      }
+      },
     );
 
     if (!response.ok) {
       // If the response is not okay, throw an error with the message from the response
       const errorData = await response.json();
-      throw new Error(errorData.detail || "An unexpected error occurred.");
+      throw new Error(errorData.detail || 'An unexpected error occurred.');
     }
 
     // If the response is okay, return the successful response message
@@ -168,9 +129,9 @@ export const apiService = {
   // Add an item to the cart on the backend
   addToCart: async (itemId: string, quantity: number) => {
     const response = await fetch(`${API_BASE_URL}/cart/add-item/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         // Include your authentication token header if the user is logged in
         // 'Authorization': `Token ${userToken}`,
       },
@@ -179,17 +140,17 @@ export const apiService = {
 
     if (!response.ok) {
       // Handle error response
-      throw new Error("Failed to add item to cart.");
+      throw new Error('Failed to add item to cart.');
     }
-    return response.json();
+    return await response.json();
   },
 
   // Fetch the cart from the backend
   getCart: async () => {
     const response = await fetch(`${API_BASE_URL}/cart/`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         // Include your authentication token header here as well
         // 'Authorization': `Token ${userToken}`,
       },
@@ -197,19 +158,19 @@ export const apiService = {
 
     if (!response.ok) {
       // Handle error response
-      throw new Error("Failed to fetch cart.");
+      throw new Error('Failed to fetch cart.');
     }
-    return response.json();
+    return await response.json();
   },
 
   // Synchronize the local cart with the backend after the user logs in
   synchronizeCart: async (
-    cartItems: Array<{ itemId: string; quantity: number }>
+    cartItems: Array<{ itemId: string; quantity: number }>,
   ) => {
     const response = await fetch(`${API_BASE_URL}/cart/synchronize/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         // 'Authorization': `Token ${userToken}`, // Ensure you pass the logged-in user's token
       },
       body: JSON.stringify({ items: cartItems }),
@@ -217,21 +178,21 @@ export const apiService = {
 
     if (!response.ok) {
       // Handle error response
-      throw new Error("Failed to synchronize cart.");
+      throw new Error('Failed to synchronize cart.');
     }
-    return response.json();
+    return await response.json();
   },
 
   getProducts: async (): Promise<TransformedProduct[]> => {
     const response = await fetch(`${API_BASE_URL}/products/all_products/`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
     if (!response.ok) {
-      throw new Error("Failed to fetch products.");
+      throw new Error('Failed to fetch products.');
     }
 
     const productVariants: Variant[] = await response.json();
@@ -240,83 +201,83 @@ export const apiService = {
 
   getCategories: async () => {
     const response = await fetch(`${API_BASE_URL}/products/categories`, {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         // 'Authorization': `Token ${userToken}`, // Add this if your endpoint requires authentication
       },
     });
 
     if (!response.ok) {
       // Handle error response
-      throw new Error("Failed to fetch categories.");
+      throw new Error('Failed to fetch categories.');
     }
 
-    return response.json();
+    return await response.json();
   },
 
   searchProducts: async (query: string) => {
     const response = await fetch(
       `${API_BASE_URL}/products/search/?q=${query}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           // 'Authorization': `Token ${userToken}`, // Add this if your endpoint requires authentication
         },
-      }
+      },
     );
 
     if (!response.ok) {
       // Handle error response
-      throw new Error("Failed to fetch search results.");
+      throw new Error('Failed to fetch search results.');
     }
 
-    return response.json();
+    return await response.json();
   },
 
   getMobilePhones: async (): Promise<TransformedProduct[]> => {
-    return await apiService.getProductsByCategory("cell-phones-accessories");
+    return await apiService.getProductsByCategory('cell-phones-accessories');
   },
 
   getComputers: async (): Promise<TransformedProduct[]> => {
-    return await apiService.getProductsByCategory("computers");
+    return await apiService.getProductsByCategory('computers');
   },
 
   getAccessories: async (): Promise<TransformedProduct[]> => {
-    return await apiService.getProductsByCategory("accessories");
+    return await apiService.getProductsByCategory('accessories');
   },
 
   getAppliances: async (): Promise<TransformedProduct[]> => {
-    return await apiService.getProductsByCategory("home-appliances");
+    return await apiService.getProductsByCategory('home-appliances');
   },
 
   // Helper function to fetch products by category
   getProductsByCategory: async (
-    categorySlug: string
+    categorySlug: string,
   ): Promise<TransformedProduct[]> => {
     const response = await fetch(
       `${API_BASE_URL}/products/category/${categorySlug}/`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           // 'Authorization': `Token ${userToken}`, // Add this if your endpoint requires authentication
         },
-      }
+      },
     );
 
     if (!response.ok) {
       // Handle error response
       throw new Error(
-        `Failed to fetch products for category: ${categorySlug}.`
+        `Failed to fetch products for category: ${categorySlug}.`,
       );
     }
 
     const productVariants: Variant[] = await response.json();
 
     return productVariants.map((variant) =>
-      apiService.transformProduct(variant)
+      apiService.transformProduct(variant),
     );
   },
 
@@ -324,23 +285,23 @@ export const apiService = {
     const response = await fetch(
       `${API_BASE_URL}/products/category/electronics/`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           // 'Authorization': `Token ${userToken}`, // Include this if your endpoint requires authentication
         },
-      }
+      },
     );
 
     if (!response.ok) {
       // Handle error response
-      throw new Error("Failed to fetch electronic products.");
+      throw new Error('Failed to fetch electronic products.');
     }
 
     const productVariants: Variant[] = await response.json();
 
     return productVariants.map((variant) =>
-      apiService.transformProduct(variant)
+      apiService.transformProduct(variant),
     );
   },
 
@@ -358,7 +319,7 @@ export const apiService = {
       price: productData.actual_price,
       image: productData.main_image, // Updated to use the direct image
       condition: productData.condition,
-      features: featureValues.join(" | "), // Join the first three feature values with ' | '
+      features: featureValues.join(' | '), // Join the first three feature values with ' | '
     };
   },
 
@@ -369,12 +330,12 @@ export const apiService = {
     const response = await fetch(
       `${API_BASE_URL}/products/product-detail/${productId}/`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           // 'Authorization': `Token ${userToken}`, // Include this if your endpoint requires authentication
         },
-      }
+      },
     );
 
     if (!response.ok) {
@@ -389,9 +350,9 @@ export const apiService = {
   // Method for guest checkout, creating profile, order, and initiating Paystack payment
   guestCheckout: async (payload: any) => {
     const response = await fetch(`${API_BASE_URL}/orders/guest-checkout/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(payload),
     });
@@ -399,7 +360,7 @@ export const apiService = {
     if (!response.ok) {
       // Handle any errors that come back from the API
       const errorData = await response.json();
-      let errorMessage = "An unexpected error occurred.";
+      const errorMessage = 'An unexpected error occurred.';
 
       // Simplified error handling: Take the first error message available
       // errorMessage = errorData[Object.keys(errorData)[0]].join(" ");
@@ -408,38 +369,38 @@ export const apiService = {
     }
 
     // The response should contain the order details and the Paystack payment URL
-    return response.json();
+    return await response.json();
   },
 
   subscribeToNewsletter: async (email: string) => {
     const response = await fetch(`${API_BASE_URL}/accounts/subscribe/`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email }),
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      let errorMessage = "An unexpected error occurred.";
+      let errorMessage = 'An unexpected error occurred.';
 
       // Handle non-field errors first
       if (errorData.non_field_errors) {
-        errorMessage = errorData.non_field_errors.join(" ");
+        errorMessage = errorData.non_field_errors.join(' ');
       } else {
         // Handle specific field errors if present
         const errorFields = Object.keys(errorData);
         if (errorFields.length > 0) {
           const firstErrorField = errorFields[0];
-          errorMessage = errorData[firstErrorField].join(" ");
+          errorMessage = errorData[firstErrorField].join(' ');
         }
       }
 
       throw new Error(errorMessage);
     }
 
-    return response.json();
+    return await response.json();
   },
 
   // Add other endpoints as needed

@@ -1,20 +1,20 @@
 // app/cart/page.tsx
 
-"use client";
-import React, { useEffect, useState } from "react";
-import { useCart } from "./CartContext"; // Update the import path as necessary
-import Breadcrumbs from "../../components/breadcrumbs/index"; // Update the import path as necessary
-import styles from "./page.module.css";
-import { TransformedProduct, apiService } from "../../services/apiService"; // Update the import path as necessary
-import Link from "next/link";
+'use client';
+import React, { useEffect, useState } from 'react';
+import { useCart } from './CartContext'; // Update the import path as necessary
+import Breadcrumbs from '../../components/breadcrumbs/index'; // Update the import path as necessary
+import styles from './page.module.css';
+import { type TransformedProduct, apiService } from '../../services/apiService'; // Update the import path as necessary
+import Link from 'next/link';
 
 export default function Page() {
   const { cart, updateCartItemQuantity, removeCartItem } = useCart();
-  console.log("Current items in cart:", cart); // Log the current cart items
+  console.log('Current items in cart:', cart); // Log the current cart items
   const [cartProducts, setCartProducts] = useState<TransformedProduct[]>([]);
   const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "Cart", href: "/cart" },
+    { title: 'Home', href: '/' },
+    { title: 'Cart', href: '/cart' },
   ];
 
   const handleRemoveItem = (productId: string) => {
@@ -25,14 +25,14 @@ export default function Page() {
 
   useEffect(() => {
     const loadCartProducts = async () => {
-      const productRequests = cart.map((cartItem) =>
-        apiService.getProductById(cartItem.id)
+      const productRequests = cart.map(
+        async (cartItem) => await apiService.getProductById(cartItem.id),
       );
       try {
         const productResponses = await Promise.all(productRequests);
         setCartProducts(productResponses);
       } catch (error) {
-        console.error("Error loading cart products:", error);
+        console.error('Error loading cart products:', error);
       }
     };
 
@@ -45,7 +45,7 @@ export default function Page() {
     const cartItem = cart.find((item) => item.id === product.id);
     // Ensure product.price is a number before multiplying
     const price =
-      typeof product.price === "number"
+      typeof product.price === 'number'
         ? product.price
         : parseFloat(product.price);
     return acc + price * (cartItem ? cartItem.quantity : 0);
@@ -66,7 +66,7 @@ export default function Page() {
                 const quantity = cartItem ? cartItem.quantity : 0;
                 // Directly use toFixed on price if it's a number
                 const productPrice =
-                  typeof product.price === "number"
+                  typeof product.price === 'number'
                     ? product.price.toFixed(2)
                     : parseFloat(product.price).toFixed(2);
 
@@ -86,20 +86,20 @@ export default function Page() {
                         <div className={styles.price}>GHS {productPrice}</div>
                         <div className={styles.controls}>
                           <button
-                            onClick={() =>
+                            onClick={() => {
                               updateCartItemQuantity(
                                 product.id,
-                                Math.max(1, quantity - 1)
-                              )
-                            }
+                                Math.max(1, quantity - 1),
+                              );
+                            }}
                           >
                             -
                           </button>
                           <span>{quantity}</span>
                           <button
-                            onClick={() =>
-                              updateCartItemQuantity(product.id, quantity + 1)
-                            }
+                            onClick={() => {
+                              updateCartItemQuantity(product.id, quantity + 1);
+                            }}
                           >
                             +
                           </button>
@@ -107,7 +107,9 @@ export default function Page() {
                       </div>
                     </div>
                     <button
-                      onClick={() => handleRemoveItem(product.id)}
+                      onClick={() => {
+                        handleRemoveItem(product.id);
+                      }}
                       className={styles.removeButton}
                     >
                       Remove
@@ -115,15 +117,14 @@ export default function Page() {
                   </div>
                 );
               })}
-              
             </div>
             <div className={styles.cartSummary}>
               <p>Sub-Total: GHS {subtotal.toFixed(2)}</p>
-              <Link href="/checkout/guest" className={styles.checkoutButton}>
+              <Link href='/checkout/guest' className={styles.checkoutButton}>
                 Guest Checkout
               </Link>
               <br />
-              <Link href="/accounts/signin" className={styles.checkoutButton}>
+              <Link href='/accounts/signin' className={styles.checkoutButton}>
                 Login to Checkout
               </Link>
             </div>

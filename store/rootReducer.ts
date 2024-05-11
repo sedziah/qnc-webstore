@@ -1,6 +1,6 @@
 // store/rootReducer.ts
-import { combineReducers } from "@reduxjs/toolkit";
-import authReducer from "./slices/authSlice";
+import { combineReducers } from '@reduxjs/toolkit';
+import authReducer from './slices/authSlice';
 // Import other slices and add them to the rootReducer
 
 const rootReducer = combineReducers({

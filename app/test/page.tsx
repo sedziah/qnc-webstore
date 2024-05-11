@@ -1,10 +1,10 @@
 // page.tsx
 
-"use client"
+'use client';
 
-import React, { useEffect, useState } from "react";
-import ImageCarousel from "../../components/imageCarousel";
-import styles from "./page.module.css";
+import React, { useEffect, useState } from 'react';
+import ImageCarousel from '../../components/imageCarousel';
+import styles from './page.module.css';
 
 interface CarouselImage {
   src: string;
@@ -17,12 +17,12 @@ const Home: React.FC = () => {
   useEffect(() => {
     // Fetch or import your images
     const imageFiles = [
-      "deals_1.png",
-      "deals_2.png",
-      "deals_3.png",
-      "deals_4.png",
-      "deals_5.jpg",
-      "deals_6.jpg",
+      'deals_1.png',
+      'deals_2.png',
+      'deals_3.png',
+      'deals_4.png',
+      'deals_5.jpg',
+      'deals_6.jpg',
     ];
 
     const loadedImages: CarouselImage[] = imageFiles.map((fileName) => ({
@@ -55,7 +55,7 @@ const Home: React.FC = () => {
             <button className={styles.quantityButton}>-</button>
             <input
               className={styles.quantityInput}
-              type="number"
+              type='number'
               defaultValue={1}
             />
             <button className={styles.quantityButton}>+</button>
@@ -69,7 +69,7 @@ const Home: React.FC = () => {
         <div className={styles.tab}>Reviews (1)</div>
       </div>
       <div className={styles.tabContent}>
-     
+
       </div> */}
     </div>
   );

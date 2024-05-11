@@ -1,5 +1,5 @@
-//about/page.tsx
-import styles from "./page.module.css";
+// about/page.tsx
+import styles from './page.module.css';
 
 const Page = () => {
   return (
@@ -7,7 +7,6 @@ const Page = () => {
       <div className={styles.heading}>
         <h1 className={styles.headingText}>Terms & Conditions</h1>
       </div>
-      
     </div>
   );
 };

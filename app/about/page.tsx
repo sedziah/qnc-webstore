@@ -1,17 +1,18 @@
-//about/page.tsx
-import styles from "./page.module.css";
-import Breadcrumbs from "../../components/breadcrumbs/index";
+// about/page.tsx
 
-const Page = () => {
+import styles from './page.module.css';
+import Breadcrumbs from '../../components/breadcrumbs/index';
+
+const Page: React.FC = () => {
   const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "About Us", href: "/about" },
+    { title: 'Home', href: '/' },
+    { title: 'About Us', href: '/about' },
   ];
 
   return (
     <>
       <Breadcrumbs crumbs={crumbs} />
-      <br></br>
+      <br />
       <div className={styles.container}>
         <div className={styles.heading}>
           <h1 className={styles.headingText}>About Us</h1>
@@ -25,7 +26,7 @@ const Page = () => {
             finest products, ensuring that every purchase meets the high
             standards our customers have come to expect.
           </p>
-          <br></br>
+          <br />
           <h1>Our Vision</h1>
           <p>
             To be the sanctuary for consumers seeking not only premium products
@@ -33,7 +34,7 @@ const Page = () => {
             transaction is a step toward building a lifelong relationship of
             trust and satisfaction.
           </p>
-          <br></br>
+          <br />
           <h1>Our Mission</h1>
           <p>
             Quality n' Care is committed to excellence by providing a curated
@@ -42,7 +43,7 @@ const Page = () => {
             unparalleled quality, fostering a shopping experience that stands
             out in the realm of retail.
           </p>
-          <br></br>
+          <br />
           <h1>Our Values</h1>
           <ul>
             <li>
@@ -50,19 +51,19 @@ const Page = () => {
               through unwavering integrity and consistent reliability in every
               product and service we offer.
             </li>
-            <br></br>
+            <br />
             <li>
               <strong>Excellence:</strong> Our pursuit of excellence is
               tireless. We aim to surpass expectations in the quality of our
               products and the standard of our customer service.
             </li>
-            <br></br>
+            <br />
             <li>
               <strong>Loyalty:</strong> Your loyalty is the heartbeat of our
               business. In turn, our loyalty to you is reflected through our
               dedication to providing quality in every aspect of our operation.
             </li>
-            <br></br>
+            <br />
             <li>
               <strong>Quality Service:</strong> Our commitment extends beyond
               transactions; we are passionate about delivering personalized
@@ -70,8 +71,8 @@ const Page = () => {
               satisfaction.
             </li>
           </ul>
-          <br></br>
-          <br></br>
+          <br />
+          <br />
           <p>
             Join us at QnC and step into a world where quality products and
             exceptional service are the norm, not the exception. Here, every

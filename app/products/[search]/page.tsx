@@ -1,15 +1,15 @@
 // app/products/[search]/page.tsx
 
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import ProductCard from "../../../components/productCard/ProductCard";
-import { apiService } from "../../../services/apiService"; // Adjust the path as needed
-import styles from "./page.module.css";
-import SearchBar from "../../../components/searchbar";
-import Breadcrumbs from "../../../components/breadcrumbs";
-import { useCart } from "../../cart/CartContext"; // Adjust the path as needed
+import React, { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import ProductCard from '../../../components/productCard/ProductCard';
+import { apiService } from '../../../services/apiService'; // Adjust the path as needed
+import styles from './page.module.css';
+import SearchBar from '../../../components/searchbar';
+import Breadcrumbs from '../../../components/breadcrumbs';
+import { useCart } from '../../cart/CartContext'; // Adjust the path as needed
 
 interface TransformedProduct {
   id: string;
@@ -28,12 +28,12 @@ const SearchProducts = () => {
   const { handleAddToCart } = useCart();
 
   const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "Search Results", href: pathname },
+    { title: 'Home', href: '/' },
+    { title: 'Search Results', href: pathname },
   ];
 
   useEffect(() => {
-    const searchSegment = pathname.split("/").pop() || "";
+    const searchSegment = pathname.split('/').pop() || '';
 
     const fetchSearchResults = async () => {
       setIsLoading(true);
@@ -41,7 +41,7 @@ const SearchProducts = () => {
         const searchResults = await apiService.searchProducts(searchSegment);
         setProducts(searchResults);
       } catch (error) {
-        console.error("Failed to fetch search results:", error);
+        console.error('Failed to fetch search results:', error);
       } finally {
         setIsLoading(false);
       }
@@ -54,7 +54,7 @@ const SearchProducts = () => {
     <>
       <SearchBar />
       <Breadcrumbs crumbs={crumbs} />
-      
+
       <div className={styles.pageContainer}>
         {/* {isLoading ? (
           <div className={styles.loadingOverlay}>Loading...</div>
@@ -93,12 +93,6 @@ const SearchProducts = () => {
 };
 
 export default SearchProducts;
-
-
-
-
-
-
 
 // "use client";
 
@@ -154,10 +148,6 @@ export default SearchProducts;
 // };
 
 // export default SearchProducts;
-
-
-
-
 
 // "use client"; // Ensures this component is treated as a Client Component
 
