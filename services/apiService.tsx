@@ -28,9 +28,12 @@ export interface TransformedProduct {
   features: string;
 }
 
+interface ErrorResponse {
+  message: string;
+}
+
 export const apiService = {
   login: async (email: string, password: string): Promise<any> => {
-    // Specify actual return type instead of any
     const response = await fetch(`${API_BASE_URL}/accounts/login/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -38,8 +41,15 @@ export const apiService = {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'An unexpected error occurred.');
+      // Add `null` to the type to handle the potential of receiving null from json()
+      const errorData: ErrorResponse | null | undefined = await response.json();
+
+      // Check if errorData exists and has a message property
+      if (errorData != null && typeof errorData.message === 'string') {
+        throw new Error(errorData.message);
+      } else {
+        throw new Error('An unexpected error occurred.');
+      }
     }
 
     return await response.json();
@@ -64,8 +74,15 @@ export const apiService = {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'An unexpected error occurred.');
+      // Add `null` to the type to handle the potential of receiving null from json()
+      const errorData: ErrorResponse | null | undefined = await response.json();
+
+      // Check if errorData exists and has a message property
+      if (errorData != null && typeof errorData.message === 'string') {
+        throw new Error(errorData.message);
+      } else {
+        throw new Error('An unexpected error occurred.');
+      }
     }
 
     return await response.json();
@@ -84,10 +101,10 @@ export const apiService = {
     );
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData: Record<string, string[]> = await response.json();
       let errorMessage = 'An unexpected error occurred.';
 
-      if (errorData.non_field_errors) {
+      if ('non_field_errors' in errorData) {
         errorMessage = errorData.non_field_errors.join(' ');
       } else {
         const errorFields = Object.keys(errorData);
@@ -119,7 +136,11 @@ export const apiService = {
     if (!response.ok) {
       // If the response is not okay, throw an error with the message from the response
       const errorData = await response.json();
-      throw new Error(errorData.detail || 'An unexpected error occurred.');
+      throw new Error(
+        (errorData.detail as string) !== ''
+          ? (errorData.detail as string)
+          : 'An unexpected error occurred.',
+      );
     }
 
     // If the response is okay, return the successful response message
@@ -348,6 +369,7 @@ export const apiService = {
   },
 
   // Method for guest checkout, creating profile, order, and initiating Paystack payment
+
   guestCheckout: async (payload: any) => {
     const response = await fetch(`${API_BASE_URL}/orders/guest-checkout/`, {
       method: 'POST',
@@ -359,7 +381,7 @@ export const apiService = {
 
     if (!response.ok) {
       // Handle any errors that come back from the API
-      const errorData = await response.json();
+      // const errorData = await response.json();
       const errorMessage = 'An unexpected error occurred.';
 
       // Simplified error handling: Take the first error message available
@@ -382,11 +404,14 @@ export const apiService = {
     });
 
     if (!response.ok) {
-      const errorData = await response.json();
+      const errorData: Record<string, string[]> = await response.json();
       let errorMessage = 'An unexpected error occurred.';
 
       // Handle non-field errors first
-      if (errorData.non_field_errors) {
+      if (
+        errorData.non_field_errors !== undefined &&
+        errorData.non_field_errors !== null
+      ) {
         errorMessage = errorData.non_field_errors.join(' ');
       } else {
         // Handle specific field errors if present
@@ -398,6 +423,30 @@ export const apiService = {
       }
 
       throw new Error(errorMessage);
+    }
+
+    return await response.json();
+  },
+
+  // Add this method inside the apiService object
+
+  verifyPayment: async (reference: string): Promise<any> => {
+    const response = await fetch(
+      `${API_BASE_URL}/payments/verify/${reference}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Authorization': `Token ${userToken}`, // Include this if your endpoint requires authentication
+        },
+      },
+    );
+
+    if (!response.ok) {
+      await response.json();
+      throw new Error(
+        `errorData.message !== '' ? String(errorData.message) : 'Failed to verify payment.'`,
+      );
     }
 
     return await response.json();

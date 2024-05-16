@@ -1,26 +1,26 @@
 // app/accounts/reset-password/page.tsx
 
 'use client';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { apiService } from '../../../services/apiService';
 import styles from './page.module.css';
 import Image from 'next/image';
-import Link from 'next/link';
 import Head from 'next/head';
 
-const PasswordResetRequestForm = () => {
+const PasswordResetRequestForm = async (
+  event: React.FormEvent<HTMLFormElement>,
+): Promise<void> => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState(''); // Added state for error message
-  const [isLoading, setIsLoading] = useState(false); // State to control spinner visibility
   const router = useRouter();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
     event.preventDefault();
     setMessage(''); // Clear previous success message
     setError(''); // Clear previous error message
-    setIsLoading(true); // Show the spinner
+    // Remove the unused variable 'isLoading'
     try {
       const response = await apiService.resetPasswordRequest(email);
       setMessage(response.message);
@@ -68,8 +68,8 @@ const PasswordResetRequestForm = () => {
             Send Reset Link
           </button>
           <br></br>
-          {message && <p className={styles.message}>{message}</p>}
-          {error && <p className={styles.error}>{error}</p>}
+          {message !== '' && <p className={styles.message}>{message}</p>}
+          {error !== '' && <p className={styles.error}>{error}</p>}
         </form>
       </div>
       <div className={styles.imageSide}>

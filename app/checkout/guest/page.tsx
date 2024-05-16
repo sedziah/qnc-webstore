@@ -1,10 +1,15 @@
+// app/checkout/guest/page.tsx
+
+'use client';
+
 import React, { useState, useEffect } from 'react';
+import type { ReactElement } from 'react';
 import { useRouter } from 'next/navigation'; // next/router should be used instead of next/navigation
 import { useCart } from '../../cart/CartContext';
 import styles from './page.module.css';
 import { apiService } from '../../../services/apiService';
 
-const CheckoutPage = () => {
+const CheckoutPage = (): ReactElement => {
   const { cart, clearCart } = useCart();
   const router = useRouter();
 
@@ -19,20 +24,26 @@ const CheckoutPage = () => {
   const [paymentURL, setPaymentURL] = useState(''); // State for payment URL
   const [showPaymentFrame, setShowPaymentFrame] = useState(false); // State to control iframe display
 
+  interface CheckoutResponse {
+    payment_url?: string;
+  }
   // Listen for payment success or failure
   useEffect(() => {
     const query = new URLSearchParams(window.location.search);
     const paymentStatus = query.get('status');
-    const orderReference = query.get('reference');
+    const orderReference = query.get('reference')?.trim() ?? '';
 
-    if (paymentStatus === 'success' && orderReference) {
-      verifyPayment(orderReference);
+    if (paymentStatus === 'success' && orderReference !== '') {
+      verifyPayment(orderReference).catch((error) => {
+        console.error('Payment verification failed:', error);
+        alert('There was an issue with the payment verification process.');
+      });
     } else if (paymentStatus === 'failed') {
       alert('Payment failed. Please try again.');
     }
   }, []);
 
-  const verifyPayment = async (reference) => {
+  const verifyPayment = async (reference: string): Promise<void> => {
     try {
       const response = await apiService.verifyPayment(reference);
       if (response.status === 'success') {
@@ -46,17 +57,19 @@ const CheckoutPage = () => {
     }
   };
 
-  const handlePaymentSuccess = () => {
+  const handlePaymentSuccess = (): void => {
     clearCart();
     router.push('/payment-success');
   };
 
-  const handleGuestCheckout = async (event) => {
+  const handleGuestCheckout = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
     event.preventDefault();
 
-    const cartItemsData = cart.map((item) => ({
-      product_id: item.id,
-      quantity: item.quantity,
+    const cartItemsData = cart.map(({ id, quantity }) => ({
+      product_id: id,
+      quantity,
     }));
 
     const guestUserData = {
@@ -75,8 +88,9 @@ const CheckoutPage = () => {
     };
 
     try {
-      const response = await apiService.guestCheckout(payload);
-      if (response.payment_url) {
+      const response: CheckoutResponse =
+        await apiService.guestCheckout(payload);
+      if (response.payment_url !== undefined && response.payment_url !== '') {
         setPaymentURL(response.payment_url);
         setShowPaymentFrame(true); // Show payment iframe after setting URL
       } else {
@@ -92,7 +106,16 @@ const CheckoutPage = () => {
     <div className={styles.container}>
       <h1 className={styles.title}>Guest Checkout</h1>
       {!showPaymentFrame && (
-        <form onSubmit={handleGuestCheckout} className={styles.checkoutForm}>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault(); // Move the preventDefault here to ensure it's always called
+            handleGuestCheckout(event).catch((error) => {
+              console.error('Error during form submission:', error);
+              alert('An error occurred while processing your form.');
+            });
+          }}
+          className={styles.checkoutForm}
+        >
           {/* Form inputs */}
           <input
             type='email'

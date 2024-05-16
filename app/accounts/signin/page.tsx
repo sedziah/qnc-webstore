@@ -1,7 +1,7 @@
 // SignIn.jsx
 'use client';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../auth/contexts/AuthContext';
@@ -15,11 +15,11 @@ const Page = () => {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
 
-  const crumbs = [
-    { title: 'Home', href: '/' },
-    { title: 'Products', href: '/products' },
-    { title: 'Mobile Phones', href: '/products/electronics' },
-  ];
+  // const crumbs = [
+  //   { title: 'Home', href: '/' },
+  //   { title: 'Products', href: '/products' },
+  //   { title: 'Mobile Phones', href: '/products/electronics' },
+  // ];
 
   useEffect(() => {
     if (isAuthenticated) {
