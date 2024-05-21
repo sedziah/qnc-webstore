@@ -1,8 +1,8 @@
 // components/Breadcrumbs.tsx
 
-import Link from "next/link";
-import React from "react";
-import styles from "./Breadcrumbs.module.css"; // Update the import path as needed
+import Link from 'next/link';
+import styles from './Breadcrumbs.module.css'; // Update the import path as needed
+import React from 'react';
 
 // Interface for breadcrumb items
 interface BreadcrumbItem {
@@ -11,12 +11,12 @@ interface BreadcrumbItem {
 }
 
 const Breadcrumbs: React.FC<{ crumbs: BreadcrumbItem[] }> = ({ crumbs }) => {
-  if (!crumbs || !crumbs.length) {
+  if (!crumbs?.length) {
     return null;
   }
 
   return (
-    <nav aria-label="breadcrumb" className={styles.breadcrumbNav}>
+    <nav aria-label='breadcrumb' className={styles.breadcrumbNav}>
       <ol className={styles.breadcrumbList}>
         {crumbs.map((crumb, i) => (
           <li key={i} className={styles.breadcrumbItem}>

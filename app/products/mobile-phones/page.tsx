@@ -1,14 +1,14 @@
 // app/products/mobile-phones/page.tsx
 
-"use client";
-import React, { useEffect, useState } from "react";
-import ProductCard from "../../../components/productCard/ProductCard";
-import { apiService } from "../../../services/apiService";
-import styles from "./page.module.css";
-import SearchBar from "../../../components/searchbar/index";
-import Breadcrumbs from "../../../components/breadcrumbs/index";
+'use client';
+import React, { useEffect, useState } from 'react';
+import ProductCard from '../../../components/productCard/ProductCard';
+import { apiService } from '../../../services/apiService';
+import styles from './page.module.css';
+import SearchBar from '../../../components/searchbar/index';
+import Breadcrumbs from '../../../components/breadcrumbs/index';
 // Import the useCart hook from your CartContext
-import { useCart } from "../../cart/CartContext";
+import { useCart } from '../../cart/CartContext';
 
 interface TransformedProduct {
   id: string;
@@ -27,9 +27,9 @@ const ElectronicsProducts = () => {
   const { handleAddToCart } = useCart();
 
   const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "Products", href: "/products/electronics" },
-    { title: "Mobile Phones", href: "/products/electronics" },
+    { title: 'Home', href: '/' },
+    { title: 'Products', href: '/products/electronics' },
+    { title: 'Mobile Phones', href: '/products/electronics' },
   ];
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const ElectronicsProducts = () => {
         const data = await apiService.getMobilePhones();
         setProducts(data);
       } catch (error) {
-        console.error("Failed to fetch products:", error);
+        console.error('Failed to fetch products:', error);
       } finally {
         setIsLoading(false);
       }
@@ -79,7 +79,9 @@ const ElectronicsProducts = () => {
                   price={product.price}
                   imageSrc={product.image}
                   imageAlt={`Image of ${product.name}`}
-                  onAddToCart={() => handleAddToCart(cartItem)} // Pass the CartItem object instead of just the ID
+                  onAddToCart={() => {
+                    handleAddToCart(cartItem);
+                  }} // Pass the CartItem object instead of just the ID
                 />
               );
             })}

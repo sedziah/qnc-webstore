@@ -1,57 +1,47 @@
-// SignIn.jsx
-"use client";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import styles from "./page.module.css";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../../auth/contexts/AuthContext";
-import Head from "next/head";
-import Image from "next/image";
+// SignIn.tsx
+'use client';
+import Link from 'next/link';
+import React, { useState, useEffect, FormEvent } from 'react';
+import styles from './page.module.css';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../../auth/contexts/AuthContext';
+import Head from 'next/head';
+import Image from 'next/image';
 
-
-const Page = () => {
+const Page: React.FC = () => {
   const router = useRouter();
-  const { isAuthenticated, error, login } = useAuth(); // Destructure isAuthenticated
-  const [emailOrUsername, setEmailOrUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginError, setLoginError] = useState("");
+  const { isAuthenticated, login } = useAuth();
+  const [emailOrUsername, setEmailOrUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [loginError, setLoginError] = useState<string>('');
 
-  const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "Products", href: "/products" },
-    { title: "Mobile Phones", href: "/products/electronics" },
-  ];
-
-  useEffect(() => {
+  useEffect((): void => {
     if (isAuthenticated) {
-      router.replace("/dashboard"); // Use replace to prevent going back to the sign-in page
+      router.replace('/dashboard');
     }
-  }, [isAuthenticated, router]); // Depend on isAuthenticated and router
+  }, [isAuthenticated, router]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    event: FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
     event.preventDefault();
-    setLoginError(""); // Clear previous errors before trying to log in
+    setLoginError('');
 
     try {
       await login(emailOrUsername, password);
-      // Check if isAuthenticated is updated before redirecting
       if (isAuthenticated) {
-        router.push("/dashboard"); // Redirect to dashboard instead of home
+        router.push('/dashboard');
       }
     } catch (error) {
       if (error instanceof Error) {
-        // If the error is an instance of Error, we can safely assume it has a message property
         setLoginError(error.message);
       } else {
-        // If it's not an Error, we handle it as an unknown error
-        setLoginError("An unknown error occurred.");
+        setLoginError('An unknown error occurred.');
       }
     }
   };
 
   if (isAuthenticated) {
-    // If user is authenticated, do not render the sign-in form.
-    // Optionally, render null or a loading spinner instead.
     return null;
   }
 
@@ -62,51 +52,60 @@ const Page = () => {
       </Head>
 
       <div className={styles.formSide}>
-        <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <form
+          className={styles.loginForm}
+          onSubmit={(e): void => {
+            handleSubmit(e).catch(console.error);
+          }}
+        >
           <div className={styles.inputGroup}>
-            <label htmlFor="username">Username or Email address *</label>
+            <label htmlFor='username'>Username or Email address *</label>
             <input
-              type="text"
-              id="username"
-              name="username"
-              onChange={(e) => setEmailOrUsername(e.target.value)}
+              type='text'
+              id='username'
+              name='username'
+              onChange={(e): void => {
+                setEmailOrUsername(e.target.value);
+              }}
               value={emailOrUsername}
               required
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="password">Password *</label>
+            <label htmlFor='password'>Password *</label>
             <input
-              type="password"
-              id="password"
-              name="password"
-              onChange={(e) => setPassword(e.target.value)}
+              type='password'
+              id='password'
+              name='password'
+              onChange={(e): void => {
+                setPassword(e.target.value);
+              }}
               value={password}
               required
             />
           </div>
           <div className={styles.options}>
             <label>
-              <input type="checkbox" id="rememberMe" name="rememberMe" />
+              <input type='checkbox' id='rememberMe' name='rememberMe' />
               Remember me
             </label>
             <Link
               className={styles.forgotPassword}
-              href="/accounts/reset-password"
+              href='/accounts/reset-password'
               passHref
             >
               Forgot password
             </Link>
           </div>
-          <button type="submit" className={styles.loginButton}>
+          <button type='submit' className={styles.loginButton}>
             Login
           </button>
 
-          {loginError && (
+          {loginError !== '' && (
             <div
               style={{
-                color: "red",
-                marginTop: "10px",
+                color: 'red',
+                marginTop: '10px',
               }}
             >
               {loginError}
@@ -116,14 +115,13 @@ const Page = () => {
       </div>
       <div className={styles.imageSide}>
         <Image
-          src="/images/login.png" // Replace with the path to your actual image
-          alt="Workspace Background"
-          layout="fill"
-          objectFit="cover"
+          src='/images/login.png' // Replace with the path to your actual image
+          alt='Workspace Background'
+          layout='fill'
+          objectFit='cover'
           priority // This will prioritize loading of the image
         />
       </div>
-
     </div>
   );
 };

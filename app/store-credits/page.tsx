@@ -1,5 +1,6 @@
-//about/page.tsx
-import styles from "./page.module.css";
+// about/page.tsx
+import styles from './page.module.css';
+import React from 'react';
 
 const Page = () => {
   return (
@@ -46,7 +47,7 @@ const Page = () => {
         <strong>
           <h2>How to Use</h2>
         </strong>
-        <br/>
+        <br />
         <p>
           It's simple. When you've selected your premium products and you're all
           set to checkout, choose 'Store Credits' as your payment method. Your
@@ -59,7 +60,7 @@ const Page = () => {
         <strong>
           <h2>Terms and Conditions</h2>
         </strong>
-        <br/>
+        <br />
         <p>
           Q&C credits are subject to terms such as expiration dates and are
           non-transferable. Please refer to our detailed terms and conditions

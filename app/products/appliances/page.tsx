@@ -1,14 +1,13 @@
 // app/products/appliances/page.tsx
 
-"use client";
-import React, { useEffect, useState } from "react";
-import ProductCard from "../../../components/productCard/ProductCard";
-import { apiService } from "../../../services/apiService";
-import styles from "./page.module.css";
-import SearchBar from "../../../components/searchbar/index";
-import Breadcrumbs from "../../../components/breadcrumbs/index";
-import { useCart } from "../../cart/CartContext";
-
+'use client';
+import React, { useEffect, useState } from 'react';
+import ProductCard from '../../../components/productCard/ProductCard';
+import { apiService } from '../../../services/apiService';
+import styles from './page.module.css';
+import SearchBar from '../../../components/searchbar/index';
+import Breadcrumbs from '../../../components/breadcrumbs/index';
+import { useCart } from '../../cart/CartContext';
 
 interface TransformedProduct {
   id: string;
@@ -25,12 +24,11 @@ interface TransformedProduct {
 const AppliancesProducts = () => {
   const [products, setProducts] = useState<TransformedProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { handleAddToCart } = useCart();
 
   const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "Products", href: "/products/mobile-phones" },
-    { title: "Home Appliances", href: "/products/appliances" },
+    { title: 'Home', href: '/' },
+    { title: 'Products', href: '/products/mobile-phones' },
+    { title: 'Home Appliances', href: '/products/appliances' },
   ];
 
   useEffect(() => {
@@ -39,7 +37,7 @@ const AppliancesProducts = () => {
         const data = await apiService.getAppliances();
         setProducts(data);
       } catch (error) {
-        console.error("Failed to fetch products:", error);
+        console.error('Failed to fetch products:', error);
       } finally {
         setIsLoading(false);
       }

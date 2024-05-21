@@ -1,5 +1,5 @@
-import React from "react";
-import styles from "./SubFooter.module.css";
+import styles from './SubFooter.module.css';
+import React from 'react';
 
 function SubFooter() {
   return (

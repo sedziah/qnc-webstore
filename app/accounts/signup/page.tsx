@@ -1,33 +1,32 @@
-//  app/acoounts/signup/signUp.tsx
+//  app/accounts/signup/signUp.tsx
+'use client';
+import React, { useState, useEffect } from 'react';
+import styles from './page.module.css';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '../../auth/contexts/AuthContext'; // Adjust path as needed
+import { apiService } from '../../../services/apiService';
+import Head from 'next/head';
+import Image from 'next/image';
+import SignUpSuccessModal from '../../../components/signupModal/signupModal';
 
-"use client";
-import styles from "./page.module.css";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../../auth/contexts/AuthContext"; // Adjust path as needed
-import { apiService } from "../../../services/apiService";
-import Head from "next/head";
-import Image from "next/image";
-import SignUpSuccessModal from "../../../components/signupModal/signupModal";
-
-const Page = () => {
+const Page: React.FC = () => {
   const router = useRouter();
   const { isAuthenticated } = useAuth();
   const [signedUp, setSignedUp] = useState(false);
 
   const [formData, setFormData] = useState({
-    email: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    confirmPassword: "",
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+    confirmPassword: '',
   });
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   // Redirect if user is already authenticated
   useEffect(() => {
     if (isAuthenticated) {
-      router.replace("/dashboard");
+      router.replace('/dashboard');
     }
   }, [isAuthenticated, router]);
 
@@ -35,7 +34,7 @@ const Page = () => {
     event.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+      setError('Passwords do not match');
       return;
     }
 
@@ -44,25 +43,19 @@ const Page = () => {
       // Call your API service to sign up the user
       // Make sure to only send the necessary fields (not confirmPassword)
       const { confirmPassword, ...signupData } = formData;
-      const response = await apiService.register(
-        signupData.email,
-        signupData.firstName,
-        signupData.lastName,
-        signupData.password
-      );
 
       // Handle response, store token, etc.
 
       // router.push("/signin"); // Redirect to signin after sign up completion
       setSignedUp(true); // Set signedUp to true after successful registration
-      setError(""); // Clear any previous errors
+      setError(''); // Clear any previous errors
     } catch (err) {
       // Handle errors, display message to user
       // setError(err.message);
       if (err instanceof Error) {
         setError(err.message);
       } else {
-        setError("An unexpected error occurred"); // Generic error message
+        setError('An unexpected error occurred'); // Generic error message
       }
     }
   };
@@ -75,22 +68,8 @@ const Page = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleResendVerification = async () => {
-    try {
-      await apiService.resendVerificationEmail(formData.email);
-      alert("Verification email resent! Please check your inbox.");
-    } catch (err) {
-      // setError(err.message);
-      if (err instanceof Error) {
-        setError(err.message); // Now TypeScript knows err is an Error object
-      } else {
-        setError("An unexpected error occurred"); // Generic error message for unknown types
-      }
-    }
-  };
-
   const handleSignInClick = () => {
-    router.push("signin"); // Redirect to sign-in page
+    router.push('signin'); // Redirect to sign-in page
   };
 
   return (
@@ -102,57 +81,57 @@ const Page = () => {
       <div className={styles.formSide}>
         <form className={styles.loginForm} onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
-            <label htmlFor="firstname">First Name *</label>
+            <label htmlFor='firstname'>First Name *</label>
             <input
-              type="text"
-              name="firstName"
+              type='text'
+              name='firstName'
               onChange={handleChange}
               value={formData.firstName}
               required
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="lastname">Last Name *</label>
+            <label htmlFor='lastname'>Last Name *</label>
             <input
-              type="text"
-              name="lastName"
+              type='text'
+              name='lastName'
               onChange={handleChange}
               value={formData.lastName}
               required
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="email">Email *</label>
+            <label htmlFor='email'>Email *</label>
             <input
-              type="email"
-              name="email"
+              type='email'
+              name='email'
               value={formData.email}
               onChange={handleChange}
               required
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="password">Password *</label>
+            <label htmlFor='password'>Password *</label>
             <input
-              type="password"
-              name="password"
+              type='password'
+              name='password'
               value={formData.password}
               onChange={handleChange}
               required
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="password">Confirm Password *</label>
+            <label htmlFor='password'>Confirm Password *</label>
             <input
-              type="password"
-              name="confirmPassword"
+              type='password'
+              name='confirmPassword'
               value={formData.confirmPassword}
               onChange={handleChange}
               required
             />
           </div>
 
-          <button type="submit" className={styles.loginButton}>
+          <button type='submit' className={styles.loginButton}>
             Sign Up
           </button>
 
@@ -161,10 +140,10 @@ const Page = () => {
       </div>
       <div className={styles.imageSide}>
         <Image
-          src="/images/signup.png"
-          alt="Workspace Background"
-          layout="fill"
-          objectFit="cover"
+          src='/images/signup.png'
+          alt='Workspace Background'
+          layout='fill'
+          objectFit='cover'
           priority
         />
       </div>
@@ -175,7 +154,7 @@ const Page = () => {
 
 export default Page;
 
-//<div className={styles.container}>
+// <div className={styles.container}>
 //   <div className={styles.formContainer}>
 //     <form onSubmit={handleSubmit}>
 //       <h1>Sign Up </h1>

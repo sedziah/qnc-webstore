@@ -1,4 +1,3 @@
-
 //next.config.js
 
 /** @type {import('next').NextConfig} */
@@ -13,18 +12,33 @@ const path = require("path");
 
 module.exports = {
   webpack: (config) => {
-    config.resolve.alias["@"] = path.resolve(__dirname);
-    config.resolve.alias["@/components"] = path.resolve(
+    config.resolve.alias['@'] = path.resolve(__dirname);
+    config.resolve.alias['@/components'] = path.resolve(
       __dirname,
-      "components"
+      'components',
     );
-    config.resolve.alias["@/services"] = path.resolve(__dirname, "services");
-    config.resolve.alias["@/store"] = path.resolve(__dirname, "store");
-    config.resolve.alias["@/app"] = path.resolve(__dirname, "app");
+
+    config.resolve.alias['@/services'] = path.resolve(__dirname, 'services');
+    config.resolve.alias['@/store'] = path.resolve(__dirname, 'store');
+    config.resolve.alias['@/app'] = path.resolve(__dirname, 'app');
     // Add other aliases if necessary
     return config;
   },
-};
 
+  compiler: {
+    removeConsole: true,
+  },
+
+  babel: {
+    plugins: [
+      [
+        'transform-remove-console',
+        {
+          exclude: ['error', 'warn'],
+        },
+      ],
+    ],
+  },
+};
 
 module.exports = nextConfig;

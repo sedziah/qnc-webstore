@@ -1,12 +1,11 @@
 // components/searchbar/index.tsx
 
-"use client";
-import React, { useState } from "react";
-import { useRouter } from "next/navigation"; 
-import styles from "./SearchBar.module.css";
+'use client';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import styles from './SearchBar.module.css';
 import SearchIcon from '@mui/icons-material/Search';
-import "../../app/globals.css"
-
+import '../../app/globals.css';
 
 interface SearchResult {
   id: string;
@@ -18,15 +17,15 @@ interface SearchResult {
 }
 
 const SearchBar: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
+  const [error, setError] = useState<string>('');
   const router = useRouter(); // Initialize useRouter hook
 
   const handleSearch = async () => {
     if (searchQuery) {
       setIsLoading(true);
-      setError("");
+      setError('');
       try {
         // Perform the search and log the results
         // const results = await apiService.searchProducts(searchQuery);
@@ -34,7 +33,7 @@ const SearchBar: React.FC = () => {
         // Instead of setting search results in the state, navigate to the dynamic route
         await router.push(`/products/${encodeURIComponent(searchQuery)}`);
       } catch (err) {
-        setError("Failed to fetch search results.");
+        setError('Failed to fetch search results.');
         console.error(err);
       } finally {
         setIsLoading(false);
@@ -43,7 +42,7 @@ const SearchBar: React.FC = () => {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleSearch();
     }
   };
@@ -53,11 +52,13 @@ const SearchBar: React.FC = () => {
       <div className={styles.searchContainer}>
         <SearchIcon className={styles.SearchIcon} />
         <input
-          type="text"
+          type='text'
           className={styles.searchInput}
-          placeholder="Search for anything"
+          placeholder='Search for anything'
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={(e) => {
+            setSearchQuery(e.target.value);
+          }}
           onKeyPress={handleKeyPress}
         />
       </div>

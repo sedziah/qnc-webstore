@@ -1,17 +1,18 @@
-//about/page.tsx
-import styles from "./page.module.css";
-import Breadcrumbs from "../../components/breadcrumbs/index";
+// about/page.tsx
+import React from 'react';
+import styles from './page.module.css';
+import Breadcrumbs from '../../components/breadcrumbs/index';
 
-const Page = () => {
+const Page: React.FC = () => {
   const crumbs = [
-    { title: "Home", href: "/" },
-    { title: "About Us", href: "/about" },
+    { title: 'Home', href: '/' },
+    { title: 'About Us', href: '/about' },
   ];
 
   return (
     <>
       <Breadcrumbs crumbs={crumbs} />
-      <br></br>
+      <br />
       <div className={styles.container}>
         <div className={styles.heading}>
           <h1 className={styles.headingText}>About Us</h1>
@@ -19,13 +20,13 @@ const Page = () => {
         <div className={styles.content}>
           <h1>A Home of Premium Products & Exemplary Customer Care!</h1>
           <p>
-            At QnC, we're not just a brand; we're a beacon of excellence in a
-            world that demands the best. We believe that quality isn't just a
-            goal—it's our promise to you. Our shelves are stocked with only the
-            finest products, ensuring that every purchase meets the high
-            standards our customers have come to expect.
+            At QnC, we&apos;re not just a brand; we&apos;re a beacon of
+            excellence in a world that demands the best. We believe that quality
+            isn&apos;t just a goal—it&apos;s our promise to you. Our shelves are
+            stocked with only the finest products, ensuring that every purchase
+            meets the high standards our customers have come to expect.
           </p>
-          <br></br>
+          <br />
           <h1>Our Vision</h1>
           <p>
             To be the sanctuary for consumers seeking not only premium products
@@ -33,16 +34,17 @@ const Page = () => {
             transaction is a step toward building a lifelong relationship of
             trust and satisfaction.
           </p>
-          <br></br>
+          <br />
           <h1>Our Mission</h1>
           <p>
-            Quality n' Care is committed to excellence by providing a curated
-            selection of top-tier products accompanied by outstanding customer
-            service. We're dedicated to enhancing your lifestyle with goods of
-            unparalleled quality, fostering a shopping experience that stands
-            out in the realm of retail.
+            Quality n&apos; Care is committed to excellence by providing a
+            curated selection of top-tier products accompanied by outstanding
+            customer service. We&apos;re dedicated to enhancing your lifestyle
+            with goods of unparalleled quality, fostering a shopping experience
+            that stands out in the realm of retail.
           </p>
-          <br></br>
+
+          <br />
           <h1>Our Values</h1>
           <ul>
             <li>
@@ -50,19 +52,19 @@ const Page = () => {
               through unwavering integrity and consistent reliability in every
               product and service we offer.
             </li>
-            <br></br>
+            <br />
             <li>
               <strong>Excellence:</strong> Our pursuit of excellence is
               tireless. We aim to surpass expectations in the quality of our
               products and the standard of our customer service.
             </li>
-            <br></br>
+            <br />
             <li>
               <strong>Loyalty:</strong> Your loyalty is the heartbeat of our
               business. In turn, our loyalty to you is reflected through our
               dedication to providing quality in every aspect of our operation.
             </li>
-            <br></br>
+            <br />
             <li>
               <strong>Quality Service:</strong> Our commitment extends beyond
               transactions; we are passionate about delivering personalized
@@ -70,14 +72,14 @@ const Page = () => {
               satisfaction.
             </li>
           </ul>
-          <br></br>
-          <br></br>
+          <br />
+          <br />
           <p>
             Join us at QnC and step into a world where quality products and
             exceptional service are the norm, not the exception. Here, every
             product is a testament to our commitment to excellence, and every
             interaction is an opportunity to demonstrate our dedication to your
-            care. Together, let's build a future that's enriched by quality,
+            care. Together, let&apos;s build a future enriched by quality,
             defined by care, and committed to the extraordinary.
           </p>
         </div>

@@ -1,13 +1,13 @@
 // contexts/AuthContext.tsx
-"use client";
+'use client';
 import React, {
   createContext,
   useContext,
   useState,
   useEffect,
-  ReactNode,
-} from "react";
-import { apiService } from "../../../services/apiService";
+  type ReactNode,
+} from 'react';
+import { apiService } from '../../../services/apiService';
 
 interface AuthContextType {
   user: any; // Replace 'any' with the type of your user object
@@ -23,7 +23,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isAuthenticated: false, // Provide an initial value
-  error: "", // Add an error state
+  error: '', // Add an error state
   login: async () => {},
   logoutUser: () => {}, // Stub for logoutUser
 });
@@ -32,28 +32,27 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [error, setError] = useState(""); // Add an error state
+  const [error, setError] = useState(''); // Add an error state
 
   useEffect(() => {
     // Since localStorage is not available on the server, we perform this check on the client side
     const token =
-      typeof window !== "undefined" ? localStorage.getItem("token") : null;
+      typeof window !== 'undefined' ? localStorage.getItem('token') : null;
     setIsAuthenticated(!!token);
   }, []);
 
   const login = async (email: string, password: string) => {
-    setError(""); // Clear previous errors
+    setError(''); // Clear previous errors
     try {
       const data = await apiService.login(email, password);
       setUser(data.user);
       setIsAuthenticated(true); // Update the isAuthenticated state
-      localStorage.setItem("token", data.token); // Store the token
+      localStorage.setItem('token', data.token); // Store the token
     } catch (error) {
-      setError("An error occurred during login."); // Set a generic error message
+      setError('An error occurred during login.'); // Set a generic error message
       console.error(error);
       throw error; // You can still throw the error if you want to handle it elsewhere
     }
@@ -62,11 +61,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logoutUser = () => {
     setUser(null);
     setIsAuthenticated(false); // Update the isAuthenticated state
-    localStorage.removeItem("token"); // Clear the token from local storage
+    localStorage.removeItem('token'); // Clear the token from local storage
   };
 
   return (
-    <AuthContext.Provider value={{ user, error, isAuthenticated, login, logoutUser }}>
+    <AuthContext.Provider
+      value={{ user, error, isAuthenticated, login, logoutUser }}
+    >
       {children}
     </AuthContext.Provider>
   );

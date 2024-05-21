@@ -2,7 +2,7 @@
 
 // "use client";
 
-// import React, { useEffect, useState } from "react";
+import React from 'react';
 // import ImageCarousel from "../../../../components/imageCarousel/index";
 // import { useParams } from 'next/navigation';
 // import { apiService } from '../../../../services/apiService'; // This should be your actual API service path
@@ -73,11 +73,8 @@
 //   );
 // };
 
-
 const ProductDetailsPage: React.FC = () => {
   return <h1>Hello World</h1>;
 };
 
-
 export default ProductDetailsPage;
-

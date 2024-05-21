@@ -1,19 +1,18 @@
 // app/cart/CartContext.js
-"use client";
+'use client';
 import React, {
   createContext,
   useContext,
   useState,
   useEffect,
-  ReactNode,
-} from "react";
+  type ReactNode,
+} from 'react';
 
 export interface CartItem {
   id: string;
   quantity: number;
   price: number; // Assuming each cart item has a price field
 }
-
 
 interface CartContextType {
   cart: CartItem[];
@@ -32,9 +31,7 @@ const CartContext = createContext<CartContextType>({
   handleAddToCart: () => {},
   updateCartItemQuantity: () => {},
   removeCartItem: () => {},
-  clearCart: () => {
-    return;
-  }, // Explicitly returning void
+  clearCart: () => {}, // Explicitly returning void
 });
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({
@@ -44,18 +41,18 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
 
   useEffect(() => {
     // Initialize cart from local storage or other persistent storage here
-    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
     setCart(storedCart);
   }, []);
 
   const saveCartToLocalStorage = (updatedCart: CartItem[]) => {
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
   };
 
   const handleAddToCart = (item: CartItem) => {
-    let updatedCart = [...cart]; // Create a shallow copy of the cart array
+    const updatedCart = [...cart]; // Create a shallow copy of the cart array
     const itemIndex = updatedCart.findIndex(
-      (cartItem) => cartItem.id === item.id
+      (cartItem) => cartItem.id === item.id,
     );
 
     if (itemIndex >= 0) {
@@ -76,7 +73,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
 
   const updateCartItemQuantity = (productId: string, newQuantity: number) => {
     const updatedCart = cart.map((item) =>
-      item.id === productId ? { ...item, quantity: newQuantity } : item
+      item.id === productId ? { ...item, quantity: newQuantity } : item,
     );
     setCart(updatedCart);
     saveCartToLocalStorage(updatedCart);
@@ -90,13 +87,13 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
 
   const clearCart = () => {
     setCart([]); // Reset the cart state to an empty array
-    localStorage.removeItem("cart"); // Clear the cart from localStorage if you're using it
+    localStorage.removeItem('cart'); // Clear the cart from localStorage if you're using it
   };
 
   const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
   const totalAmount = cart.reduce(
     (total, item) => total + item.price * item.quantity,
-    0
+    0,
   );
 
   return (

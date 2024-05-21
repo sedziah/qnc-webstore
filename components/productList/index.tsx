@@ -1,17 +1,17 @@
-import React from "react";
-import styles from "./ProductList.module.css";
+import styles from './ProductList.module.css';
+import React from 'react';
 
 const Home = () => {
   const products = [
     {
       id: 1,
-      name: "Brand New Jordan 12 Brilliant Orange",
-      size: "9W-7.5M",
+      name: 'Brand New Jordan 12 Brilliant Orange',
+      size: '9W-7.5M',
       price: 280.0,
       watching: 13,
-      imageUrl: "/path-to-your-image.jpg",
+      imageUrl: '/path-to-your-image.jpg',
       shipping: 14.95,
-      sellerRating: "80.0%",
+      sellerRating: '80.0%',
     },
     // ... other products
   ];
