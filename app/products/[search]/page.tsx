@@ -4,7 +4,6 @@
 
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import ProductCard from '../../../components/productCard/ProductCard';
 import { apiService } from '../../../services/apiService'; // Adjust the path as needed
 import styles from './page.module.css';
 import SearchBar from '../../../components/searchbar';

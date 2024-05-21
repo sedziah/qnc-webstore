@@ -1,6 +1,8 @@
 // products/page.tsx
 
-import styles from './page.module.css'; // Make sure to create this CSS module
+import React from 'react';
+
+
 // import ProductList from "../../components/productList/index"
 
 const Page = () => {

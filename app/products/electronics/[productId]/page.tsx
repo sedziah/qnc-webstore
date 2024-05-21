@@ -2,6 +2,8 @@
 
 // "use client";
 
+import React from 'react';
+
 // import React, { useEffect, useState } from "react";
 // import ImageCarousel from "../../../../components/imageCarousel/index";
 // import { useParams } from 'next/navigation';

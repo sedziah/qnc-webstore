@@ -1,12 +1,13 @@
 // components/footer/index.jsx
 
 'use client';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Footer.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
 import logo from '../../public/images/logo.png'; // Make sure this path is correct
 import { apiService } from '../../services/apiService'; // Adjust the import path as needed
+
 
 function Footer() {
   const [email, setEmail] = useState('');

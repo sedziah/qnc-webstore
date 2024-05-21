@@ -1,5 +1,6 @@
 // components/SignUpSuccessModal.tsx
 import styles from './modal.module.css'; // Ensure this is the correct path to your CSS module
+import React from 'react';
 
 interface SignUpSuccessModalProps {
   onSignInClick: () => void;

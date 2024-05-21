@@ -8,34 +8,36 @@ import styles from './page.module.css';
 import Image from 'next/image';
 import Head from 'next/head';
 
-const PasswordResetRequestForm = async (
-  event: React.FormEvent<HTMLFormElement>,
-): Promise<void> => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState(''); // Added state for error message
+interface ApiResponse {
+  message: string;
+}
+
+const PasswordResetRequestForm: React.FC = () => {
+  const [email, setEmail] = useState<string>('');
+  const [message, setMessage] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const router = useRouter();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (
+    event: React.FormEvent<HTMLFormElement>,
+  ): Promise<void> => {
     event.preventDefault();
-    setMessage(''); // Clear previous success message
-    setError(''); // Clear previous error message
-    // Remove the unused variable 'isLoading'
+    setMessage('');
+    setError('');
+
     try {
-      const response = await apiService.resetPasswordRequest(email);
+      const response: ApiResponse =
+        await apiService.resetPasswordRequest(email);
       setMessage(response.message);
-      setIsLoading(false); // Hide the spinner before starting the delay
 
       setTimeout(() => {
         router.push('/accounts/signin');
-      }, 4000); // Delay before redirection
-    } catch (error: unknown) {
-      // Catch clause has type 'unknown'
-      setIsLoading(false); // Ensure spinner is hidden in case of an error
-      if (error instanceof Error) {
-        setError(error.message); // TypeScript knows error is an Error object
+      }, 4000);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
       } else {
-        setError('Details no found'); // Generic error message for unknown types
+        setError('An unexpected error occurred');
       }
     }
   };
@@ -47,7 +49,12 @@ const PasswordResetRequestForm = async (
       </Head>
 
       <div className={styles.formSide}>
-        <form className={styles.loginForm} onSubmit={handleSubmit}>
+        <form
+          className={styles.loginForm}
+          onSubmit={(e) => {
+            handleSubmit(e).catch(console.error);
+          }}
+        >
           <div className={styles.inputGroup}>
             <label htmlFor='email' className={styles.label}>
               Email:
@@ -67,18 +74,18 @@ const PasswordResetRequestForm = async (
           <button type='submit' className={styles.loginButton}>
             Send Reset Link
           </button>
-          <br></br>
+          <br />
           {message !== '' && <p className={styles.message}>{message}</p>}
           {error !== '' && <p className={styles.error}>{error}</p>}
         </form>
       </div>
       <div className={styles.imageSide}>
         <Image
-          src='/images/login.png' // Replace with the path to your actual image
+          src='/images/login.png'
           alt='Workspace Background'
           layout='fill'
           objectFit='cover'
-          priority // This will prioritize loading of the image
+          priority
         />
       </div>
     </div>

@@ -7,7 +7,7 @@ import { useAuth } from '../auth/contexts/AuthContext';
 
 export default function Page() {
   const router = useRouter();
-  const { isAuthenticated, login } = useAuth(); // Destructure isAuthenticated
+  const { isAuthenticated} = useAuth(); // Destructure isAuthenticated
   const [error, setError] = useState('');
   const [activeTab, setActiveTab] = useState('Overview');
 

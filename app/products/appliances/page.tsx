@@ -24,7 +24,6 @@ interface TransformedProduct {
 const AppliancesProducts = () => {
   const [products, setProducts] = useState<TransformedProduct[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { handleAddToCart } = useCart();
 
   const crumbs = [
     { title: 'Home', href: '/' },

@@ -6,6 +6,7 @@ import Footer from '../components/footer/index';
 import SubFooter from '../components/subfooter/index';
 import { AuthProvider } from './auth/contexts/AuthContext';
 import { CartProvider } from './cart/CartContext';
+import React from 'react';
 
 export const metadata: Metadata = {
   title: 'Electronics, Cars, Fashion, Collectibles & More | QnC',

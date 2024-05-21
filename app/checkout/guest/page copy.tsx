@@ -23,8 +23,6 @@ const Page: React.FC = () => {
   // Cart items (this might come from a global state or context in your actual application)
   const { cart } = useCart(); // Placeholder, replace with actual cart items
 
-  const router = useRouter();
-
   const crumbs = [
     { title: 'Home', href: '/' },
     { title: 'Cart', href: '/cart' },

@@ -1,7 +1,7 @@
 // Components/Navbar/index.jsx
 
 'use client';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import styles from './Navbar.module.css';
 import Image from 'next/image';
@@ -10,6 +10,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useAuth } from '../../app/auth/contexts/AuthContext';
 import { useCart } from '../../app/cart/CartContext';
+
 
 function Navbar() {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);

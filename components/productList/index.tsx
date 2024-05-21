@@ -1,4 +1,5 @@
 import styles from './ProductList.module.css';
+import React from 'react';
 
 const Home = () => {
   const products = [

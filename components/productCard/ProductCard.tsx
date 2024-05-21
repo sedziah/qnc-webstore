@@ -1,4 +1,5 @@
 import styles from './ProductCard.module.css';
+import React from 'react';
 
 interface ProductCardProps {
   name: string;

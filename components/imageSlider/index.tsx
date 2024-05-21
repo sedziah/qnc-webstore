@@ -4,6 +4,7 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import type { FunctionComponent } from 'react';
+import React from 'react';
 
 // Import Swiper styles
 import 'swiper/css';

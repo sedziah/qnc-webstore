@@ -4,6 +4,7 @@
 import Image from 'next/image';
 import styles from './page.module.css'; // Import the CSS module
 import Breadcrumbs from '../../components/breadcrumbs/index'; // Import the Breadcrumbs component
+import React from 'react';
 
 // Sample JSON data
 const sampleCategories = [

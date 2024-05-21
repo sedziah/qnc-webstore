@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import styles from './Breadcrumbs.module.css'; // Update the import path as needed
+import React from 'react';
 
 // Interface for breadcrumb items
 interface BreadcrumbItem {

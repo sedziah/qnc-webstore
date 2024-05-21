@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import styles from './Hero.module.css'; // Import the CSS module
 import Link from 'next/link';
+import React from 'react';
 
 // Hero Images
 import phones from '../../public/images/hero/hero_mobile_phone.png';

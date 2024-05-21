@@ -1,4 +1,5 @@
 import styles from './SubFooter.module.css';
+import React from 'react';
 
 function SubFooter() {
   return (
