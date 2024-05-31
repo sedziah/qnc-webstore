@@ -1,7 +1,7 @@
 // SignIn.tsx
 'use client';
 import Link from 'next/link';
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, useEffect } from 'react'; // Remove 'FormEvent' from the import statement
 import styles from './page.module.css';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../auth/contexts/AuthContext';
@@ -22,7 +22,7 @@ const Page: React.FC = () => {
   }, [isAuthenticated, router]);
 
   const handleSubmit = async (
-    event: FormEvent<HTMLFormElement>,
+    event: React.FormEvent<HTMLFormElement>, // Update the type of 'event' to 'React.FormEvent<HTMLFormElement>'
   ): Promise<void> => {
     event.preventDefault();
     setLoginError('');

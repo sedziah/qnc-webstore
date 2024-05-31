@@ -3,27 +3,41 @@
 'use client';
 import React, { useState } from 'react';
 import Breadcrumbs from '../../../components/breadcrumbs';
-import { useRouter } from 'next/navigation'; // import useRouter from Next.js
 import styles from './page.module.css'; // Update the import path as necessary
 import { useCart } from '../../cart/CartContext'; // Update the import path as necessary
 import { apiService } from '../../../services/apiService'; // Update the import path as necessary
 
+interface Crumb {
+  title: string;
+  href: string;
+}
+
+interface ProfileData {
+  email: string;
+  first_name: string;
+  last_name: string;
+  primary_phone_number: string;
+  address: string;
+  city: string;
+  region: string;
+}
+
 const Page: React.FC = () => {
   // Personal details for GuestUser
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [firstName, setFirstName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
 
   // Additional profile information
-  const [primaryPhoneNumber, setPrimaryPhoneNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [region, setRegion] = useState('');
+  const [primaryPhoneNumber, setPrimaryPhoneNumber] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [region, setRegion] = useState<string>('');
 
   // Cart items (this might come from a global state or context in your actual application)
-  const { cart } = useCart(); // Placeholder, replace with actual cart items
+  const { cart } = useCart(); // Assuming cart is of type CartItem[]
 
-  const crumbs = [
+  const crumbs: Crumb[] = [
     { title: 'Home', href: '/' },
     { title: 'Cart', href: '/cart' },
     { title: 'Checkout', href: '/checkout' },
@@ -31,11 +45,11 @@ const Page: React.FC = () => {
 
   const handleGuestCheckout = async (
     event: React.FormEvent<HTMLFormElement>,
-  ) => {
+  ): Promise<void> => {
     event.preventDefault();
 
     // Construct profile data
-    const profileData = {
+    const profileData: ProfileData = {
       email,
       first_name: firstName,
       last_name: lastName,
@@ -59,11 +73,10 @@ const Page: React.FC = () => {
 
     try {
       // Call the service to perform the entire guest checkout process
-      // Now passing profileData and cartItems as separate arguments
       const response = await apiService.guestCheckout(payload);
 
       // Redirect to the payment URL provided by Paystack
-      if (response.payment_url) {
+      if (typeof response.payment_url === 'string') {
         window.location.href = response.payment_url;
       } else {
         console.error('Payment URL not provided');
@@ -78,7 +91,7 @@ const Page: React.FC = () => {
     <>
       <Breadcrumbs crumbs={crumbs} />
       <h1 className={styles.title}>Guest Checkout</h1>
-      <form onSubmit={handleGuestCheckout} className={styles.checkoutForm}>
+      <form onSubmit={handleGuestCheckout}>
         <input
           type='email'
           placeholder='Email'
